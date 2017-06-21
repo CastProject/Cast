@@ -21,9 +21,9 @@ module.exports = class Response {
     }
 
     reply(text, embed, selfDestruct = true) {
-        if (embed) embed = this.destructionFooter(embed);
+        if (embed && selfDestruct) embed = this.destructionFooter(embed);
         return this.channel.send(text ? text : "", embed ? {embed} : {}).then(m => {
-            this.markForDestruction(this.message, m);
+            if (selfDestruct) this.markForDestruction(this.message, m);
         })
     }
 }
