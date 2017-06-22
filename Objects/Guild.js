@@ -9,9 +9,7 @@ const GuildInstance = class CastGuild {
     constructor(guild, properties = defaultProps) {
         this.guild = guild;
         this.properties = properties;
-        this.handlers = {
-            messages: new Messages(guild.client, guild)
-        }
+        this.messages = new Messages(guild.client, guild);
     }
 }
 
