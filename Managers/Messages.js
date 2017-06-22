@@ -1,4 +1,6 @@
 const discord = require(`discord.js`);
+const Response = require(`../Util/Response`);
+const EmbedBuilder = require(`../Util/EmbedBuilder`);
 
 class Messages {
     constructor (client, guild) {
@@ -9,20 +11,34 @@ class Messages {
         }
     }
 
-    handle (message) {
+    handle (message = {content: ""}) {
+        if (!message.content.startsWith(this.client.config.prefix) || message.content.startsWith(this.client.config.prefix + this.client.config.prefix)) return;
         if (this.parameters.dm && !message.channel.type === `dm`) return;
         if (this.parameters.guild && message.guild.id !== this.parameters.guild.id) return;
-        this.parameters.dm ?
-            this.handleDM(message) :
-            this.handleChat(message);
+        var response = new Response(message);
+        var opts = message.content.substr(1).split(" ");
+        var command = this.client.managers.commands.get(opts[0]).then(command => {
+            if (!command) {
+                response.reply("", this.unknownCommand());
+                return;
+            }
+            if (this.parameters.dm) {
+                if (!command.meta.supportsDM) {
+                    response.reply("", this.unavailable());
+                    return;
+                }
+            }
+            opts.shift();
+            command.execute(message, response, opts);
+        });
     }
 
-    handleDM (message) {
-
+    unknownCommand () {
+        return EmbedBuilder.createErrorEmbed(`Unknown Command. Type ${this.client.config.prefix}help for help.`, {title: "Unknown Command"})
     }
 
-    handleChat (message) {
-
+    unavailable (dm = true) {
+        return EmbedBuilder.createErrorEmbed(`Sorry, this command can only be run in ${dm ? "DMs" : "guilds"}.`, {title: "Unsupported Environment"})
     }
 }
 
