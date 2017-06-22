@@ -4,4 +4,5 @@ module.exports = {
     Guild: require('./Objects/Guild'),
     EmbedBuilder: require('./Util/EmbedBuilder'),
     Messages: require('./Managers/Messages'),
+    CommandsManager: require('./Managers/CommandsManager')
 }
