@@ -1,7 +1,8 @@
 module.exports = class Command {
-    constructor(client, plugin = null) {
+    constructor(client, settings, plugin = null) {
         if (!client) this.log(`Invalid arguments passed to command constructor`, true);
         this.client = client;
+        this.meta = settings;
         if (plugin) this.plugin = plugin;
     }
 
