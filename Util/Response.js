@@ -22,7 +22,7 @@ module.exports = class Response {
 
     reply(text, embed, selfDestruct = true) {
         if (embed && selfDestruct) embed = this.destructionFooter(embed);
-        return this.channel.send(text ? text : "", embed ? {embed} : {}).then(m => {
+        return this.channel.send(`❮<@${this.message.author.id}>❯${text ? `: ${text}` : ""}`, embed ? {embed} : {}).then(m => {
             if (selfDestruct) this.markForDestruction(this.message, m);
         })
     }
