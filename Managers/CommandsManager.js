@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
 
 const BaseCommand = require(`../Objects/Command`);
@@ -50,12 +50,19 @@ class CommandsManager {
 
     loadCommands() {
         return new Promise((resolve, reject) => {
+            var jsonPath = path.join(this.commandsPath, 'commands.json');
             fs.exists(jsonPath).then(exists => {
                 if (!exists) {
-                    this.client.log(`No commands.json found in ${path}! Commands will not be loaded`, true)
-                    return;
+                    this.client.log(`No commands.json found in ${jsonPath}! Commands will not be loaded`, true)
+                    return resolve();
                 }
-                var commandsMeta = require(path.join(this.commandsPath, 'commands.json'));
+                try {
+                    var commandsMeta = require(jsonPath);
+                } catch (e) {
+                    this.client.log(`An error occurred while loading the commands.json file at ${jsonPath}`, true);
+                    this.client.logError(e);
+                    return resolve();
+                }
                 Object.keys(commandsMeta.categories).forEach(c => {
                     this.groups.set(c, [])
                     commandsMeta.categories[c].forEach(command => {
