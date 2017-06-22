@@ -50,7 +50,7 @@ class CommandsManager {
 
     loadCommands() {
         return new Promise((resolve, reject) => {
-            fs.exists(path.join(this.commandsPath, 'commands.json'), (exists) => {
+            fs.exists(jsonPath).then(exists => {
                 if (!exists) {
                     this.client.log(`No commands.json found in ${path}! Commands will not be loaded`, true)
                     return;

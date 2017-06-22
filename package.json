@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/CastProject/CastAPI#readme",
   "dependencies": {
-    "discord.js": "^11.1.0"
+    "discord.js": "^11.1.0",
+    "fs-extra": "^3.0.1"
   }
 }
