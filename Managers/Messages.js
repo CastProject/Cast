@@ -12,7 +12,7 @@ class Messages {
     }
 
     handle (message = {content: ""}) {
-        if (!message.content.startsWith(this.client.config.prefix) || message.content.startsWith(this.client.config.prefix + this.client.config.prefix)) return;
+        if (!message.content.startsWith(this.client.config.prefix) || message.content.startsWith(this.client.config.prefix + this.client.config.prefix) || message.content === this.client.config.prefix) return;
         if (this.parameters.dm && !message.channel.type === `dm`) return;
         if (this.parameters.guild && message.guild.id !== this.parameters.guild.id) return;
         var response = new Response(message);
