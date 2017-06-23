@@ -1,10 +1,9 @@
 module.exports = class Logger {
-
   /**
    * @param {String} [prefix] The logger prefix
    */
-  constructor(prefix = null) {
-    this.prefix = prefix;
+  constructor (prefix = null) {
+    this.prefix = prefix
   }
 
   /**
@@ -15,8 +14,8 @@ module.exports = class Logger {
   log (data, error = false) {
     if (!data) return
     error
-      ? console.error(`[ERROR] ${this.prefix ? `[${this.prefix}] ` : ""}${data}`)
-      : console.log(`[INFO] ${this.prefix ? `[${this.prefix}] ` : ""}${data}`)
+      ? console.error(`[ERROR] ${this.prefix ? `[${this.prefix}] ` : ''}${data}`)
+      : console.log(`[INFO] ${this.prefix ? `[${this.prefix}] ` : ''}${data}`)
   }
 
   /**
@@ -25,16 +24,16 @@ module.exports = class Logger {
    */
   warn (data) {
     if (!data) return
-    console.warn(`[WARN] ${this.prefix ? `[${this.prefix}] ` : ""}${data}`)
+    console.warn(`[WARN] ${this.prefix ? `[${this.prefix}] ` : ''}${data}`)
   }
 
   /**
    * Parse and log an error to the console
-   * @param {Error} error 
+   * @param {Error} error
    */
   logError (error) {
     if (!error.name) return
-    this.log(`${this.prefix ? `[${this.prefix}] ` : ""}${error.name}${error.message ? `: ${error.message}` : ' was thrown.'}`, true)
+    this.log(`${this.prefix ? `[${this.prefix}] ` : ''}${error.name}${error.message ? `: ${error.message}` : ' was thrown.'}`, true)
     if (error.stack) console.error(error.stack)
   }
 }

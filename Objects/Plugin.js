@@ -19,7 +19,7 @@ class Plugin extends EventEmitter {
         this.managers.commands = cmdMgr
       }
     }
-    this.logger = new Logger('bih')
+    this.logger = new Logger(metadata.main);
     this.log = this.logger.log
     this.logError = this.logger.logError
   }
