@@ -4,16 +4,15 @@ const path = require('path')
 const BaseCommand = require(`../Objects/Command`)
 
 const CommandMetaDefault = {
-  "file": null,
-  "command": null,
-  "aliases": [],
-  "args": null,
-  "plugin": null,
-  "permissions": null
+  'file': null,
+  'command': null,
+  'aliases': [],
+  'args': null,
+  'plugin': null,
+  'permissions': null
 }
 
 class CommandsManager {
-
   /**
    * @param {Discord.Client} client A reference to the client that created this instance
    * @param {String} commandsPath The path of the folder containing the commands
@@ -30,7 +29,7 @@ class CommandsManager {
 
   /**
    * Load a specific command
-   * 
+   *
    * @param {String} file The path of the command to load
    * @param {String} [group] The group the command belongs to, if any.
    * @param {CommandMetaDefault} [settings] The metadata of the command, if any.
@@ -61,7 +60,7 @@ class CommandsManager {
 
   /**
    * Get a command from the maps
-   * 
+   *
    * @param {String} cstr The command string
    */
   get (cstr) {
@@ -71,34 +70,38 @@ class CommandsManager {
     })
   }
 
+  getSync (cstr) {
+    var alias = this.aliases.get(cstr)
+    return alias ? this.commands.get(alias) : this.commands.get(cstr)
+  }
+
   /**
    * Load all commands in the configured path
    */
-  loadCommands () {
-    return new Promise((resolve, reject) => {
-      var jsonPath = path.join(this.commandsPath, 'commands.json')
-      fs.exists(jsonPath).then(exists => {
-        if (!exists) {
-          this.client.log(`No commands.json found in ${jsonPath}! Commands will not be loaded`, true)
-          return resolve()
-        }
-        try {
-          var commandsMeta = require(jsonPath)
-        } catch (e) {
-          this.client.log(`An error occurred while loading the commands.json file at ${jsonPath}`, true)
-          this.client.logError(e)
-          return resolve()
-        }
-        Object.keys(commandsMeta.categories).forEach(c => {
-          this.groups.set(c, [])
-          commandsMeta.categories[c].forEach(command => {
-            if (!command.file) return this.invalidMeta(command)
-            this.load(path.join(this.commandsPath, command.file), c, command)
-          })
+  loadCommandsSync () {
+    var jsonPath = path.join(this.commandsPath, 'commands.json')
+    if (fs.existsSync(jsonPath)) {
+      try {
+        var commandsMeta = require(jsonPath)
+      } catch (e) {
+        this.client.log(`An error occurred while loading the commands.json file at ${jsonPath}`, true)
+        this.client.logError(e)
+        return
+      }
+      Object.keys(commandsMeta.categories).forEach(c => {
+        this.groups.set(c, [])
+        commandsMeta.categories[c].forEach(command => {
+          if (!command.file) return this.invalidMeta(command)
+          this.load(path.join(this.commandsPath, command.file), c, command)
         })
-        resolve()
       })
-    })
+    } else {
+      this.client.log(`No commands.json found in ${jsonPath}! Commands will not be loaded`, true)
+    }
+  }
+
+  async loadCommands () {
+    return this.loadCommandsSync()
   }
 
   /**
