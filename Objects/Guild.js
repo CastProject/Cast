@@ -19,4 +19,4 @@ const GuildInstance = class CastGuild {
 }
 
 module.exports = GuildInstance
-module.exports.DefaultProperties = defaultProps
+module.exports.CastGuildProperties = defaultProps
