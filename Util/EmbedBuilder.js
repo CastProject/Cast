@@ -7,14 +7,14 @@ const Colors = {
 
 const EmbedDefaults = {title: null, footer: null, color: null, author: null, url: null}
 
-const version = require(`../package`).version;
+const version = require(`../package`).version
 
 const EmbedBuilder = {
 
   /**
    * Creates a generic embed, not really a reason
-   * @param {String} text 
-   * @param {MessageEmbed} data 
+   * @param {String} text
+   * @param {MessageEmbed} data
    */
   createEmbed (text, data = EmbedDefaults) {
     if (typeof data.footer === 'string') {
@@ -36,17 +36,16 @@ const EmbedBuilder = {
     return new RichEmbed(embedData)
   },
 
-
   createSuccessEmbed (text, data = EmbedDefaults) {
-    data.color = Colors.SUCCESS;
+    data.color = Colors.SUCCESS
     return EmbedBuilder.createEmbed(text, data)
   },
 
   createErrorEmbed (text, data = EmbedDefaults) {
-    data.color = Colors.ERROR;
+    data.color = Colors.ERROR
     return EmbedBuilder.createEmbed(text, data)
   }
 }
 
 module.exports = EmbedBuilder
-module.exports.Colors = Colors;
+module.exports.Colors = Colors
