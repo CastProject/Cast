@@ -5,6 +5,7 @@ module.exports = {
   EmbedBuilder: require('./Util/EmbedBuilder'),
   Messages: require('./Managers/Messages'),
   CommandsManager: require('./Managers/CommandsManager'),
-  PluginsManager: require('./Managers/PluginManager')
+  PluginManager: require('./Managers/PluginManager'),
   Logger: require('./Util/Logger'),
+  Plugin: require('./Objects/Plugin')
 }
