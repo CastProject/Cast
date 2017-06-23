@@ -1,9 +1,8 @@
-const Logger = require('../Util/Logger');
+const Logger = require('../Util/Logger')
 
 module.exports = class Command {
-
   /**
-   * 
+   *
    * @param {Discord.Client} client A reference to the client that created the instance
    * @param {Object} settings The command metadata
    * @param {Plugin} [plugin] The plugin, if any, that owns this command
@@ -17,7 +16,7 @@ module.exports = class Command {
   }
 
   /**
-   * 
+   *
    * @param {Discord.Message} message The message that is executing this command
    * @param {Response} response The response to be used when interacting with the user
    * @param {String[]} [args] The arguments, if any, passed to the command
