@@ -1,3 +1,5 @@
+const Logger = require('../Util/Logger');
+
 module.exports = class Command {
 
   /**
@@ -11,18 +13,9 @@ module.exports = class Command {
     this.client = client
     this.meta = settings
     if (plugin) this.plugin = plugin
+    this.logger = new Logger(settings.command ? settings.command : settings.file ? settings.file : __filename)
   }
 
-  execute (message, response, args) {
-
-  }
-
-  log (data, error = false) {
-    if (!data) return
-    error
-      ? console.error(`[ERROR] ${data}`)
-      : console.log(`[INFO] ${data}`)
-  }
   /**
    * 
    * @param {Discord.Message} message The message that is executing this command
@@ -31,9 +24,5 @@ module.exports = class Command {
    */
   execute (message, response, args = []) {
 
-  logError (error) {
-    if (!error.name) return
-    this.log(`${error.name}${error.message ? `: ${error.message}` : ' was thrown.'}`, true)
-    if (this.client.config.debug && error.stack) console.error(error.stack)
   }
 }
