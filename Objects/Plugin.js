@@ -8,3 +8,5 @@ class Plugin extends EventEmitter {
     this.metadata = metadata
   }
 }
+
+module.exports = Plugin;
