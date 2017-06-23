@@ -19,11 +19,20 @@ const path = require(`path`)
 const fs = require(`fs-extra`)
 
 class PluginManager {
+  /**
+   * @param {Discord.Client} client A reference to the client that created the instance
+   * @param {String} dir The path the plugins are stored in
+   */
   constructor (client, dir) {
     this.client = client
     this.dir = dir
   }
 
+  /**
+   * Load a specific plugin
+   * 
+   * @param {String} dir The path to the specific plugin 
+   */
   load (dir) {
     fs.pathExists(path.join(dir, PluginMeta)).then(exists => {
       var loadedMeta = {}
@@ -42,6 +51,11 @@ class PluginManager {
     })
   }
 
+  /**
+   * 
+   * @param {String} dir 
+   * @param {LoadOptions} [opts]
+   */
   loadAll (dir = this.dir, opts = LoadOptions) {
     return new Promise((resolve, reject) => {
       fs.pathExists(dir).then(e => {
