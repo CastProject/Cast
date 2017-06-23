@@ -13,13 +13,13 @@ const LoadOptions = {
 
 const PluginMeta = 'plugin.json'
 
-const BasePlugin = require('../Objects/Plugin');
+const BasePlugin = require('../Objects/Plugin')
 
-const Discord = require('discord.js');
+const Discord = require('discord.js')
 
 const Util = Discord.Util
 
-const Events = Discord.Constants.Events;
+const Events = Discord.Constants.Events
 
 const path = require(`path`)
 const fs = require(`fs-extra`)
@@ -32,48 +32,51 @@ class PluginManager {
   constructor (client, dir) {
     this.client = client
     this.dir = dir
-    this.disabled = new Map();
-    this.plugins = new Map();
+    this.disabled = new Map()
+    this.plugins = new Map()
   }
 
   /**
    * Load a specific plugin
-   * 
-   * @param {String} dir The path to the specific plugin 
+   *
+   * @param {String} dir The path to the specific plugin
    */
   load (dir) {
-    fs.pathExists(path.join(dir, PluginMeta)).then(exists => {
-      var loadedMeta = {}
-      try {
-        loadedMeta = require(path.join(dir, PluginMeta))
-      } catch (e) {
-        if (e.name !== 'SyntaxError') {
-          this.client.logError(e)
-          return
+    return new Promise((resolve, reject) => {
+      fs.pathExists(path.join(dir, PluginMeta)).then(exists => {
+        var loadedMeta = {}
+        try {
+          loadedMeta = require(path.join(dir, PluginMeta))
+        } catch (e) {
+          if (e.name !== 'SyntaxError') {
+            this.client.logError(e)
+            return
+          }
         }
-      }
-      // Adds any missing variables to the plugin config, read from the default plugin config. Likely to fail if the default is null.
-      loadedMeta = Util.mergeDefault(MetaDefaults, loadedMeta)
-      if (!loadedMeta.main) {
-        return this.client.log(`Plugin doesn't have a main class in ${path.join(dir, PluginMeta)}`, true)
-      }
-      fs.exists(path.join(dir, loadedMeta.main)).then(exists => {
-        if (!exists) return this.client.log(`Plugin doesn't have a main class in ${path.join(dir, PluginMeta)}`, true);
-        var pluginMain = require(path.join(dir, loadedMeta.main));
-        var newPlugin = new pluginMain(this.client, loadedMeta);
-        if (!(newPlugin instanceof BasePlugin)) return this.client.log(`${loadedMeta.bundleID} does not have a main class that conforms to the Cast BasePlugin. Disabling.`, true)
-        this.plugins.set(loadedMeta.bundleID, {plugin: newPlugin, meta: loadedMeta});
-        if (pluginMain.events) {
-          if (!(pluginMain.events instanceof Array)) return this.client.log(`${loadedMeta.bundleID} did not have an Array for their events variable. Events will not be loaded.`, true);
-          this.attachEvents(newPlugin, pluginMain.events)
+        // Adds any missing variables to the plugin config, read from the default plugin config. Likely to fail if the default is null.
+        loadedMeta = Util.mergeDefault(MetaDefaults, loadedMeta)
+        if (!loadedMeta.main) {
+          return this.client.log(`Plugin doesn't have a main class in ${path.join(dir, PluginMeta)}`, true)
         }
+        fs.exists(path.join(dir, loadedMeta.main)).then(exists => {
+          if (!exists) return this.client.log(`Plugin doesn't have a main class in ${path.join(dir, PluginMeta)}`, true)
+          var PluginMain = require(path.join(dir, loadedMeta.main))
+          var newPlugin = new PluginMain(this.client, loadedMeta)
+          if (!(newPlugin instanceof BasePlugin)) return this.client.log(`${loadedMeta.bundleID} does not have a main class that conforms to the Cast BasePlugin. Disabling.`, true)
+          this.plugins.set(loadedMeta.bundleID, {plugin: newPlugin, meta: loadedMeta})
+          if (PluginMain.events) {
+            if (!(PluginMain.events instanceof Array)) return this.client.log(`${loadedMeta.bundleID} did not have an Array for their events variable. Events will not be loaded.`, true)
+            this.attachEvents(newPlugin, PluginMain.events)
+          }
+          resolve()
+        })
       })
     })
   }
 
   /**
-   * 
-   * @param {String} dir 
+   *
+   * @param {String} dir
    * @param {LoadOptions} [opts]
    */
   loadAll (dir = this.dir, opts = LoadOptions) {
@@ -89,10 +92,12 @@ class PluginManager {
         }
         // Loop through directory and load them
         fs.readdir(dir).then(directory => {
-          directory.forEach(plDir => {
-            this.load(path.join(dir, plDir))
+          if (directory.length === 0) return resolve()
+          directory.forEach((plDir, index) => {
+            this.load(path.join(dir, plDir)).then(() => {
+              if (index === directory.length - 1) return resolve()
+            })
           })
-          resolve()
         })
       })
     })
@@ -100,55 +105,54 @@ class PluginManager {
 
   /**
    * Listens for events on a given plugin
-   * @param {Plugin} plugin 
+   * @param {Plugin} plugin
    * @param {String[]} [events]
    */
   attachEvents (plugin, events = [], self = this) {
-    if (!events || events.length === 0) return;
-    var listens = event => events.indexOf(event) > -1;
-    var validate = function(...object) {
-      var validated = false;
+    if (!events || events.length === 0) return
+    var listens = event => events.indexOf(event) > -1
+    var validate = function (...object) {
+      var validated = false
       object.some(o => {
         if (o instanceof Discord.Guild) {
-          return validated = !self.pluginDisabled(plugin, o);
+          return validated = !self.pluginDisabled(plugin, o)
         } else if (o.guild) {
           return validated = !self.pluginDisabled(plugin, o.guild)
         } else if (o.message.guild) {
           return validated = !self.pluginDisabled(plugin, o.message.guild)
         }
-        return validated = false;
+        return validated = false
       })
-      console.log(validated);
-      return validated;
+      return validated
     }
     var noArg = event => {
-      this.client.on(event, () => plugin.emit(event));
+      this.client.on(event, () => plugin.emit(event))
     }
     var oneArg = (event, checkGuild = true) => {
       this.client.on(event, arg => {
-        if (checkGuild && !validate(arg)) return;
-        plugin.emit(event, arg);
+        if (checkGuild && !validate(arg)) return
+        plugin.emit(event, arg)
       })
     }
     var twoArg = (event, checkGuild = true) => {
       this.client.on(event, (arg1, arg2) => {
-        if (checkGuild && !validate(arg1, arg2)) return;
-        plugin.emit(event, arg1, arg2);
+        if (checkGuild && !validate(arg1, arg2)) return
+        plugin.emit(event, arg1, arg2)
       })
     }
     var threeArg = (event, checkGuild = true) => {
       this.client.on(event, (arg1, arg2, arg3) => {
-        if (checkGuild && !validate(arg1, arg2, arg3)) return;
+        if (checkGuild && !validate(arg1, arg2, arg3)) return
         plugin.emit(event, arg1, arg2, arg3)
       })
     }
-    if (listens(Events.READY)) oneArg(Events.READY, false);
+    if (listens(Events.READY)) oneArg(Events.READY, false)
     if (listens(Events.CHANNEL_CREATE)) oneArg(Events.CHANNEL_CREATE)
     if (listens(Events.CHANNEL_DELETE)) oneArg(Events.CHANNEL_DELETE)
     if (listens(Events.CHANNEL_PINS_UPDATE)) twoArg(Events.CHANNEL_PINS_UPDATE)
     if (listens(Events.CHANNEL_UPDATE)) twoArg(Events.CHANNEL_UPDATE)
     if (listens(Events.CLIENT_USER_SETTINGS_UPDATE)) oneArg(Events.CLIENT_USER_SETTINGS_UPDATE, false)
-    if (listens(Events.DEBUG)) oneArg(Events.DEBUG, false);
+    if (listens(Events.DEBUG)) oneArg(Events.DEBUG, false)
     if (listens(Events.DISCONNECT)) oneArg(Events.DISCONNECT, false)
     if (listens(Events.GUILD_EMOJI_CREATE)) oneArg(Events.GUILD_EMOJI_CREATE)
     if (listens(Events.GUILD_EMOJI_DELETE)) oneArg(Events.GUILD_EMOJI_DELETE)
@@ -169,8 +173,8 @@ class PluginManager {
     if (listens(Events.MESSAGE_DELETE)) oneArg(Events.MESSAGE_DELETE)
     if (listens(Events.MESSAGE_BULK_DELETE)) {
       this.client.on(Events.MESSAGE_BULK_DELETE, messages => {
-        if (!validate(messages.first())) return;
-        plugin.emit(Events.MESSAGE_BULK_DELETE, messages);
+        if (!validate(messages.first())) return
+        plugin.emit(Events.MESSAGE_BULK_DELETE, messages)
       })
     }
     if (listens(Events.MESSAGE_REACTION_ADD)) twoArg(Events.MESSAGE_REACTION_ADD)
@@ -192,12 +196,12 @@ class PluginManager {
 
   /**
    * Checks whether a given plugin is disabled in a guild.
-   * @param {Plugin} plugin 
-   * @param {Discord.Guild} guild 
+   * @param {Plugin} plugin
+   * @param {Discord.Guild} guild
    */
-  pluginDisabled(plugin, guild) {
-    var disabledMap = this.disabled.get(guild.id);
-    return disabledMap ? disabledMap.indexOf(plugin.metadata.bundleID) > -1 : false;
+  pluginDisabled (plugin, guild) {
+    var disabledMap = this.disabled.get(guild.id)
+    return disabledMap ? disabledMap.indexOf(plugin.metadata.bundleID) > -1 : false
   }
 }
 
