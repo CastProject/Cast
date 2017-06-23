@@ -6,4 +6,5 @@ module.exports = {
   Messages: require('./Managers/Messages'),
   CommandsManager: require('./Managers/CommandsManager'),
   PluginsManager: require('./Managers/PluginManager')
+  Logger: require('./Util/Logger'),
 }
