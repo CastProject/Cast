@@ -58,6 +58,14 @@ class CommandsManager {
     }
   }
 
+  duplicateGroups () {
+    var duplicated = new Map();
+    this.groups.forEach((commands, group) => {
+      duplicated.set(group, commands.slice())
+    })
+    return duplicated;
+  }
+
   /**
    * Get a command from the maps
    *
