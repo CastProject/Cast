@@ -8,5 +8,6 @@ module.exports = {
   PluginManager: require('./Managers/PluginManager'),
   Logger: require('./Util/Logger'),
   Plugin: require('./Objects/Plugin'),
-  Values: require('./Constants/Values')
+  Values: require('./Constants/Values'),
+  Version: require('./package').version
 }
