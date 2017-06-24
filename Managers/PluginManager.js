@@ -32,7 +32,6 @@ class PluginManager {
   constructor (client, dir) {
     this.client = client
     this.dir = dir
-    this.disabled = new Map()
     this.plugins = new Map()
   }
 
@@ -117,11 +116,11 @@ class PluginManager {
       var validated = false
       object.some(o => {
         if (o instanceof Discord.Guild) {
-          return validated = !self.pluginDisabled(plugin, o)
+          return validated = !self.pluginDisabled(plugin.metadata.bundleID, o)
         } else if (o.guild) {
-          return validated = !self.pluginDisabled(plugin, o.guild)
+          return validated = !self.pluginDisabled(plugin.metadata.bundleID, o.guild)
         } else if (o.message.guild) {
-          return validated = !self.pluginDisabled(plugin, o.message.guild)
+          return validated = !self.pluginDisabled(plugin.metadata.bundleID, o.message.guild)
         }
         return validated = false
       })
@@ -198,12 +197,13 @@ class PluginManager {
 
   /**
    * Checks whether a given plugin is disabled in a guild.
-   * @param {Plugin} plugin
+   * @param {String} bundleID
    * @param {Discord.Guild} guild
    */
-  pluginDisabled (plugin, guild) {
-    var disabledMap = this.disabled.get(guild.id)
-    return disabledMap ? disabledMap.indexOf(plugin.metadata.bundleID) > -1 : false
+  pluginDisabled (bundleID, guild) {
+    if (!this.client.pluginsController) return false;
+    if (!this.client.pluginsController[guild.id]) return false;
+    return this.client.pluginsController[guild.id].disabled.indexOf(bundleID) > -1
   }
 }
 
