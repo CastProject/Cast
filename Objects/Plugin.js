@@ -5,7 +5,7 @@ const CommandsManager = require(`../Managers/CommandsManager`)
 const Logger = require(`../Util/Logger`)
 
 class Plugin extends EventEmitter {
-  constructor (client, metadata, pluginPath, resolve = null) {
+  constructor (client, metadata, pluginPath) {
     super()
     this.client = client
     this.metadata = metadata
@@ -19,7 +19,8 @@ class Plugin extends EventEmitter {
         this.managers.commands = cmdMgr
       }
     }
-    this.logger = new Logger(metadata.main);
+    this.logger = new Logger(metadata.main)
+    this.prefix = this.logger.prefix
     this.log = this.logger.log
     this.logError = this.logger.logError
   }
