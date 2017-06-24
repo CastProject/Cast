@@ -7,5 +7,6 @@ module.exports = {
   CommandsManager: require('./Managers/CommandsManager'),
   PluginManager: require('./Managers/PluginManager'),
   Logger: require('./Util/Logger'),
-  Plugin: require('./Objects/Plugin')
+  Plugin: require('./Objects/Plugin'),
+  Values: require('./Constants/Values')
 }
