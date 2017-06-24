@@ -2,7 +2,8 @@ const RichEmbed = require(`discord.js`).RichEmbed
 
 const Colors = {
   SUCCESS: 0x26FF00,
-  ERROR: 0xFF4F00
+  ERROR: 0xFF4F00,
+  INFO: 0x077AE1
 }
 
 const EmbedDefaults = {title: null, footer: null, color: null, author: null, url: null}
@@ -44,6 +45,11 @@ const EmbedBuilder = {
   createErrorEmbed (text, data = EmbedDefaults) {
     data.color = Colors.ERROR
     return EmbedBuilder.createEmbed(text, data)
+  },
+
+  createInformativeEmbed (text, data = EmbedDefaults) {
+    data.color = Colors.INFO
+    return EmbedBuilder.createEmbed(text, data);
   }
 }
 
