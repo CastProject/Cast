@@ -4,7 +4,8 @@ const MetaDefaults = {
   commandsPath: null,
   disabledByDefault: true,
   version: '0.0.1',
-  dev: true
+  dev: true,
+  dm: false
 }
 
 const LoadOptions = {
@@ -119,8 +120,10 @@ class PluginManager {
           return validated = !self.pluginDisabled(plugin.metadata.bundleID, o)
         } else if (o.guild) {
           return validated = !self.pluginDisabled(plugin.metadata.bundleID, o.guild)
-        } else if (o.message.guild) {
+        } else if (o.message) {
           return validated = !self.pluginDisabled(plugin.metadata.bundleID, o.message.guild)
+        } else if (plugin.metadata.dm) {
+          return validated = true;
         }
         return validated = false
       })
