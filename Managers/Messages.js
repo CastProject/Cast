@@ -1,5 +1,6 @@
 const Response = require(`../Util/Response`)
 const EmbedBuilder = require(`../Util/EmbedBuilder`)
+const Logger = require(`../Util/Logger`)
 
 class Messages {
   /**
@@ -19,6 +20,9 @@ class Messages {
       dm: !guild,
       guild
     }
+
+    this.logger = new Logger(this.parameters.guild ? `${this.parameters.guild.name}MessagesManager` : `MessagesManager`)
+    this.log = this.logger.log
   }
 
   /**
@@ -41,6 +45,18 @@ class Messages {
         response.reply('', this.unknownCommand())
         return
       }
+      if (command.meta.permissionLevel > 0) {
+        if (!message.client.userMeetsCriteria) {
+          const reply = 'Client does not have a method to check permissions. (Was looking for client.userMeetsCriteria)'
+          this.log(reply, true)
+          response.reply('', this.error(reply))
+          return
+        }
+        if (!message.client.userMeetsCriteria(message.author, command.meta.permissionLevel, message.guild)) {
+          response.reply('', this.badPerms())
+          return
+        }
+      }
       // Check to see if this is a DM manager and if so check if the command has support for DMs.
       if (this.parameters.dm) {
         if (!command.meta.supportsDM) {
@@ -55,10 +71,24 @@ class Messages {
   }
 
   /**
+   * Generate an embed depicting an error
+   */
+  error (message = null) {
+    return EmbedBuilder.createErrorEmbed(message ? `\`\`\`${message}\`\`\`` : message, {title: 'An Error Occurred'})
+  }
+
+  /**
    * Generate an embed depicting an unknown command
    */
   unknownCommand () {
     return EmbedBuilder.createErrorEmbed(`Unknown Command. Type ${this.prefix}help for help.`, {title: 'Unknown Command'})
+  }
+
+  /**
+   * Generate an embed depicting insufficient permissions
+   */
+  badPerms () {
+    return EmbedBuilder.createErrorEmbed(`Sorry! You don't have permission to execute that command.`, {title: 'Insufficient Permissions'})
   }
 
   /**
