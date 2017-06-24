@@ -48,9 +48,12 @@ class PluginManager {
         try {
           loadedMeta = require(path.join(dir, PluginMeta))
         } catch (e) {
-          if (e.name !== 'SyntaxError') {
+          if (e.name !== 'SyntaxError' && !e.message.includes('Cannot find module')) {
             this.client.logError(e)
-            return
+            return resolve()
+          } else if (e.message.includes('Cannot find module')) {
+            this.client.log(`${dir} is an invalid plugin!`, true)
+            return resolve()
           }
         }
         // Adds any missing variables to the plugin config, read from the default plugin config. Likely to fail if the default is null.
@@ -58,18 +61,17 @@ class PluginManager {
         if (!loadedMeta.main) {
           return this.client.log(`Plugin doesn't have a main class in ${path.join(dir, PluginMeta)}`, true)
         }
-        fs.exists(path.join(dir, loadedMeta.main)).then(exists => {
-          if (!exists) return this.client.log(`Plugin doesn't have a main class in ${path.join(dir, PluginMeta)}`, true)
-          var PluginMain = require(path.join(dir, loadedMeta.main))
-          var newPlugin = new PluginMain(this.client, loadedMeta)
-          if (!(newPlugin instanceof BasePlugin)) return this.client.log(`${loadedMeta.bundleID} does not have a main class that conforms to the Cast BasePlugin. Disabling.`, true)
-          this.plugins.set(loadedMeta.bundleID, {plugin: newPlugin, meta: loadedMeta})
-          if (PluginMain.events) {
-            if (!(PluginMain.events instanceof Array)) return this.client.log(`${loadedMeta.bundleID} did not have an Array for their events variable. Events will not be loaded.`, true)
-            this.attachEvents(newPlugin, PluginMain.events)
-          }
-          resolve()
-        })
+        var exists = fs.existsSync(path.join(dir, loadedMeta.main))
+        if (!exists) return this.client.log(`Plugin doesn't have a main class in ${path.join(dir, PluginMeta)}`, true)
+        var PluginMain = require(path.join(dir, loadedMeta.main))
+        var newPlugin = new PluginMain(this.client, loadedMeta)
+        if (!(newPlugin instanceof BasePlugin)) return this.client.log(`${loadedMeta.bundleID} does not have a main class that conforms to the Cast BasePlugin. Disabling.`, true)
+        this.plugins.set(loadedMeta.bundleID, {plugin: newPlugin, meta: loadedMeta})
+        if (PluginMain.events) {
+          if (!(PluginMain.events instanceof Array)) return this.client.log(`${loadedMeta.bundleID} did not have an Array for their events variable. Events will not be loaded.`, true)
+          this.attachEvents(newPlugin, PluginMain.events)
+        }
+        resolve()
       })
     })
   }
