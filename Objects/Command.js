@@ -17,7 +17,7 @@ module.exports = class Command {
 
   /**
    *
-   * @param {Discord.Message} message The message that is executing this command
+   * @param {Message} message The message that is executing this command
    * @param {Response} response The response to be used when interacting with the user
    * @param {String[]} [args] The arguments, if any, passed to the command
    */
