@@ -1,12 +1,14 @@
-module.exports = class Response {
+const CastGuild = require('../Objects/Guild')
+
+const Response = class MessageResponse {
   constructor (message) {
     this.message = message
     this.channel = this.message.channel
-    this.properties = this.message.guild.manager.properties
+    this.properties = this.message.guild ? this.message.guild.manager.properties : CastGuild.DEFAULTS;
   }
 
   destructionFooter (embed) {
-    if (embed && this.properties.autoRemove > -1) {
+    if (embed && this.properties.autoRemove > -1 && this.message.channel.type !== 'dm') {
       if (!embed.footer) embed.footer = {}
       embed.footer.text = `This message will self-destruct in ${this.properties.autoRemove} seconds${embed.footer.text ? ` · ${embed.footer.text}` : '.'}`
     }
@@ -14,7 +16,7 @@ module.exports = class Response {
   }
 
   markForDestruction (...message) {
-    if (this.properties.autoRemove > -1) {
+    if (this.properties.autoRemove > -1 && this.message.channel.type !== 'dm') {
       message.forEach(m => {
         m.delete(this.properties.autoRemove * 1000)
       })
@@ -28,3 +30,5 @@ module.exports = class Response {
     })
   }
 }
+
+module.exports = Response;

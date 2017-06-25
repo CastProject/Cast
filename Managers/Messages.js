@@ -1,4 +1,3 @@
-const Response = require(`../Util/Response`)
 const EmbedBuilder = require(`../Util/EmbedBuilder`)
 const Logger = require(`../Util/Logger`)
 
@@ -8,6 +7,8 @@ class Messages {
    * @param {Discord.Guild} guild
    */
   constructor (prefix, managers, guild) {
+    //TODO: Workaround for a really weird bug, will investigate in the future
+    this.Response = require(`../Util/Response`)
     this.prefix = prefix
 
     this.managers = managers
@@ -28,14 +29,14 @@ class Messages {
   /**
    * Handles a message event given it meets the MessageManager's sepcifications
    *
-   * @param {Discord.Message} message
+   * @param {Message} message
    */
-  handle (message = {content: ''}) {
+  handle (message) {
     // Check to make sure the message event is a valid command event
     if (!message.content.startsWith(this.prefix) || message.content.startsWith(this.prefix + this.prefix) || message.content === this.prefix) return
     if (this.parameters.dm && !message.channel.type === `dm`) return
     if (this.parameters.guild && message.guild.id !== this.parameters.guild.id) return
-    var response = new Response(message)
+    var response = new this.Response(message)
     // Remove the command prefix and split by spaces
     var opts = message.content.substr(1).split(' ')
     this.managers.commands.get(opts[0]).then(command => {
@@ -96,7 +97,7 @@ class Messages {
    *
    * @param {boolean} dm
    */
-  unavailable (dm = true) {
+  unavailable (dm = false) {
     return EmbedBuilder.createErrorEmbed(`Sorry, this command can only be run in ${dm ? 'DMs' : 'guilds'}.`, {title: 'Unsupported Environment'})
   }
 
