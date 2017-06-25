@@ -204,6 +204,7 @@ class PluginManager {
    * @param {Discord.Guild} guild
    */
   pluginDisabled (bundleID, guild) {
+    if (!guild) return !this.plugins.get(bundleID).meta.dm;
     if (!this.client.pluginsController) return false;
     if (!this.client.pluginsController[guild.id]) return false;
     return this.client.pluginsController[guild.id].disabled.indexOf(bundleID) > -1
