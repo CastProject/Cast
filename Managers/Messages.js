@@ -60,7 +60,7 @@ class Messages {
       }
       // Check to see if this is a DM manager and if so check if the command has support for DMs.
       if (this.parameters.dm) {
-        if (!command.meta.supportsDM) {
+        if (!command.meta.dm) {
           response.reply('', this.unavailable())
           return
         }
