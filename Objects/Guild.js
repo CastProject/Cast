@@ -15,6 +15,10 @@ const GuildInstance = class CastGuild {
     this.properties = properties
     this.messages = new Messages(guild.client.config.prefix, guild.client.managers, guild)
   }
+
+  static DEFAULTS() {
+    return defaultProps;
+  }
 }
 
 module.exports = GuildInstance
