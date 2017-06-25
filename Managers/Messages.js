@@ -41,7 +41,7 @@ class Messages {
     var opts = message.content.substr(1).split(' ')
     this.managers.commands.get(opts[0]).then(command => {
       // Check to see if the command exists
-      if (!command) command = this.pluginsContain(message.guild.id, opts[0])
+      if (!command) command = this.pluginsContain(opts[0])
       if (!command) {
         response.reply('', this.unknownCommand())
         return
@@ -105,12 +105,12 @@ class Messages {
    * Checks to see if any plugins own the desired command string, then return it
    * @param {*} cstr
    */
-  pluginsContain (guildID, cstr) {
+  pluginsContain (cstr) {
     if (this.managers.plugins) {
       var command = null
       Array.from(this.managers.plugins.plugins.values()).some(data => {
         var plugin = data.plugin
-        if (this.managers.plugins.pluginDisabled(plugin.metadata.bundleID, this.parameters.guild ? this.parameters.guild : '0')) return true
+        if (this.managers.plugins.pluginDisabled(plugin.metadata.bundleID, this.parameters.guild ? this.parameters.guild : null)) return true
         if (plugin.managers && plugin.managers.commands) {
           var fetched = plugin.managers.commands.getSync(cstr)
           if (fetched) {
