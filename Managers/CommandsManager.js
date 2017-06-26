@@ -102,6 +102,10 @@ class CommandsManager {
     return alias ? this.commands.get(alias) : this.commands.get(cstr)
   }
 
+  async loadCommands() {
+    return this.loadCommandsSync();
+  }
+
   /**
    * Load all commands from the directory passed in the constructor
    */

@@ -48,7 +48,7 @@ const EmbedBuilder = new class EmbedBuilder {
    */
   createSuccessEmbed (text, data = EmbedDefaults) {
     data.color = Colors.SUCCESS
-    return EmbedBuilder.createEmbed(text, data)
+    return this.createEmbed(text, data)
   }
 
   /**
@@ -60,7 +60,7 @@ const EmbedBuilder = new class EmbedBuilder {
    */
   createErrorEmbed (text, data = EmbedDefaults) {
     data.color = Colors.ERROR
-    return EmbedBuilder.createEmbed(text, data)
+    return this.createEmbed(text, data)
   }
 
   /**
@@ -72,7 +72,7 @@ const EmbedBuilder = new class EmbedBuilder {
    */
   createInformativeEmbed (text, data = EmbedDefaults) {
     data.color = Colors.INFO
-    return EmbedBuilder.createEmbed(text, data);
+    return this.createEmbed(text, data);
   }
 }
 
