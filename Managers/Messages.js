@@ -48,6 +48,7 @@ class Messages {
     var response = new this.Response(message)
     // Remove the command prefix and split by spaces
     var opts = message.content.substr(1).split(' ')
+    var placeholders = {castHasCriteriaCheck: true, meetsCriteria: true}
     this.managers.commands.get(opts[0]).then(command => {
       // Check to see if the command exists
       if (!command) command = this.pluginsContain(opts[0])
@@ -55,17 +56,15 @@ class Messages {
         response.reply('', this.unknownCommand())
         return
       }
-      if (command.meta.permissionLevel > 0) {
-        if (!this.cast.userMeetsCriteria) {
-          const reply = 'Cast does not have a method to check permissions. (Was looking for cast.userMeetsCriteria)'
-          this.log(reply, true)
-          response.reply('', this.error(reply))
-          return
-        }
-        if (!this.cast.userMeetsCriteria(message.author, command.meta.permissionLevel, message.guild)) {
-          response.reply('', this.badPerms())
-          return
-        }
+      if (!placeholders.castHasCriteriaCheck) {
+        const reply = 'Cast does not have a method to check permissions. (Was looking for cast.userMeetsCriteria)'
+        this.log(reply, true)
+        response.reply('', this.error(reply))
+        return
+      }
+      if (!placeholders.meetsCriteria) {
+        response.reply('', this.badPerms())
+        return
       }
       // Check to see if this is a DM manager and if so check if the command has support for DMs.
       if (this.parameters.dm) {

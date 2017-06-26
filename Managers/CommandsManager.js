@@ -9,8 +9,7 @@ const CommandMetaDefault = {
   'command': null,
   'aliases': [],
   'args': null,
-  'plugin': null,
-  'permissionLevel': 0
+  'plugin': null
 }
 
 class CommandsManager {
