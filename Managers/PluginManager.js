@@ -31,8 +31,11 @@ class PluginManager {
    * @param {String} dir The path the plugins are stored in
    */
   constructor (client, dir) {
+    /** A reference to the client that created this instance */
     this.client = client
+    /** The directory to index for plugins */
     this.dir = dir
+    /** A map of bundle identifiers to their plugin instances */
     this.plugins = new Map()
   }
 
@@ -77,7 +80,8 @@ class PluginManager {
   }
 
   /**
-   *
+   * Load all plugins in a given directory
+   * 
    * @param {String} dir
    * @param {LoadOptions} [opts]
    */
@@ -106,7 +110,8 @@ class PluginManager {
   }
 
   /**
-   * Listens for events on a given plugin
+   * Index a plugin for events that it will listen for and bind them to client events
+   * 
    * @param {Plugin} plugin
    * @param {String[]} [events]
    */
@@ -200,8 +205,10 @@ class PluginManager {
 
   /**
    * Checks whether a given plugin is disabled in a guild.
+   * 
    * @param {String} bundleID
    * @param {Discord.Guild} guild
+   * @return {boolean} Whether or not the plugin is disabled in a given guild
    */
   pluginDisabled (bundleID, guild) {
     if (!guild) return !this.plugins.get(bundleID).meta.dm;

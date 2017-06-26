@@ -10,12 +10,14 @@ const EmbedDefaults = {title: null, footer: null, color: null, author: null, url
 
 const version = require(`../package`).version
 
-const EmbedBuilder = {
+const EmbedBuilder = new class EmbedBuilder {
 
   /**
-   * Creates a generic embed, not really a reason
-   * @param {String} text
-   * @param {MessageEmbed} data
+   * Creates a generic embed
+   * 
+   * @param {String} text The description of the embed
+   * @param {MessageEmbed} [data] Any data to pass to the embed. Supports RichEmbed parameters
+   * @return {RichEmbed} The new embed
    */
   createEmbed (text, data = EmbedDefaults) {
     if (typeof data.footer === 'string') {
@@ -35,18 +37,39 @@ const EmbedBuilder = {
       }
     }
     return new RichEmbed(embedData)
-  },
+  }
 
+  /**
+   * Creates an embed depicting a successful outcome
+   * 
+   * @param {String} text The description of the embed
+   * @param {MessageEmbed} [data] Any data to pass to the embed. Supports RichEmbed parameters
+   * @return {RichEmbed} The new embed
+   */
   createSuccessEmbed (text, data = EmbedDefaults) {
     data.color = Colors.SUCCESS
     return EmbedBuilder.createEmbed(text, data)
-  },
+  }
 
+  /**
+   * Creates an embed depicting a failed outcome
+   * 
+   * @param {String} text The description of the embed
+   * @param {MessageEmbed} [data] Any data to pass to the embed. Supports RichEmbed parameters
+   * @return {RichEmbed} The new embed
+   */
   createErrorEmbed (text, data = EmbedDefaults) {
     data.color = Colors.ERROR
     return EmbedBuilder.createEmbed(text, data)
-  },
+  }
 
+  /**
+   * Creates an embed depicting an informative response
+   * 
+   * @param {String} text The description of the embed
+   * @param {MessageEmbed} [data] Any data to pass to the embed. Supports RichEmbed parameters
+   * @return {RichEmbed} The new embed
+   */
   createInformativeEmbed (text, data = EmbedDefaults) {
     data.color = Colors.INFO
     return EmbedBuilder.createEmbed(text, data);

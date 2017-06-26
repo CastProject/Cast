@@ -19,11 +19,18 @@ class CommandsManager {
    * @param {Plugin} [plugin] The plugin, if any, that owns the command.
    */
   constructor (client, commandsPath, plugin = null) {
+
+    /** A refernce to the client that created this instance */
     this.client = client
+    /** The path to index for commands */
     this.commandsPath = commandsPath
+    /** The plugin that owns this command manager and its commands */
     this.plugin = plugin
+    /** A map of commands tracked by this manager */
     this.commands = new Map()
+    /** A map of aliases to their commands */
     this.aliases = new Map()
+    /** A map of groups to their commands */
     this.groups = new Map()
   }
 
@@ -58,6 +65,11 @@ class CommandsManager {
     }
   }
 
+  /** 
+   * Create a duplicated map of the groups to allow modification without affecting other services
+   * 
+   * @return {Map} The duplicated map of groups
+   */
   duplicateGroups () {
     var duplicated = new Map();
     this.groups.forEach((commands, group) => {
@@ -67,9 +79,10 @@ class CommandsManager {
   }
 
   /**
-   * Get a command from the maps
+   * Get the command tied to the command name if it exists
    *
-   * @param {String} cstr The command string
+   * @param {String} cstr The command name
+   * @return {Promise} A promise that resolves with the command
    */
   get (cstr) {
     return new Promise((resolve, reject) => {
@@ -78,13 +91,19 @@ class CommandsManager {
     })
   }
 
+  /**
+   * Get the command tied to the command name if it exists, synchronously
+   * 
+   * @param {String} cstr The command name
+   * @return {Command} The command tied to the command name
+   */
   getSync (cstr) {
     var alias = this.aliases.get(cstr)
     return alias ? this.commands.get(alias) : this.commands.get(cstr)
   }
 
   /**
-   * Load all commands in the configured path
+   * Load all commands from the directory passed in the constructor
    */
   loadCommandsSync () {
     var jsonPath = path.join(this.commandsPath, 'commands.json')
@@ -108,12 +127,9 @@ class CommandsManager {
     }
   }
 
-  async loadCommands () {
-    return this.loadCommandsSync()
-  }
-
   /**
    * Generate an invalid meta message using any available data
+   * 
    * @param {CommandMetaDefault} availableMeta The available metadata
    * @param {boolean} [missing] Whether or not the command file is missing
    */

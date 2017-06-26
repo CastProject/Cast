@@ -9,8 +9,11 @@ class Messages {
   constructor (prefix, managers, guild) {
     //TODO: Workaround for a really weird bug, will investigate in the future
     this.Response = require(`../Util/Response`)
+
+    /** The prefix to use to detect commands */
     this.prefix = prefix
 
+    /** The plugin and command managers */
     this.managers = managers
 
     /**
@@ -73,6 +76,8 @@ class Messages {
 
   /**
    * Generate an embed depicting an error
+   * 
+   * @return {RichEmbed} The embed depicting the error
    */
   error (message = null) {
     return EmbedBuilder.createErrorEmbed(message ? `\`\`\`${message}\`\`\`` : message, {title: 'An Error Occurred'})
@@ -80,6 +85,8 @@ class Messages {
 
   /**
    * Generate an embed depicting an unknown command
+   * 
+   * @return {RichEmbed} The embed depicting the unknown command
    */
   unknownCommand () {
     return EmbedBuilder.createErrorEmbed(`Unknown Command. Type ${this.prefix}help for help.`, {title: 'Unknown Command'})
@@ -87,6 +94,8 @@ class Messages {
 
   /**
    * Generate an embed depicting insufficient permissions
+   * 
+   * @return {RichEmbed} The embed depicting insufficient permissions
    */
   badPerms () {
     return EmbedBuilder.createErrorEmbed(`Sorry! You don't have permission to execute that command.`, {title: 'Insufficient Permissions'})
@@ -95,7 +104,8 @@ class Messages {
   /**
    * Generate an embed depicting an unsupported environment
    *
-   * @param {boolean} dm
+   * @param {boolean} [dm] Whether or not the command can only be run in a DM, defaults to false
+   * @return {RichEmbed} The embed depicting an unsupported environment
    */
   unavailable (dm = false) {
     return EmbedBuilder.createErrorEmbed(`Sorry, this command can only be run in ${dm ? 'DMs' : 'guilds'}.`, {title: 'Unsupported Environment'})
@@ -104,6 +114,7 @@ class Messages {
   /**
    * Checks to see if any plugins own the desired command string, then return it
    * @param {*} cstr
+   * @return {Plugin} Returns the plugin that owns the command, if any
    */
   pluginsContain (cstr) {
     if (this.managers.plugins) {

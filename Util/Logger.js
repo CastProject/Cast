@@ -1,8 +1,9 @@
-module.exports = class Logger {
+class Logger {
   /**
    * @param {String} [prefix] The logger prefix
    */
   constructor (prefix = null) {
+    /** The prefix to use when logging to STDOUT */
     this.prefix = prefix
   }
 
@@ -37,3 +38,6 @@ module.exports = class Logger {
     if (error.stack) console.error(error.stack)
   }
 }
+
+
+module.exports = Logger;
