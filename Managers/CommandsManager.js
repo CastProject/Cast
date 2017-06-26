@@ -2,6 +2,7 @@ const fs = require('fs-extra')
 const path = require('path')
 
 const BaseCommand = require(`../Objects/Command`)
+const Logger = require(`../Util/Logger`);
 
 const CommandMetaDefault = {
   'file': null,
@@ -14,14 +15,15 @@ const CommandMetaDefault = {
 
 class CommandsManager {
   /**
-   * @param {Discord.Client} client A reference to the client that created this instance
+   * @param {Cast} cast A reference to the Cast instance that created this instance
    * @param {String} commandsPath The path of the folder containing the commands
    * @param {Plugin} [plugin] The plugin, if any, that owns the command.
    */
-  constructor (client, commandsPath, plugin = null) {
-
-    /** A refernce to the client that created this instance */
-    this.client = client
+  constructor (cast, commandsPath, plugin = null) {
+    /** A refernce to the Cast instance that created this instance */
+    this.cast = cast;
+    /** The logger for this manager */
+    this.logger = new Logger("CommandsManager");
     /** The path to index for commands */
     this.commandsPath = commandsPath
     /** The plugin that owns this command manager and its commands */
@@ -44,10 +46,10 @@ class CommandsManager {
   load (file, group = null, settings = CommandMetaDefault) {
     try {
       var Command = require(file)
-      var loadedCommand = new Command(this.client, settings)
+      var loadedCommand = new Command(this.cast, settings)
       // Check to make sure this command extends the BaseCommand
       if (!(loadedCommand instanceof BaseCommand)) {
-        this.client.log(`The ${settings.file} command from the ${settings.plugin} plugin could not be loaded because it is invalid.`, true)
+        this.logger.log(`The ${settings.file} command from the ${settings.plugin} plugin could not be loaded because it is invalid.`, true)
       } else {
         var command = settings.command ? settings.command : settings.file
         var alias = settings.aliases ? settings.aliases : []
@@ -61,7 +63,7 @@ class CommandsManager {
     } catch (e) {
       if (e.message.includes('Cannot find module')) {
         this.invalidMeta(settings, true)
-      } else this.client.logError(e)
+      } else this.logger.logError(e)
     }
   }
 
@@ -115,8 +117,8 @@ class CommandsManager {
       try {
         var commandsMeta = require(jsonPath)
       } catch (e) {
-        this.client.log(`An error occurred while loading the commands.json file at ${jsonPath}`, true)
-        this.client.logError(e)
+        this.logger.log(`An error occurred while loading the commands.json file at ${jsonPath}`, true)
+        this.logger.logError(e)
         return
       }
       Object.keys(commandsMeta.categories).forEach(c => {
@@ -127,7 +129,7 @@ class CommandsManager {
         })
       })
     } else {
-      this.client.log(`No commands.json found in ${jsonPath}! Commands will not be loaded`, true)
+      this.logger.log(`No commands.json found in ${jsonPath}! Commands will not be loaded`, true)
     }
   }
 
@@ -138,7 +140,7 @@ class CommandsManager {
    * @param {boolean} [missing] Whether or not the command file is missing
    */
   invalidMeta (availableMeta, missing = false) {
-    this.client.log(`${availableMeta.plugin ? `The ${availableMeta.plugin} plugin` : 'A plugin'} tried to load command '${availableMeta.file ? availableMeta.file : availableMeta.command ? availableMeta.command : 'a command'}' ${missing ? 'but it could not be found' : 'with invalid syntax'}!`, true)
+    this.logger.log(`${availableMeta.plugin ? `The ${availableMeta.plugin} plugin` : 'A plugin'} tried to load command '${availableMeta.file ? availableMeta.file : availableMeta.command ? availableMeta.command : 'a command'}' ${missing ? 'but it could not be found' : 'with invalid syntax'}!`, true)
   }
 }
 

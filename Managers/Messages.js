@@ -2,19 +2,25 @@ const EmbedBuilder = require(`../Util/EmbedBuilder`)
 const Logger = require(`../Util/Logger`)
 
 class Messages {
+  
   /**
-   *
-   * @param {Discord.Guild} guild
+   * 
+   * @param {Cast} cast The cast instance creating this instance
+   * @param {String} prefix The prefix for detecting commands
+   * @param {Object} managers The messages, plugin and DM managers
+   * @param {Guild} guild The guild to associate with
    */
-  constructor (prefix, managers, guild) {
+  constructor (cast, guild) {
     //TODO: Workaround for a really weird bug, will investigate in the future
     this.Response = require(`../Util/Response`)
 
+    /** A reference to the Cast instance that created this instance */
+    this.cast = cast;
     /** The prefix to use to detect commands */
-    this.prefix = prefix
+    this.prefix = this.cast.config.prefix;
 
     /** The plugin and command managers */
-    this.managers = managers
+    this.managers = this.cast.managers;
 
     /**
      * The specifications the MessagesManager was created with
@@ -50,13 +56,13 @@ class Messages {
         return
       }
       if (command.meta.permissionLevel > 0) {
-        if (!message.client.userMeetsCriteria) {
-          const reply = 'Client does not have a method to check permissions. (Was looking for client.userMeetsCriteria)'
+        if (!this.cast.userMeetsCriteria) {
+          const reply = 'Cast does not have a method to check permissions. (Was looking for cast.userMeetsCriteria)'
           this.log(reply, true)
           response.reply('', this.error(reply))
           return
         }
-        if (!message.client.userMeetsCriteria(message.author, command.meta.permissionLevel, message.guild)) {
+        if (!this.cast.userMeetsCriteria(message.author, command.meta.permissionLevel, message.guild)) {
           response.reply('', this.badPerms())
           return
         }

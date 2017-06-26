@@ -3,14 +3,15 @@ const Logger = require('../Util/Logger')
 class Command {
   /**
    *
-   * @param {Discord.Client} client A reference to the client that created the instance
+   * @param {Cast} cast A reference to the Cast instance that created the instance
    * @param {Object} settings The command metadata
    * @param {Plugin} [plugin] The plugin, if any, that owns this command
    */
-  constructor (client, settings, plugin = null) {
-    if (!client) this.log(`Invalid arguments passed to command constructor`, true)
-    /** A reference to the client that created this instance */
-    this.client = client
+  constructor (cast, settings, plugin = null) {
+    /** A reference to the Cast instance that created this instance */
+    this.cast = cast;
+    /** A shortcut to the client instance */
+    this.client = this.cast.client;
     /** A reference to the command metadata */
     this.meta = settings
 

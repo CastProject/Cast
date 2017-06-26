@@ -30,9 +30,9 @@ class PluginManager {
    * @param {Discord.Client} client A reference to the client that created the instance
    * @param {String} dir The path the plugins are stored in
    */
-  constructor (client, dir) {
-    /** A reference to the client that created this instance */
-    this.client = client
+  constructor (cast, dir) {
+    /** A reference to the Cast instance that created this instance */
+    this.cast = cast
     /** The directory to index for plugins */
     this.dir = dir
     /** A map of bundle identifiers to their plugin instances */
@@ -52,26 +52,26 @@ class PluginManager {
           loadedMeta = require(path.join(dir, PluginMeta))
         } catch (e) {
           if (e.name !== 'SyntaxError' && !e.message.includes('Cannot find module')) {
-            this.client.logError(e)
+            this.cast.logError(e)
             return resolve()
           } else if (e.message.includes('Cannot find module')) {
-            this.client.log(`${dir} is an invalid plugin!`, true)
+            this.cast.log(`${dir} is an invalid plugin!`, true)
             return resolve()
           }
         }
         // Adds any missing variables to the plugin config, read from the default plugin config. Likely to fail if the default is null.
         loadedMeta = Util.mergeDefault(MetaDefaults, loadedMeta)
         if (!loadedMeta.main) {
-          return this.client.log(`Plugin doesn't have a main class in ${path.join(dir, PluginMeta)}`, true)
+          return this.cast.log(`Plugin doesn't have a main class in ${path.join(dir, PluginMeta)}`, true)
         }
         var exists = fs.existsSync(path.join(dir, loadedMeta.main))
-        if (!exists) return this.client.log(`Plugin doesn't have a main class in ${path.join(dir, PluginMeta)}`, true)
+        if (!exists) return this.cast.log(`Plugin doesn't have a main class in ${path.join(dir, PluginMeta)}`, true)
         var PluginMain = require(path.join(dir, loadedMeta.main))
-        var newPlugin = new PluginMain(this.client, loadedMeta)
-        if (!(newPlugin instanceof BasePlugin)) return this.client.log(`${loadedMeta.bundleID} does not have a main class that conforms to the Cast BasePlugin. Disabling.`, true)
+        var newPlugin = new PluginMain(this.cast, loadedMeta)
+        if (!(newPlugin instanceof BasePlugin)) return this.cast.log(`${loadedMeta.bundleID} does not have a main class that conforms to the Cast BasePlugin. Disabling.`, true)
         this.plugins.set(loadedMeta.bundleID, {plugin: newPlugin, meta: loadedMeta})
         if (PluginMain.events) {
-          if (!(PluginMain.events instanceof Array)) return this.client.log(`${loadedMeta.bundleID} did not have an Array for their events variable. Events will not be loaded.`, true)
+          if (!(PluginMain.events instanceof Array)) return this.cast.log(`${loadedMeta.bundleID} did not have an Array for their events variable. Events will not be loaded.`, true)
           this.attachEvents(newPlugin, PluginMain.events)
         }
         resolve()
@@ -89,10 +89,10 @@ class PluginManager {
     return new Promise((resolve, reject) => {
       fs.pathExists(dir).then(e => {
         if (!e) {
-          this.client.log(`Plugin directory does not exist: ${dir} - ${opts.autogen ? 'Creating' : 'Skipping'}`)
+          this.cast.log(`Plugin directory does not exist: ${dir} - ${opts.autogen ? 'Creating' : 'Skipping'}`)
           if (!opts.autogen) return resolve()
           fs.mkdir(dir).catch(e => {
-            this.client.logError(e)
+            this.cast.logError(e)
             return resolve()
           })
         }
@@ -135,22 +135,22 @@ class PluginManager {
       return validated
     }
     var noArg = event => {
-      this.client.on(event, () => plugin.emit(event))
+      this.cast.client.on(event, () => plugin.emit(event))
     }
     var oneArg = (event, checkGuild = true) => {
-      this.client.on(event, arg => {
+      this.cast.client.on(event, arg => {
         if (checkGuild && !validate(arg)) return
         plugin.emit(event, arg)
       })
     }
     var twoArg = (event, checkGuild = true) => {
-      this.client.on(event, (arg1, arg2) => {
+      this.cast.client.on(event, (arg1, arg2) => {
         if (checkGuild && !validate(arg1, arg2)) return
         plugin.emit(event, arg1, arg2)
       })
     }
     var threeArg = (event, checkGuild = true) => {
-      this.client.on(event, (arg1, arg2, arg3) => {
+      this.cast.client.on(event, (arg1, arg2, arg3) => {
         if (checkGuild && !validate(arg1, arg2, arg3)) return
         plugin.emit(event, arg1, arg2, arg3)
       })
@@ -181,7 +181,7 @@ class PluginManager {
     if (listens(Events.MESSAGE_CREATE)) oneArg(Events.MESSAGE_CREATE)
     if (listens(Events.MESSAGE_DELETE)) oneArg(Events.MESSAGE_DELETE)
     if (listens(Events.MESSAGE_BULK_DELETE)) {
-      this.client.on(Events.MESSAGE_BULK_DELETE, messages => {
+      this.cast.client.on(Events.MESSAGE_BULK_DELETE, messages => {
         if (!validate(messages.first())) return
         plugin.emit(Events.MESSAGE_BULK_DELETE, messages)
       })
@@ -212,9 +212,9 @@ class PluginManager {
    */
   pluginDisabled (bundleID, guild) {
     if (!guild) return !this.plugins.get(bundleID).meta.dm;
-    if (!this.client.pluginsController) return false;
-    if (!this.client.pluginsController[guild.id]) return false;
-    return this.client.pluginsController[guild.id].disabled.indexOf(bundleID) > -1
+    if (!this.cast.pluginsController) return false;
+    if (!this.cast.pluginsController[guild.id]) return false;
+    return this.cast.pluginsController[guild.id].disabled.indexOf(bundleID) > -1
   }
 }
 
