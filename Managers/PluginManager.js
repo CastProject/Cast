@@ -1,5 +1,6 @@
 const MetaDefaults = {
   bundleID: null,
+  pluginName: null,
   main: null,
   commandsPath: null,
   disabledByDefault: true,
