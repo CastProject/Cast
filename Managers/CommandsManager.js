@@ -2,9 +2,9 @@ const fs = require('fs-extra')
 const path = require('path')
 
 const BaseCommand = require(`../Objects/Command`)
-const Logger = require(`../Util/Logger`);
+const Logger = require(`../Util/Logger`)
 
-const AssemblePerm = require('../Permissions/PermNode').deserialize;
+const AssemblePerm = require('../Permissions/PermNode').deserialize
 
 const CommandMetaDefault = {
   'file': null,
@@ -12,7 +12,7 @@ const CommandMetaDefault = {
   'aliases': [],
   'args': null,
   'plugin': null,
-  "perm": null
+  'perm': null
 }
 
 class CommandsManager {
@@ -23,9 +23,9 @@ class CommandsManager {
    */
   constructor (cast, commandsPath, plugin = null) {
     /** A refernce to the Cast instance that created this instance */
-    this.cast = cast;
+    this.cast = cast
     /** The logger for this manager */
-    this.logger = new Logger("CommandsManager");
+    this.logger = new Logger('CommandsManager')
     /** The path to index for commands */
     this.commandsPath = commandsPath
     /** The plugin that owns this command manager and its commands */
@@ -49,10 +49,10 @@ class CommandsManager {
     try {
       var Command = require(file)
       if (!settings.command) {
-        settings.command = settings.file;
+        settings.command = settings.file
       }
       if (!settings.perm) {
-        settings.perm = settings.command;
+        settings.perm = settings.command
       }
       var loadedCommand = new Command(this.cast, settings)
       loadedCommand.permission = AssemblePerm(this.plugin ? `${this.plugin.metadata.bundleID}.${settings.perm}` : `native.${settings.perm}`)
@@ -76,17 +76,17 @@ class CommandsManager {
     }
   }
 
-  /** 
+  /**
    * Create a duplicated map of the groups to allow modification without affecting other services
-   * 
+   *
    * @return {Map} The duplicated map of groups
    */
   duplicateGroups () {
-    var duplicated = new Map();
+    var duplicated = new Map()
     this.groups.forEach((commands, group) => {
       duplicated.set(group, commands.slice())
     })
-    return duplicated;
+    return duplicated
   }
 
   /**
@@ -104,7 +104,7 @@ class CommandsManager {
 
   /**
    * Get the command tied to the command name if it exists, synchronously
-   * 
+   *
    * @param {String} cstr The command name
    * @return {Command} The command tied to the command name
    */
@@ -113,8 +113,8 @@ class CommandsManager {
     return alias ? this.commands.get(alias) : this.commands.get(cstr)
   }
 
-  async loadCommands() {
-    return this.loadCommandsSync();
+  async loadCommands () {
+    return this.loadCommandsSync()
   }
 
   /**
@@ -144,7 +144,7 @@ class CommandsManager {
 
   /**
    * Generate an invalid meta message using any available data
-   * 
+   *
    * @param {CommandMetaDefault} availableMeta The available metadata
    * @param {boolean} [missing] Whether or not the command file is missing
    */

@@ -2,25 +2,24 @@ const EmbedBuilder = require(`../Util/EmbedBuilder`)
 const Logger = require(`../Util/Logger`)
 
 class Messages {
-  
   /**
-   * 
+   *
    * @param {Cast} cast The cast instance creating this instance
    * @param {String} prefix The prefix for detecting commands
    * @param {Object} managers The messages, plugin and DM managers
    * @param {Guild} guild The guild to associate with
    */
   constructor (cast, guild) {
-    //TODO: Workaround for a really weird bug, will investigate in the future
+    // TODO: Workaround for a really weird bug, will investigate in the future
     this.Response = require(`../Util/Response`)
 
     /** A reference to the Cast instance that created this instance */
-    this.cast = cast;
+    this.cast = cast
     /** The prefix to use to detect commands */
-    this.prefix = this.cast.config.prefix;
+    this.prefix = this.cast.config.prefix
 
     /** The plugin and command managers */
-    this.managers = this.cast.managers;
+    this.managers = this.cast.managers
 
     /**
      * The specifications the MessagesManager was created with
@@ -80,7 +79,7 @@ class Messages {
 
   /**
    * Generate an embed depicting an error
-   * 
+   *
    * @return {RichEmbed} The embed depicting the error
    */
   error (message = null) {
@@ -89,7 +88,7 @@ class Messages {
 
   /**
    * Generate an embed depicting an unknown command
-   * 
+   *
    * @return {RichEmbed} The embed depicting the unknown command
    */
   unknownCommand () {
@@ -98,7 +97,7 @@ class Messages {
 
   /**
    * Generate an embed depicting insufficient permissions
-   * 
+   *
    * @return {RichEmbed} The embed depicting insufficient permissions
    */
   badPerms () {

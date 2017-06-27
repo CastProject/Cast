@@ -9,9 +9,9 @@ class Command {
    */
   constructor (cast, settings, plugin = null) {
     /** A reference to the Cast instance that created this instance */
-    this.cast = cast;
+    this.cast = cast
     /** A shortcut to the client instance */
-    this.client = this.cast.client;
+    this.client = this.cast.client
     /** A reference to the command metadata */
     this.meta = settings
 
@@ -24,7 +24,7 @@ class Command {
 
   /**
    * Called whenever the command is executed in chat.
-   * 
+   *
    * @param {Message} message The message that is executing this command
    * @param {Response} response The response to be used when interacting with the user
    * @param {String[]} [args] The arguments, if any, passed to the command
@@ -34,5 +34,4 @@ class Command {
   }
 }
 
-
-module.exports = Command;
+module.exports = Command

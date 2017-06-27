@@ -5,9 +5,8 @@ const CommandsManager = require(`../Managers/CommandsManager`)
 const Logger = require(`../Util/Logger`)
 
 const Plugin = class BasePlugin extends EventEmitter {
-  
   /**
-   * 
+   *
    * @param {Client} client The Cast instance that created this instance
    * @param {Object} metadata The metadata for this plugin
    * @param {String} pluginPath The path to the plugin directory
@@ -15,9 +14,9 @@ const Plugin = class BasePlugin extends EventEmitter {
   constructor (cast, metadata, pluginPath) {
     super()
     /** A reference to the Cast instance that created this instance */
-    this.cast = cast;
+    this.cast = cast
     /** A Shortcut to the client instance */
-    this.client = this.cast.client;
+    this.client = this.cast.client
     /** A reference to the plugin metadata, identical to plugins.json */
     this.metadata = metadata
     this.metadata.pluginPath = pluginPath
@@ -39,4 +38,4 @@ const Plugin = class BasePlugin extends EventEmitter {
   }
 }
 
-module.exports = Plugin;
+module.exports = Plugin

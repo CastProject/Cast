@@ -1,7 +1,6 @@
 const CastGuild = require('../Objects/Guild')
 
 const Response = class MessageResponse {
-
   /**
    * @param {Message} message The message this Response is being wrapped to
    */
@@ -11,12 +10,12 @@ const Response = class MessageResponse {
     /** A reference to the channel creating the message for this response */
     this.channel = this.message.channel
     /** The settings for this response (auto-remove seconds, if any) */
-    this.properties = this.message.guild ? this.message.guild.manager.properties : CastGuild.DEFAULTS;
+    this.properties = this.message.guild ? this.message.guild.manager.properties : CastGuild.DEFAULTS
   }
 
   /**
    * Add a self-destruct message to the embed footer
-   * 
+   *
    * @param {MessageEmbed} embed The embed to modify
    * @return {MessageEmbed} The modified embed
    */
@@ -30,7 +29,7 @@ const Response = class MessageResponse {
 
   /**
    * Delete the given message(s) after a set amount of seconds
-   * 
+   *
    * @param {...String} message The message(s) to mark for destruction after the seconds defined in the properties variable
    */
   markForDestruction (...message) {
@@ -43,7 +42,7 @@ const Response = class MessageResponse {
 
   /**
    * Reply to the user with the given text/embed
-   * 
+   *
    * @param {String} text The text to reply to the user (can be an empty string or null)
    * @param {RichEmbed} [embed] The embed, if any, to send to the user
    * @param {boolean} [selfDestruct] Whether or not the message should self-destruct. Defaults to true.
@@ -57,4 +56,4 @@ const Response = class MessageResponse {
   }
 }
 
-module.exports = Response;
+module.exports = Response

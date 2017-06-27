@@ -12,7 +12,7 @@ const GuildInstance = class CastGuild {
    */
   constructor (cast, guild, properties = defaultProps) {
     /** A reference to the Cast instance that created this instance */
-    this.cast = cast;
+    this.cast = cast
     /** A reference to the guild that owns this CastGuild */
     this.guild = guild
     /** A reference to the properties of this guild */
@@ -22,8 +22,8 @@ const GuildInstance = class CastGuild {
   }
 
   /** Gets the default properties for a CastGuild */
-  static DEFAULTS() {
-    return defaultProps;
+  static DEFAULTS () {
+    return defaultProps
   }
 }
 

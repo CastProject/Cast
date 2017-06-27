@@ -11,10 +11,9 @@ const EmbedDefaults = {title: null, footer: null, color: null, author: null, url
 const version = require(`../package`).version
 
 const EmbedBuilder = new class EmbedBuilder {
-
   /**
    * Creates a generic embed
-   * 
+   *
    * @param {String} text The description of the embed
    * @param {MessageEmbed} [data] Any data to pass to the embed. Supports RichEmbed parameters
    * @return {RichEmbed} The new embed
@@ -41,7 +40,7 @@ const EmbedBuilder = new class EmbedBuilder {
 
   /**
    * Creates an embed depicting a successful outcome
-   * 
+   *
    * @param {String} text The description of the embed
    * @param {MessageEmbed} [data] Any data to pass to the embed. Supports RichEmbed parameters
    * @return {RichEmbed} The new embed
@@ -53,7 +52,7 @@ const EmbedBuilder = new class EmbedBuilder {
 
   /**
    * Creates an embed depicting a failed outcome
-   * 
+   *
    * @param {String} text The description of the embed
    * @param {MessageEmbed} [data] Any data to pass to the embed. Supports RichEmbed parameters
    * @return {RichEmbed} The new embed
@@ -65,16 +64,16 @@ const EmbedBuilder = new class EmbedBuilder {
 
   /**
    * Creates an embed depicting an informative response
-   * 
+   *
    * @param {String} text The description of the embed
    * @param {MessageEmbed} [data] Any data to pass to the embed. Supports RichEmbed parameters
    * @return {RichEmbed} The new embed
    */
   createInformativeEmbed (text, data = EmbedDefaults) {
     data.color = Colors.INFO
-    return this.createEmbed(text, data);
+    return this.createEmbed(text, data)
   }
-}
+}()
 
 module.exports = EmbedBuilder
 module.exports.Colors = Colors

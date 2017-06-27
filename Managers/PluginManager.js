@@ -24,7 +24,7 @@ const Events = Discord.Constants.Events
 
 const path = require(`path`)
 const fs = require(`fs-extra`)
-const Collection = require(`discord.js`).Collection;
+const Collection = require(`discord.js`).Collection
 
 class PluginManager {
   /**
@@ -48,6 +48,9 @@ class PluginManager {
   load (dir) {
     return new Promise((resolve, reject) => {
       fs.pathExists(path.join(dir, PluginMeta)).then(exists => {
+        if (!exists) {
+          return this.cast.log(`${dir} is missing a ${PluginMeta}`)
+        }
         var loadedMeta = {}
         try {
           loadedMeta = require(path.join(dir, PluginMeta))
@@ -69,9 +72,9 @@ class PluginManager {
           return this.cast.log(`Plugin doesn't have a bundle ID in ${path.join(dir, PluginMeta)}`, true)
         }
         if (!loadedMeta.pluginName) {
-          var idSplit = loadedMeta.bundleID.split(".");
-          var pluginName = idSplit[idSplit.length - 1];
-          loadedMeta.pluginName = pluginName.charAt(0).toUpperCase() + pluginName.slice(1);
+          var idSplit = loadedMeta.bundleID.split('.')
+          var pluginName = idSplit[idSplit.length - 1]
+          loadedMeta.pluginName = pluginName.charAt(0).toUpperCase() + pluginName.slice(1)
         }
         var exists = fs.existsSync(path.join(dir, loadedMeta.main))
         if (!exists) return this.cast.log(`Plugin doesn't have a main class in ${path.join(dir, PluginMeta)}`, true)
@@ -90,7 +93,7 @@ class PluginManager {
 
   /**
    * Load all plugins in a given directory
-   * 
+   *
    * @param {String} dir
    * @param {LoadOptions} [opts]
    */
@@ -120,7 +123,7 @@ class PluginManager {
 
   /**
    * Index a plugin for events that it will listen for and bind them to client events
-   * 
+   *
    * @param {Plugin} plugin
    * @param {String[]} [events]
    */
@@ -137,7 +140,7 @@ class PluginManager {
         } else if (o.message) {
           return validated = !self.pluginDisabled(plugin.metadata.bundleID, o.message.guild)
         } else if (plugin.metadata.dm) {
-          return validated = true;
+          return validated = true
         }
         return validated = false
       })
@@ -214,15 +217,15 @@ class PluginManager {
 
   /**
    * Checks whether a given plugin is disabled in a guild.
-   * 
+   *
    * @param {String} bundleID
    * @param {Discord.Guild} guild
    * @return {boolean} Whether or not the plugin is disabled in a given guild
    */
   pluginDisabled (bundleID, guild) {
-    if (!guild) return !this.plugins.get(bundleID).metadata.dm;
-    if (!this.cast.pluginsController) return false;
-    if (!this.cast.pluginsController[guild.id]) return false;
+    if (!guild) return !this.plugins.get(bundleID).metadata.dm
+    if (!this.cast.pluginsController) return false
+    if (!this.cast.pluginsController[guild.id]) return false
     return this.cast.pluginsController[guild.id].disabled.indexOf(bundleID) > -1
   }
 }
