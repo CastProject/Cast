@@ -2,19 +2,27 @@ class PermNode {
 
   /**
    * @param {String} name The name of this node
-   * @param {PermNode[]} [parent] The parent permnodes, if any
+   * @param {PermNode} [parent] The parent permnode, if any
    */
-  constructor(name, parents = null) {
+  constructor(name, parent) {
     this.name = name;
-    this.parents = parents;
+    this.parent = parent;
   }
 
   /** Convert the permnode into a permission string */
   serialize() {
     var builder = "";
-    this.parents.forEach(node => {
+    /*this.parent.forEach(node => {
       builder += `${node.name}.`
-    });
+    });*/
+    var nodes = [];
+    var selection = this.parent;
+    while (true) {
+      if (!selection) break;
+      nodes.unshift(selection);
+      selection = selection.parent;
+    }
+    nodes.forEach(node => builder += `${node.name}.`)
     builder += this.name;
     return builder;
   }
@@ -29,15 +37,15 @@ class PermNode {
  * @param {String} permission The permission to deserialize into nodes
  */
 const deserialize = function(permission) {
-  var parents = [];
+  var parent = null;
   var finalNode = null;
   var nodes = permission.split(".");
   nodes.forEach((node, index) => {
     var root = !nodes[index - 1];
     var bottom = !nodes[index + 1];
-    var permNode = new PermNode(node, root ? [] : parents);
-    if (!bottom) parents.push(permNode);
-    else finalNode = permNode;
+    var permNode = new PermNode(node, root ? null : parent);
+    parent = permNode;
+    if (bottom) finalNode = permNode;
   })
   return finalNode;
 }
