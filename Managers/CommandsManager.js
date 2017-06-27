@@ -4,12 +4,15 @@ const path = require('path')
 const BaseCommand = require(`../Objects/Command`)
 const Logger = require(`../Util/Logger`);
 
+const AssemblePerm = require('../Permissions/PermNode').deserialize;
+
 const CommandMetaDefault = {
   'file': null,
   'command': null,
   'aliases': [],
   'args': null,
-  'plugin': null
+  'plugin': null,
+  "perm": null
 }
 
 class CommandsManager {
@@ -45,7 +48,14 @@ class CommandsManager {
   load (file, group = null, settings = CommandMetaDefault) {
     try {
       var Command = require(file)
+      if (!settings.command) {
+        settings.command = settings.file;
+      }
+      if (!settings.perm) {
+        settings.perm = settings.command;
+      }
       var loadedCommand = new Command(this.cast, settings)
+      loadedCommand.permission = AssemblePerm(this.plugin ? `${this.plugin.metadata.bundleID}.${settings.perm}` : `native.${settings.perm}`)
       // Check to make sure this command extends the BaseCommand
       if (!(loadedCommand instanceof BaseCommand)) {
         this.logger.log(`The ${settings.file} command from the ${settings.plugin} plugin could not be loaded because it is invalid.`, true)

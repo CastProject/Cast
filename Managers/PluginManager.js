@@ -64,6 +64,14 @@ class PluginManager {
         if (!loadedMeta.main) {
           return this.cast.log(`Plugin doesn't have a main class in ${path.join(dir, PluginMeta)}`, true)
         }
+        if (!loadedMeta.bundleID) {
+          return this.cast.log(`Plugin doesn't have a bundle ID in ${path.join(dir, PluginMeta)}`, true)
+        }
+        if (!loadedMeta.pluginName) {
+          var idSplit = loadedMeta.bundleID.split(".");
+          var pluginName = idSplit[idSplit.length - 1];
+          loadedMeta.pluginName = pluginName.charAt(0).toUpperCase() + pluginName.slice(1);
+        }
         var exists = fs.existsSync(path.join(dir, loadedMeta.main))
         if (!exists) return this.cast.log(`Plugin doesn't have a main class in ${path.join(dir, PluginMeta)}`, true)
         var PluginMain = require(path.join(dir, loadedMeta.main))
