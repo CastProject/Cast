@@ -48,7 +48,6 @@ class Messages {
     var response = new this.Response(message)
     // Remove the command prefix and split by spaces
     var opts = message.content.substr(1).split(' ')
-    var placeholders = {castHasCriteriaCheck: true, meetsCriteria: true}
     this.managers.commands.get(opts[0]).then(command => {
       // Check to see if the command exists
       if (!command) command = this.pluginsContain(opts[0])
@@ -56,14 +55,14 @@ class Messages {
         response.reply('', this.unknownCommand())
         return
       }
-      if (!placeholders.castHasCriteriaCheck) {
+      if (!this.cast.hasPermission) {
         const reply = 'Cast does not have a method to check permissions. (Was looking for cast.userMeetsCriteria)'
         this.log(reply, true)
         response.reply('', this.error(reply))
         return
       }
-      if (!placeholders.meetsCriteria) {
-        response.reply('', this.badPerms())
+      if (!this.cast.hasPermission(message.member ? message.member : message.author, command.permission.serialize())) {
+        response.reply(this.badPerms())
         return
       }
       // Check to see if this is a DM manager and if so check if the command has support for DMs.
@@ -103,7 +102,7 @@ class Messages {
    * @return {RichEmbed} The embed depicting insufficient permissions
    */
   badPerms () {
-    return EmbedBuilder.createErrorEmbed(`Sorry! You don't have permission to execute that command.`, {title: 'Insufficient Permissions'})
+    return `Sorry! You don't have permission to execute that command.`
   }
 
   /**
