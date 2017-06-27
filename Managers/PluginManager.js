@@ -24,6 +24,7 @@ const Events = Discord.Constants.Events
 
 const path = require(`path`)
 const fs = require(`fs-extra`)
+const Collection = require(`discord.js`).Collection;
 
 class PluginManager {
   /**
@@ -36,7 +37,7 @@ class PluginManager {
     /** The directory to index for plugins */
     this.dir = dir
     /** A map of bundle identifiers to their plugin instances */
-    this.plugins = new Map()
+    this.plugins = new Collection()
   }
 
   /**
@@ -77,7 +78,7 @@ class PluginManager {
         var PluginMain = require(path.join(dir, loadedMeta.main))
         var newPlugin = new PluginMain(this.cast, loadedMeta)
         if (!(newPlugin instanceof BasePlugin)) return this.cast.log(`${loadedMeta.bundleID} does not have a main class that conforms to the Cast BasePlugin. Disabling.`, true)
-        this.plugins.set(loadedMeta.bundleID, {plugin: newPlugin, meta: loadedMeta})
+        this.plugins.set(loadedMeta.bundleID, newPlugin)
         if (PluginMain.events) {
           if (!(PluginMain.events instanceof Array)) return this.cast.log(`${loadedMeta.bundleID} did not have an Array for their events variable. Events will not be loaded.`, true)
           this.attachEvents(newPlugin, PluginMain.events)
@@ -219,7 +220,7 @@ class PluginManager {
    * @return {boolean} Whether or not the plugin is disabled in a given guild
    */
   pluginDisabled (bundleID, guild) {
-    if (!guild) return !this.plugins.get(bundleID).meta.dm;
+    if (!guild) return !this.plugins.get(bundleID).metadata.dm;
     if (!this.cast.pluginsController) return false;
     if (!this.cast.pluginsController[guild.id]) return false;
     return this.cast.pluginsController[guild.id].disabled.indexOf(bundleID) > -1

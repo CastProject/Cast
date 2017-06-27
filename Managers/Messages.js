@@ -123,8 +123,7 @@ class Messages {
   pluginsContain (cstr) {
     if (this.managers.plugins) {
       var command = null
-      Array.from(this.managers.plugins.plugins.values()).some(data => {
-        var plugin = data.plugin
+      Array.from(this.managers.plugins.plugins.values()).some(plugin => {
         if (this.managers.plugins.pluginDisabled(plugin.metadata.bundleID, this.parameters.guild ? this.parameters.guild : null)) return true
         if (plugin.managers && plugin.managers.commands) {
           var fetched = plugin.managers.commands.getSync(cstr)
