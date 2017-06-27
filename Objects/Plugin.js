@@ -6,8 +6,7 @@ const Logger = require(`../Util/Logger`)
 
 const Plugin = class BasePlugin extends EventEmitter {
   /**
-   *
-   * @param {Client} client The Cast instance that created this instance
+   * @param {Cast} cast The Cast instance that created this instance
    * @param {Object} metadata The metadata for this plugin
    * @param {String} pluginPath The path to the plugin directory
    */

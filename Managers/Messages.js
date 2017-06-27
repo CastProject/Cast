@@ -51,7 +51,7 @@ class Messages {
       // Check to see if the command exists
       if (!command) command = this.pluginsContain(opts[0])
       if (!command) {
-        response.reply('', this.unknownCommand())
+        response.reply(`Unknown Command. Type \`${this.cast.config.prefix}help\` for help.`)
         return
       }
       if (!this.cast.hasPermission) {
