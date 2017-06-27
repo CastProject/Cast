@@ -42,3 +42,5 @@ class PermissionsTracker {
   }
 
 }
+
+module.exports = PermissionsTracker;
