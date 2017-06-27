@@ -4,7 +4,6 @@ const MetaDefaults = {
   commandsPath: null,
   disabledByDefault: true,
   version: '0.0.1',
-  dev: true,
   dm: false
 }
 
