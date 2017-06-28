@@ -13,7 +13,7 @@ class Command {
     /** A shortcut to the client instance */
     this.client = this.cast.client
     /** A reference to the command metadata */
-    this.meta = settings
+    this.metadata = settings
 
     if (plugin) {
       /** A reference to the plugin, if any, that owns this command */

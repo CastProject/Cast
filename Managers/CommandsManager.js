@@ -6,12 +6,15 @@ const Logger = require(`../Util/Logger`)
 
 const AssemblePerm = require('../Permissions/PermNode').deserialize
 
+const Collection = require(`discord.js`).Collection;
+
 const CommandMetaDefault = {
   'file': null,
   'command': null,
   'aliases': [],
   'args': null,
-  'perm': null
+  'perm': null,
+  'description': null
 }
 
 class CommandsManager {
@@ -30,11 +33,11 @@ class CommandsManager {
     /** The plugin that owns this command manager and its commands */
     this.plugin = plugin
     /** A map of commands tracked by this manager */
-    this.commands = new Map()
+    this.commands = new Collection()
     /** A map of aliases to their commands */
-    this.aliases = new Map()
+    this.aliases = new Collection()
     /** A map of groups to their commands */
-    this.groups = new Map()
+    this.groups = new Collection()
   }
 
   /**
@@ -52,6 +55,9 @@ class CommandsManager {
       }
       if (!settings.perm) {
         settings.perm = settings.command
+      }
+      if (!(settings.args instanceof Array)) {
+        settings.args = [];
       }
       var loadedCommand = new Command(this.cast, settings)
       loadedCommand.permission = AssemblePerm(this.plugin ? `${this.plugin.metadata.bundleID}.${settings.perm}` : `native.${settings.perm}`)
