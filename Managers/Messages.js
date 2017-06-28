@@ -2,25 +2,24 @@ const EmbedBuilder = require(`../Util/EmbedBuilder`)
 const Logger = require(`../Util/Logger`)
 
 class Messages {
-  
   /**
-   * 
+   *
    * @param {Cast} cast The cast instance creating this instance
    * @param {String} prefix The prefix for detecting commands
    * @param {Object} managers The messages, plugin and DM managers
    * @param {Guild} guild The guild to associate with
    */
   constructor (cast, guild) {
-    //TODO: Workaround for a really weird bug, will investigate in the future
+    // TODO: Workaround for a really weird bug, will investigate in the future
     this.Response = require(`../Util/Response`)
 
     /** A reference to the Cast instance that created this instance */
-    this.cast = cast;
+    this.cast = cast
     /** The prefix to use to detect commands */
-    this.prefix = this.cast.config.prefix;
+    this.prefix = this.cast.config.prefix
 
     /** The plugin and command managers */
-    this.managers = this.cast.managers;
+    this.managers = this.cast.managers
 
     /**
      * The specifications the MessagesManager was created with
@@ -55,17 +54,15 @@ class Messages {
         response.reply(`Unknown Command. Type \`${this.cast.config.prefix}help\` for help.`)
         return
       }
-      if (command.meta.permissionLevel > 0) {
-        if (!this.cast.userMeetsCriteria) {
-          const reply = 'Cast does not have a method to check permissions. (Was looking for cast.userMeetsCriteria)'
-          this.log(reply, true)
-          response.reply('', this.error(reply))
-          return
-        }
-        if (!this.cast.userMeetsCriteria(message.author, command.meta.permissionLevel, message.guild)) {
-          response.reply('', this.badPerms())
-          return
-        }
+      if (!this.cast.hasPermission) {
+        const reply = 'Cast does not have a method to check permissions. (Was looking for cast.userMeetsCriteria)'
+        this.log(reply, true)
+        response.reply('', this.error(reply))
+        return
+      }
+      if (!this.cast.hasPermission(message.member ? message.member : message.author, command.permission.serialize())) {
+        response.reply(this.badPerms())
+        return
       }
       // Check to see if this is a DM manager and if so check if the command has support for DMs.
       if (this.parameters.dm) {
@@ -82,7 +79,7 @@ class Messages {
 
   /**
    * Generate an embed depicting an error
-   * 
+   *
    * @return {RichEmbed} The embed depicting the error
    */
   error (message = null) {
@@ -91,7 +88,7 @@ class Messages {
 
   /**
    * Generate an embed depicting an unknown command
-   * 
+   *
    * @return {RichEmbed} The embed depicting the unknown command
    */
   unknownCommand () {
@@ -100,11 +97,11 @@ class Messages {
 
   /**
    * Generate an embed depicting insufficient permissions
-   * 
+   *
    * @return {RichEmbed} The embed depicting insufficient permissions
    */
   badPerms () {
-    return EmbedBuilder.createErrorEmbed(`Sorry! You don't have permission to execute that command.`, {title: 'Insufficient Permissions'})
+    return `Sorry! You don't have permission to execute that command.`
   }
 
   /**
@@ -125,8 +122,7 @@ class Messages {
   pluginsContain (cstr) {
     if (this.managers.plugins) {
       var command = null
-      Array.from(this.managers.plugins.plugins.values()).some(data => {
-        var plugin = data.plugin
+      Array.from(this.managers.plugins.plugins.values()).some(plugin => {
         if (this.managers.plugins.pluginDisabled(plugin.metadata.bundleID, this.parameters.guild ? this.parameters.guild : null)) return true
         if (plugin.managers && plugin.managers.commands) {
           var fetched = plugin.managers.commands.getSync(cstr)

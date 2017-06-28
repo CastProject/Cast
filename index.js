@@ -9,5 +9,7 @@ module.exports = {
   Logger: require('./Util/Logger'),
   Plugin: require('./Objects/Plugin'),
   Values: require('./Constants/Values'),
-  Version: require('./package').version
+  Version: require('./package').version,
+  PermNode: require('./Permissions/PermNode'),
+  PermissionsTracker: require('./Permissions/PermissionsTracker')
 }
