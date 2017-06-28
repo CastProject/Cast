@@ -11,7 +11,6 @@ const CommandMetaDefault = {
   'command': null,
   'aliases': [],
   'args': null,
-  'plugin': null,
   'perm': null
 }
 
@@ -58,7 +57,7 @@ class CommandsManager {
       loadedCommand.permission = AssemblePerm(this.plugin ? `${this.plugin.metadata.bundleID}.${settings.perm}` : `native.${settings.perm}`)
       // Check to make sure this command extends the BaseCommand
       if (!(loadedCommand instanceof BaseCommand)) {
-        this.logger.log(`The ${settings.file} command from the ${settings.plugin} plugin could not be loaded because it is invalid.`, true)
+        this.logger.log(`The ${settings.file} command from the ${this.plugin ? this.plugin.metadata.bundleID : 'native'} plugin could not be loaded because it is invalid.`, true)
       } else {
         var command = settings.command ? settings.command : settings.file
         var alias = settings.aliases ? settings.aliases : []
@@ -149,7 +148,7 @@ class CommandsManager {
    * @param {boolean} [missing] Whether or not the command file is missing
    */
   invalidMeta (availableMeta, missing = false) {
-    this.logger.log(`${availableMeta.plugin ? `The ${availableMeta.plugin} plugin` : 'A plugin'} tried to load command '${availableMeta.file ? availableMeta.file : availableMeta.command ? availableMeta.command : 'a command'}' ${missing ? 'but it could not be found' : 'with invalid syntax'}!`, true)
+    this.logger.log(`${this.plugin ? `The ${this.plugin.metadata.bundleID} plugin` : 'A plugin'} tried to load command '${availableMeta.file ? availableMeta.file : availableMeta.command ? availableMeta.command : 'a command'}' ${missing ? 'but it could not be found' : 'with invalid syntax'}!`, true)
   }
 }
 

@@ -49,7 +49,8 @@ class PluginManager {
     return new Promise((resolve, reject) => {
       fs.pathExists(path.join(dir, PluginMeta)).then(exists => {
         if (!exists) {
-          return this.cast.log(`${dir} is missing a ${PluginMeta}`)
+          this.cast.log(`${dir} is missing a ${PluginMeta}`);
+          return resolve();
         }
         var loadedMeta = {}
         try {
@@ -66,10 +67,12 @@ class PluginManager {
         // Adds any missing variables to the plugin config, read from the default plugin config. Likely to fail if the default is null.
         loadedMeta = Util.mergeDefault(MetaDefaults, loadedMeta)
         if (!loadedMeta.main) {
-          return this.cast.log(`Plugin doesn't have a main class in ${path.join(dir, PluginMeta)}`, true)
+          this.cast.log(`Plugin doesn't have a main class in ${path.join(dir, PluginMeta)}`, true)
+          return resolve();
         }
         if (!loadedMeta.bundleID) {
-          return this.cast.log(`Plugin doesn't have a bundle ID in ${path.join(dir, PluginMeta)}`, true)
+          this.cast.log(`Plugin doesn't have a bundle ID in ${path.join(dir, PluginMeta)}`, true)
+          return resolve();
         }
         if (!loadedMeta.pluginName) {
           var idSplit = loadedMeta.bundleID.split('.')
@@ -77,13 +80,24 @@ class PluginManager {
           loadedMeta.pluginName = pluginName.charAt(0).toUpperCase() + pluginName.slice(1)
         }
         var exists = fs.existsSync(path.join(dir, loadedMeta.main))
-        if (!exists) return this.cast.log(`Plugin doesn't have a main class in ${path.join(dir, PluginMeta)}`, true)
-        var PluginMain = require(path.join(dir, loadedMeta.main))
+        if (!exists) {
+          this.cast.log(`Plugin doesn't have a main class in ${path.join(dir, PluginMeta)}`, true)
+          return resolve()
+        }
+        var plPath = path.join(dir, loadedMeta.main);
+        var PluginMain = require(plPath)
         var newPlugin = new PluginMain(this.cast, loadedMeta)
-        if (!(newPlugin instanceof BasePlugin)) return this.cast.log(`${loadedMeta.bundleID} does not have a main class that conforms to the Cast BasePlugin. Disabling.`, true)
+        if (!(newPlugin instanceof BasePlugin)) {
+          this.cast.log(`${loadedMeta.bundleID} does not have a main class that conforms to the Cast BasePlugin. Disabling.`, true);
+          newPlugin = null;
+          return resolve();
+        }
         this.plugins.set(loadedMeta.bundleID, newPlugin)
         if (PluginMain.events) {
-          if (!(PluginMain.events instanceof Array)) return this.cast.log(`${loadedMeta.bundleID} did not have an Array for their events variable. Events will not be loaded.`, true)
+          if (!(PluginMain.events instanceof Array)) {
+            this.cast.log(`${loadedMeta.bundleID} did not have an Array for their events variable. Events will not be loaded.`, true)
+            return resolve();
+          }
           this.attachEvents(newPlugin, PluginMain.events)
         }
         resolve()
