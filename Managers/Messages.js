@@ -51,7 +51,7 @@ class Messages {
       // Check to see if the command exists
       if (!command) command = this.pluginsContain(opts[0])
       if (!command) {
-        response.reply(`Unknown Command. Type \`${this.cast.config.prefix}help\` for help.`)
+        response.reply(this.unknownCommand())
         return
       }
       if (!this.cast.hasPermission) {
@@ -67,7 +67,7 @@ class Messages {
       // Check to see if this is a DM manager and if so check if the command has support for DMs.
       if (this.parameters.dm) {
         if (!command.meta.dm) {
-          response.reply('', this.unavailable())
+          response.reply(this.unavailable())
           return
         }
       }
@@ -92,7 +92,7 @@ class Messages {
    * @return {RichEmbed} The embed depicting the unknown command
    */
   unknownCommand () {
-    return EmbedBuilder.createErrorEmbed(`Unknown Command. Type ${this.prefix}help for help.`, {title: 'Unknown Command'})
+    return `Unknown Command. Type ${this.prefix}help for help.`;
   }
 
   /**
@@ -111,7 +111,7 @@ class Messages {
    * @return {RichEmbed} The embed depicting an unsupported environment
    */
   unavailable (dm = false) {
-    return EmbedBuilder.createErrorEmbed(`Sorry, this command can only be run in ${dm ? 'DMs' : 'guilds'}.`, {title: 'Unsupported Environment'})
+    return `Sorry, this command can only be run in ${dm ? 'DMs' : 'guilds'}.`;
   }
 
   /**
