@@ -1,5 +1,9 @@
 const CastGuild = require('../Objects/Guild')
 
+const tagPrefix = `❮<@%s>❯`;
+
+const util = require(`util`);
+
 const Response = class MessageResponse {
   /**
    * @param {Message} message The message this Response is being wrapped to
@@ -50,10 +54,16 @@ const Response = class MessageResponse {
    */
   reply (text, embed = null, selfDestruct = true) {
     if (embed && selfDestruct) embed = this.destructionFooter(embed)
-    return this.channel.send(`❮<@${this.message.author.id}>❯${text ? `: ${text}` : ''}`, embed ? {embed} : {}).then(m => {
+    return this.channel.send(`${this.prefix(this.message.author.id)}${text ? `: ${text}` : ''}`, embed ? {embed} : {}).then(m => {
       if (selfDestruct) this.markForDestruction(this.message, m)
+      return m;
     })
   }
+
+  prefix(id) {
+    return util.format(tagPrefix, id);
+  }
+
 }
 
 module.exports = Response
