@@ -73,7 +73,11 @@ class Messages {
       }
       // Remove from the command from the opts array, converting it to an arguments array
       opts.shift()
-      command.execute(message, response, opts)
+      try{
+        command.execute(message, response, opts)
+      } catch (e) {
+        response.reply('', this.error(e), false);
+      }
     })
   }
 
@@ -82,7 +86,9 @@ class Messages {
    *
    * @return {RichEmbed} The embed depicting the error
    */
-  error (message = null) {
+  error (error = null) {
+    var eRef = new Error();
+    var message = `${error.name}${error.message ? `: ${error.message}` : ``}${error.stack ? `\n${error.stack}` : ``}`
     return EmbedBuilder.createErrorEmbed(message ? `\`\`\`${message}\`\`\`` : message, {title: 'An Error Occurred'})
   }
 
