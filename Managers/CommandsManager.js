@@ -59,7 +59,7 @@ class CommandsManager {
       if (!(settings.args instanceof Array)) {
         settings.args = [];
       }
-      var loadedCommand = new Command(this.cast, settings)
+      var loadedCommand = new Command(this.cast, settings, this.plugin)
       loadedCommand.permission = AssemblePerm(this.plugin ? `${this.plugin.metadata.bundleID}.${settings.perm}` : `native.${settings.perm}`)
       // Check to make sure this command extends the BaseCommand
       if (!(loadedCommand instanceof BaseCommand)) {
