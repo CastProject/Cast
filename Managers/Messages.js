@@ -77,6 +77,7 @@ class Messages {
         command.execute(message, response, opts)
       } catch (e) {
         response.reply('', this.error(e), false);
+        this.cast.logError(e);
       }
     })
   }
