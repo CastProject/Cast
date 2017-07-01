@@ -29,7 +29,7 @@ class Logger {
   }
 
   debug (data) {
-    if (!data) return;
+    if (!data) return
     console.log(`[DEBUG] ${this.prefix ? `[${this.prefix}] ` : ''}${data}`)
   }
 

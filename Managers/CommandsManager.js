@@ -6,7 +6,7 @@ const Logger = require(`../Util/Logger`)
 
 const AssemblePerm = require('../Permissions/PermNode').deserialize
 
-const Collection = require(`discord.js`).Collection;
+const Collection = require(`discord.js`).Collection
 
 const CommandMetaDefault = {
   'file': null,
@@ -57,7 +57,7 @@ class CommandsManager {
         settings.perm = settings.command
       }
       if (!(settings.args instanceof Array)) {
-        settings.args = [];
+        settings.args = []
       }
       var loadedCommand = new Command(this.cast, settings, this.plugin)
       loadedCommand.permission = AssemblePerm(this.plugin ? `${this.plugin.metadata.bundleID}.${settings.perm}` : `native.${settings.perm}`)

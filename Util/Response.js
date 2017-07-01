@@ -1,8 +1,8 @@
 const CastGuild = require('../Objects/Guild')
 
-const tagPrefix = `❮<@%s>❯`;
+const tagPrefix = `❮<@%s>❯`
 
-const util = require(`util`);
+const util = require(`util`)
 
 const Response = class MessageResponse {
   /**
@@ -56,14 +56,13 @@ const Response = class MessageResponse {
     if (embed && selfDestruct) embed = this.destructionFooter(embed)
     return this.channel.send(`${this.prefix(this.message.author.id)}${text ? `: ${text}` : ''}`, embed ? {embed} : {}).then(m => {
       if (selfDestruct) this.markForDestruction(this.message, m)
-      return m;
+      return m
     })
   }
 
-  prefix(id) {
-    return util.format(tagPrefix, id);
+  prefix (id) {
+    return util.format(tagPrefix, id)
   }
-
 }
 
 module.exports = Response

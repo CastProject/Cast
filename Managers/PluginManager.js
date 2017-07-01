@@ -49,8 +49,8 @@ class PluginManager {
     return new Promise((resolve, reject) => {
       fs.pathExists(path.join(dir, PluginMeta)).then(exists => {
         if (!exists) {
-          this.cast.log(`${dir} is missing a ${PluginMeta}`);
-          return resolve();
+          this.cast.log(`${dir} is missing a ${PluginMeta}`)
+          return resolve()
         }
         var loadedMeta = {}
         try {
@@ -68,11 +68,11 @@ class PluginManager {
         loadedMeta = Util.mergeDefault(MetaDefaults, loadedMeta)
         if (!loadedMeta.main) {
           this.cast.log(`Plugin doesn't have a main class in ${path.join(dir, PluginMeta)}`, true)
-          return resolve();
+          return resolve()
         }
         if (!loadedMeta.bundleID) {
           this.cast.log(`Plugin doesn't have a bundle ID in ${path.join(dir, PluginMeta)}`, true)
-          return resolve();
+          return resolve()
         }
         if (!loadedMeta.pluginName) {
           var idSplit = loadedMeta.bundleID.split('.')
@@ -84,19 +84,19 @@ class PluginManager {
           this.cast.log(`Plugin doesn't have a main class in ${path.join(dir, PluginMeta)}`, true)
           return resolve()
         }
-        var plPath = path.join(dir, loadedMeta.main);
+        var plPath = path.join(dir, loadedMeta.main)
         var PluginMain = require(plPath)
         var newPlugin = new PluginMain(this.cast, loadedMeta)
         if (!(newPlugin instanceof BasePlugin)) {
-          this.cast.log(`${loadedMeta.bundleID} does not have a main class that conforms to the Cast BasePlugin. Disabling.`, true);
-          newPlugin = null;
-          return resolve();
+          this.cast.log(`${loadedMeta.bundleID} does not have a main class that conforms to the Cast BasePlugin. Disabling.`, true)
+          newPlugin = null
+          return resolve()
         }
         this.plugins.set(loadedMeta.bundleID, newPlugin)
         if (PluginMain.events) {
           if (!(PluginMain.events instanceof Array)) {
             this.cast.log(`${loadedMeta.bundleID} did not have an Array for their events variable. Events will not be loaded.`, true)
-            return resolve();
+            return resolve()
           }
           this.attachEvents(newPlugin, PluginMain.events)
         }

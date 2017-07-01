@@ -44,7 +44,7 @@ class Messages {
     if (!message.content.startsWith(this.prefix) || message.content.startsWith(this.prefix + this.prefix) || message.content === this.prefix) return
     if (this.parameters.dm && !message.channel.type === `dm`) return
     if (this.parameters.guild && message.guild.id !== this.parameters.guild.id) return
-    if (this.cast.config.debug) this.cast.logger.debug(`${message.guild ? `[${message.guild.name}] ` : ``}<${message.member ? message.member.nickname || message.author.username : message.author.username}#${message.author.discriminator}> ${message.content}`);
+    if (this.cast.config.debug) this.cast.logger.debug(`${message.guild ? `[${message.guild.name}] ` : ``}<${message.member ? message.member.nickname || message.author.username : message.author.username}#${message.author.discriminator}> ${message.content}`)
     var response = new this.Response(message)
     // Remove the command prefix and split by spaces
     var opts = message.content.substr(1).split(' ')
@@ -74,11 +74,11 @@ class Messages {
       }
       // Remove from the command from the opts array, converting it to an arguments array
       opts.shift()
-      try{
+      try {
         command.execute(message, response, opts)
       } catch (e) {
-        response.reply('', this.error(e), false);
-        this.cast.logError(e);
+        response.reply('', this.error(e), false)
+        this.cast.logError(e)
       }
     })
   }
@@ -89,7 +89,7 @@ class Messages {
    * @return {RichEmbed} The embed depicting the error
    */
   error (error = null) {
-    var eRef = new Error();
+    var eRef = new Error()
     var message = `${error.name}${error.message ? `: ${error.message}` : ``}${error.stack ? `\n${error.stack}` : ``}`
     return EmbedBuilder.createErrorEmbed(message ? `\`\`\`${message}\`\`\`` : message, {title: 'An Error Occurred'})
   }
@@ -100,7 +100,7 @@ class Messages {
    * @return {RichEmbed} The embed depicting the unknown command
    */
   unknownCommand () {
-    return `Unknown Command. Type ${this.prefix}help for help.`;
+    return `Unknown Command. Type ${this.prefix}help for help.`
   }
 
   /**
@@ -119,7 +119,7 @@ class Messages {
    * @return {RichEmbed} The embed depicting an unsupported environment
    */
   unavailable (dm = false) {
-    return `Sorry, this command can only be run in ${dm ? 'DMs' : 'guilds'}.`;
+    return `Sorry, this command can only be run in ${dm ? 'DMs' : 'guilds'}.`
   }
 
   /**
