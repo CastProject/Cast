@@ -30,7 +30,7 @@ class PermissionsTracker {
    */
   addPermission (permission) {
     if (this.permissions.indexOf(permission) > -1) return
-    this.permissions.push(permission.serialize())
+    this.permissions.push(permission)
   }
 
   /**
