@@ -28,6 +28,11 @@ class Logger {
     console.warn(`[WARN] ${this.prefix ? `[${this.prefix}] ` : ''}${data}`)
   }
 
+  debug (data) {
+    if (!data) return;
+    console.log(`[DEBUG] ${this.prefix ? `[${this.prefix}] ` : ''}${data}`)
+  }
+
   /**
    * Parse and log an error to the console
    * @param {Error} error

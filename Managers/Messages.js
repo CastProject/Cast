@@ -44,6 +44,7 @@ class Messages {
     if (!message.content.startsWith(this.prefix) || message.content.startsWith(this.prefix + this.prefix) || message.content === this.prefix) return
     if (this.parameters.dm && !message.channel.type === `dm`) return
     if (this.parameters.guild && message.guild.id !== this.parameters.guild.id) return
+    if (this.cast.config.debug) this.cast.logger.debug(`${message.guild ? `[${message.guild.name}] ` : ``}<${message.member ? message.member.nickname || message.author.username : message.author.username}#${message.author.discriminator}> ${message.content}`);
     var response = new this.Response(message)
     // Remove the command prefix and split by spaces
     var opts = message.content.substr(1).split(' ')
