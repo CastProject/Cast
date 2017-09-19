@@ -1,23 +1,16 @@
 {
   "name": "castapi",
-  "version": "0.0.4",
-  "description": "The Cast API",
-  "main": "index.js",
+  "version": "0.0.5",
+  "description": "The API for Cast-compatible Discord bot",
+  "main": "dist/index",
+  "typings": "dist/index",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsc -p . --watch"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/CastProject/CastAPI.git"
-  },
-  "author": "Eric Rabil",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/CastProject/CastAPI/issues"
-  },
-  "homepage": "https://github.com/CastProject/CastAPI#readme",
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "discord.js": "^11.1.0",
-    "fs-extra": "^3.0.1"
+    "@types/node": "^8.0.28",
+    "discord.js": "^11.2.1"
   }
 }
