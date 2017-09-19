@@ -7,8 +7,10 @@ export interface Cast {
     messageListeners: Map<Discord.Snowflake, MessageListener>;
     dmListener: MessageListener;
     isDebug(): boolean;
+
     getToken(): string;
     getGlobalAdmins(): string[];
     getDefaultPermissions(): string[];
     getCommandPrefix(): string;
+    getUserBlacklist(): string[];
 }
