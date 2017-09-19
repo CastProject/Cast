@@ -13,4 +13,5 @@ export interface Cast {
   getGlobalAdmins(): string[];
   getDefaultPermissions(): string[];
   getCommandPrefix(): string;
+  getUserBlacklist(): string[];
 }
