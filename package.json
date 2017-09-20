@@ -1,7 +1,7 @@
 {
-  "name": "castapi",
+  "name": "cast",
   "version": "0.0.5",
-  "description": "The API for Cast-compatible Discord bot",
+  "description": "The API for Cast-compatible Discord bots",
   "main": "dist/index",
   "typings": "dist/index",
   "scripts": {
