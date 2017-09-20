@@ -12,7 +12,6 @@ export interface Cast {
     libraries: {
         embedFactory: EmbedFactory;
         util: Util;
-        logger: Logger;
     };
     pluginContainer: PluginContainer;
     isDebug(): boolean;
@@ -21,4 +20,5 @@ export interface Cast {
     getDefaultPermissions(): string[];
     getCommandPrefix(): string;
     getUserBlacklist(): string[];
+    createLogger(prefixes: string[]): Logger;
 }

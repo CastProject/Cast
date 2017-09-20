@@ -11,7 +11,7 @@ export interface Cast {
   messageListeners: Discord.Collection<Discord.Snowflake, MessageListener>;
   dmListener: MessageListener;
   
-  libraries: {embedFactory: EmbedFactory, util: Util, logger: Logger};
+  libraries: {embedFactory: EmbedFactory, util: Util};
 
   pluginContainer: PluginContainer;
   
@@ -21,4 +21,5 @@ export interface Cast {
   getDefaultPermissions(): string[];
   getCommandPrefix(): string;
   getUserBlacklist(): string[];
+  createLogger(prefixes: string[]): Logger;
 }
