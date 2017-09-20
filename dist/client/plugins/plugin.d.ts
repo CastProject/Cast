@@ -1,9 +1,11 @@
 /// <reference types="node" />
 import { Cast } from '../cast';
 import { PluginConfig } from './pluginConfig';
+import { Logger } from '../util/logger';
 import * as events from 'events';
 export interface Plugin extends events.EventEmitter {
-    onLoad(cast: Cast, config: PluginConfig): Promise<any>;
+    logger: Logger;
+    onLoad(cast: Cast, config: PluginConfig, logger: Logger): Promise<any>;
     onEnable(): Promise<any>;
     onDisable(): Promise<any>;
     getName(): string;
