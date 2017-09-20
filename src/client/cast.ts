@@ -5,7 +5,7 @@ import {Logger} from './util/logger';
 export interface Cast {
   client: Discord.Client;
   logger: Logger;
-  messageListeners: Map<Discord.Snowflake, MessageListener>;
+  messageListeners: Discord.Collection<Discord.Snowflake, MessageListener>;
   dmListener: MessageListener;
   
   isDebug(): boolean;
