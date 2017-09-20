@@ -12,6 +12,7 @@ export interface Cast {
     libraries: {
         embedFactory: EmbedFactory;
         util: Util;
+        logger: Logger;
     };
     pluginContainer: PluginContainer;
     isDebug(): boolean;

@@ -11,7 +11,7 @@ export interface Cast {
   messageListeners: Discord.Collection<Discord.Snowflake, MessageListener>;
   dmListener: MessageListener;
   
-  libraries: {embedFactory: EmbedFactory, util: Util};
+  libraries: {embedFactory: EmbedFactory, util: Util, logger: Logger};
 
   pluginContainer: PluginContainer;
   
