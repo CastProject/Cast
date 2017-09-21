@@ -1,17 +1,16 @@
 /// <reference types="node" />
 import { Cast } from '../cast';
-import { PluginConfig } from './pluginConfig';
 import { Logger } from '../util/logger';
 import * as events from 'events';
 export interface Plugin extends events.EventEmitter {
     logger: Logger;
-    onLoad(cast: Cast, config: PluginConfig, logger: Logger): Promise<any>;
+    onLoad(cast: Cast, logger: Logger, config?: object): Promise<any>;
     onEnable(): Promise<any>;
     onDisable(): Promise<any>;
     getName(): string;
     getVersion(): string | number;
     isDebugMode(): boolean;
     isDisabledByDefault(): boolean;
-    getPluginConfig(): PluginConfig;
+    getPluginConfig(): object;
     getListeningEvents(): string[];
 }
