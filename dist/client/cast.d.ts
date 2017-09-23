@@ -5,20 +5,92 @@ import { PluginContainer } from './containers/pluginContainer';
 import { EmbedFactory } from './util/embedFactory';
 import { Util } from './util/util';
 export interface Cast {
+    /**
+     * The client that Cast will interact with
+     *
+     * @type {Discord.Client}
+     * @memberof Cast
+     */
     client: Discord.Client;
+    /**
+     * The global logger
+     *
+     * @type {Logger}
+     * @memberof Cast
+     */
     logger: Logger;
-    messageListeners: Discord.Collection<Discord.Snowflake, MessageListener>;
-    dmListener: MessageListener;
+    /**
+     * A map of message listeners by their channel
+     *
+     * @type {Map<Discord.Snowflake, MessageListener>}
+     * @memberof Cast
+     */
+    messageListeners: Map<Discord.Snowflake, MessageListener>;
+    /**
+     * The implemented libraries available for plugins and commands to use
+     *
+     * @type {{embedFactory: EmbedFactory, util: Util}}
+     * @memberof Cast
+     */
     libraries: {
         embedFactory: EmbedFactory;
         util: Util;
     };
+    /**
+     * The plugin container for this Cast instance
+     *
+     * @type {PluginContainer}
+     * @memberof Cast
+     */
     pluginContainer: PluginContainer;
+    /**
+     * Whether or not Cast is in debug mode
+     *
+     * @returns {boolean} Debug mode
+     * @memberof Cast
+     */
     isDebug(): boolean;
+    /**
+     * Gets the token for this bot
+     *
+     * @returns {string} The token
+     * @memberof Cast
+     */
     getToken(): string;
+    /**
+     * Gets an array of global admins
+     *
+     * @returns {string[]} The global admins
+     * @memberof Cast
+     */
     getGlobalAdmins(): string[];
+    /**
+     * Gets an array of default permissions each user/role will inherit
+     *
+     * @returns {string[]} The default permissions
+     * @memberof Cast
+     */
     getDefaultPermissions(): string[];
+    /**
+     * Gets the command prefix
+     *
+     * @returns {string} The command prefix
+     * @memberof Cast
+     */
     getCommandPrefix(): string;
+    /**
+     * Gets an array of blacklisted users
+     *
+     * @returns {string[]} The blacklisted users
+     * @memberof Cast
+     */
     getUserBlacklist(): string[];
+    /**
+     * Builds a logger using the provided prefix tags
+     *
+     * @param {string[]} prefixes The prefixes
+     * @returns {Logger} The logger
+     * @memberof Cast
+     */
     createLogger(prefixes: string[]): Logger;
 }
