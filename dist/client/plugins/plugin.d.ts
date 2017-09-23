@@ -12,4 +12,5 @@ export interface Plugin extends events.EventEmitter {
     isDisabledByDefault(): boolean;
     getPluginConfig(): object;
     getListeningEvents(): string[];
+    getState(): number;
 }

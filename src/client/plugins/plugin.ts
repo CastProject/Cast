@@ -15,4 +15,9 @@ export interface Plugin extends events.EventEmitter {
 
   getPluginConfig(): object;
   getListeningEvents(): string[];
+
+  /**
+   * The state the plugin is in - 0 if disabled or unloaded, 1 if enabled.
+   */
+  getState(): number;
 }
