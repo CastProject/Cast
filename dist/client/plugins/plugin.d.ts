@@ -5,6 +5,13 @@ import { CommandContainer } from '../containers/commandContainer';
 import * as events from 'events';
 export interface Plugin extends events.EventEmitter {
     /**
+     * A reference to the cast object that created this plugin
+     *
+     * @type {Cast}
+     * @memberof Plugin
+     */
+    cast: Cast;
+    /**
      * The container of commands this plugin has
      *
      * @type {CommandContainer}
