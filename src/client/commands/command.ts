@@ -38,5 +38,5 @@ export interface Command {
    * @returns {(['dm' | 'group' | 'text'])} 
    * @memberof Command
    */
-  supportedEnvironments(): ['dm' | 'group' | 'text'];
+  supportedEnvironments(): ['dm' | 'text'];
 }
