@@ -3,7 +3,6 @@ import { Cast } from '../cast';
 import { Logger } from '../util/logger';
 import * as events from 'events';
 export interface Plugin extends events.EventEmitter {
-    logger: Logger;
     onLoad(cast: Cast, logger: Logger, config?: object): Promise<any>;
     onEnable(): Promise<any>;
     onDisable(): Promise<any>;
