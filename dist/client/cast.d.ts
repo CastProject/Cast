@@ -101,4 +101,12 @@ export interface Cast {
      * @memberof Cast
      */
     createLogger(prefixes: string[]): Logger;
+    /**
+     * Creates a command container for the provided directory
+     *
+     * @param {string} commandPath The command directory
+     * @returns {CommandContainer}
+     * @memberof Cast
+     */
+    createCommandContainer(commandPath: string): CommandContainer;
 }
