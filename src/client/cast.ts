@@ -4,6 +4,7 @@ import {Logger} from './util/logger';
 import {PluginContainer} from './containers/pluginContainer';
 import {EmbedFactory} from './util/embedFactory';
 import {Util} from './util/util';
+import {CommandContainer} from './containers/commandContainer';
 
 export interface Cast {
 
@@ -32,6 +33,15 @@ export interface Cast {
    * @memberof Cast
    */
   messageListeners: Map<Discord.Snowflake, MessageListener>;
+
+
+  /**
+   * The container of global commands
+   * 
+   * @type {CommandContainer}
+   * @memberof Cast
+   */
+  commands: CommandContainer;
   
 
   /**

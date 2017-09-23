@@ -1,8 +1,16 @@
 /// <reference types="node" />
 import { Cast } from '../cast';
 import { Logger } from '../util/logger';
+import { CommandContainer } from '../containers/commandContainer';
 import * as events from 'events';
 export interface Plugin extends events.EventEmitter {
+    /**
+     * The container of commands this plugin has
+     *
+     * @type {CommandContainer}
+     * @memberof Plugin
+     */
+    commands?: CommandContainer;
     /**
      * Called on initial load, is used to give a plugin a chance to initialize before fully enabling.
      *
