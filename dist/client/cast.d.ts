@@ -5,6 +5,7 @@ import { PluginContainer } from './containers/pluginContainer';
 import { EmbedFactory } from './util/embedFactory';
 import { Util } from './util/util';
 import { CommandContainer } from './containers/commandContainer';
+import { Plugin } from './plugins/plugin';
 export interface Cast {
     /**
      * The client that Cast will interact with
@@ -108,5 +109,5 @@ export interface Cast {
      * @returns {CommandContainer}
      * @memberof Cast
      */
-    createCommandContainer(commandPath: string): CommandContainer;
+    createCommandContainer(commandPath: string, owner: Plugin): CommandContainer;
 }
