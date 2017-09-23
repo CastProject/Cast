@@ -16,6 +16,14 @@ export interface Plugin extends events.EventEmitter {
   commands?: CommandContainer;
 
   /**
+   * The logger for this plugin
+   * 
+   * @type {Logger}
+   * @memberof Plugin
+   */
+  logger: Logger;
+
+  /**
    * Called on initial load, is used to give a plugin a chance to initialize before fully enabling.
    * 
    * @param {Cast} cast A reference to the Cast object that created this plugin
