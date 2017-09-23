@@ -14,7 +14,7 @@ export interface Plugin extends events.EventEmitter {
    * @returns {Promise<any>} A promise representing the completed loading
    * @memberof Plugin
    */
-  onLoad(cast: Cast, logger: Logger, config?: object): Promise<any>;
+  onLoad(cast: Cast, logger: Logger): Promise<any>;
 
 
   /**
