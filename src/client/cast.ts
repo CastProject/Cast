@@ -19,6 +19,15 @@ export interface Cast {
 
 
   /**
+   * A circular reference to this object
+   * 
+   * @type {Cast}
+   * @memberof Cast
+   */
+  cast: Cast;
+
+
+  /**
    * The global logger
    * 
    * @type {Logger}
