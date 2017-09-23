@@ -118,6 +118,16 @@ export interface Cast {
 
 
   /**
+   * Toggle the blacklist state of a user
+   * 
+   * @param {Discord.Snowflake} id The user to toggle blacklist
+   * @returns {boolean} Returns true if the user is now blacklisted, false if they are no longer blacklisted
+   * @memberof Cast
+   */
+  toggleBlacklisted(id: Discord.Snowflake): boolean;
+
+
+  /**
    * Builds a logger using the provided prefix tags
    * 
    * @param {string[]} prefixes The prefixes
