@@ -118,13 +118,12 @@ export interface Cast {
 
 
   /**
-   * Toggle the blacklist state of a user
+   * Set the blacklist state of a user
    * 
-   * @param {Discord.Snowflake} id The user to toggle blacklist
-   * @returns {boolean} Returns true if the user is now blacklisted, false if they are no longer blacklisted
+   * @param {Discord.Snowflake} id The user to set blacklist
    * @memberof Cast
    */
-  toggleBlacklisted(id: Discord.Snowflake): boolean;
+  setBlacklisted(id: Discord.Snowflake, blacklist: boolean): any;
 
 
   /**
