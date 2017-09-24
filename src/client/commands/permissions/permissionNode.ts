@@ -1,6 +1,6 @@
 export interface PermissionNode {
     name: string;
-    parent: PermissionNode;
+    parent?: PermissionNode;
 
     serialize (): string;
   
