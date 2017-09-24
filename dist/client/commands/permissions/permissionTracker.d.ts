@@ -1,9 +1,9 @@
 import * as Discord from 'discord.js';
 import { PermissionNode } from './permissionNode';
 export interface PermissionTracker {
-    user?: Discord.User;
-    role?: Discord.Role;
-    guild?: Discord.Guild;
+    user?: Discord.Snowflake;
+    role?: Discord.Snowflake;
+    guild?: Discord.Snowflake;
     hasPermission(permission: string | PermissionNode): boolean;
     addPermission(permission: string | PermissionNode): void;
     revokePermission(permission: string | PermissionNode): void;
