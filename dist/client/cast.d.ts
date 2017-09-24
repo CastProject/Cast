@@ -1,3 +1,4 @@
+/// <reference types="mongoose" />
 import * as Discord from 'discord.js';
 import { MessageListener } from './listeners/messageListener';
 import { Logger } from './util/logger';
@@ -6,6 +7,7 @@ import { EmbedFactory } from './util/embedFactory';
 import { Util } from './util/util';
 import { CommandContainer } from './containers/commandContainer';
 import { Plugin } from './plugins/plugin';
+import * as mongoose from 'mongoose';
 export interface Cast {
     /**
      * The client that Cast will interact with
@@ -14,6 +16,13 @@ export interface Cast {
      * @memberof Cast
      */
     client: Discord.Client;
+    /**
+     * The database connection (if any)
+     *
+     * @type {mongoose.Mongoose}
+     * @memberof Cast
+     */
+    mongoose: mongoose.Mongoose;
     /**
      * A circular reference to this object
      *

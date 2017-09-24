@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/mongoose": "^4.7.23",
     "@types/node": "^8.0.28",
-    "discord.js": "^11.2.1"
+    "discord.js": "^11.2.1",
+    "mongoose": "^4.11.12"
   }
 }
