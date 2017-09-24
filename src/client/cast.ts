@@ -167,6 +167,27 @@ export interface Cast {
 
 
   /**
+   * Revokes a permission from a given user
+   * 
+   * @param {(Discord.Role | Discord.GuildMember | Discord.User)} entity 
+   * @param {string} permission 
+   * @returns {Promise<void>} 
+   * @memberof Cast
+   */
+  revokePermission(entity: Discord.Role | Discord.GuildMember | Discord.User, permission: string): Promise<void>;
+
+
+  /**
+   * Grants permission to a given user
+   * 
+   * @param {(Discord.Role | Discord.GuildMember | Discord.User)} entity 
+   * @param {string} permission 
+   * @returns {Promise<void>} 
+   * @memberof Cast
+   */
+  grantPermission(entity: Discord.Role | Discord.GuildMember | Discord.User, permission: string): Promise<void>;  
+
+  /**
    * Creates a command container for the provided directory
    * 
    * @param {string} commandPath The command directory
