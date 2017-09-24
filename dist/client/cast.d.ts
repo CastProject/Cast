@@ -126,6 +126,14 @@ export interface Cast {
      */
     createLogger(prefixes: string[]): Logger;
     /**
+     * Checks whether or not the given entity has permission to execute a command.
+     *
+     * @param {(Discord.Role | Discord.GuildMember | Discord.User)} entity The entity to check against
+     * @returns {boolean} Whether they have permission
+     * @memberof Cast
+     */
+    hasPermission(entity: Discord.Role | Discord.GuildMember | Discord.User): boolean;
+    /**
      * Creates a command container for the provided directory
      *
      * @param {string} commandPath The command directory
