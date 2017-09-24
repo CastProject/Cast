@@ -8,7 +8,7 @@ export interface PermissionTracker {
     addPermission(permission: string | PermissionNode): void;
     revokePermission(permission: string | PermissionNode): void;
     serialize(): {
-        user: Discord.Snowflake;
+        user?: Discord.Snowflake;
         role?: Discord.Snowflake;
         guild?: Discord.Snowflake;
         permissions: string[];
