@@ -159,10 +159,11 @@ export interface Cast {
    * Checks whether or not the given entity has permission to execute a command.
    * 
    * @param {(Discord.Role | Discord.GuildMember | Discord.User)} entity The entity to check against
+   * @param {string} permission The permission to check for
    * @returns {boolean} Whether they have permission
    * @memberof Cast
    */
-  hasPermission(entity: Discord.Role | Discord.GuildMember | Discord.User): boolean;
+  hasPermission(entity: Discord.Role | Discord.GuildMember | Discord.User, permission: string): boolean;
 
 
   /**
