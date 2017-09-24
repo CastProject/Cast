@@ -93,14 +93,14 @@ export interface Cast {
      * @type {string} The command prefix
      * @memberof Cast
      */
-    commandPrefix(): string;
+    commandPrefix: string;
     /**
      * Gets an array of blacklisted users
      *
      * @type {string[]} The blacklisted users
      * @memberof Cast
      */
-    userBlacklist(): string[];
+    userBlacklist: string[];
     /**
      * Set the blacklist state of a user
      *

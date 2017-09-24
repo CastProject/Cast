@@ -114,7 +114,7 @@ export interface Cast {
    * @type {string} The command prefix
    * @memberof Cast
    */
-  commandPrefix(): string;
+  commandPrefix: string;
 
 
   /**
@@ -123,7 +123,7 @@ export interface Cast {
    * @type {string[]} The blacklisted users
    * @memberof Cast
    */
-  userBlacklist(): string[];
+  userBlacklist: string[];
 
 
   /**
