@@ -135,6 +135,15 @@ export interface Cast {
      */
     hasPermission(entity: Discord.Role | Discord.GuildMember | Discord.User, permission: string): Promise<boolean>;
     /**
+     * Toggles a permission for a given entity
+     *
+     * @param {(Discord.Role | Discord.GuildMember | Discord.User)} entity
+     * @param {string} permission
+     * @returns {Promise<void>}
+     * @memberof Cast
+     */
+    togglePermission(entity: Discord.Role | Discord.GuildMember | Discord.User, permission: string): Promise<void>;
+    /**
      * Revokes a permission from a given user
      *
      * @param {(Discord.Role | Discord.GuildMember | Discord.User)} entity
