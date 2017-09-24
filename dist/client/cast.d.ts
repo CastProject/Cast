@@ -65,7 +65,7 @@ export interface Cast {
      * @type {boolean} Debug mode
      * @memberof Cast
      */
-    isDebug: boolean;
+    debug: boolean;
     /**
      * Gets the token for this bot
      *

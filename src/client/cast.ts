@@ -78,7 +78,7 @@ export interface Cast {
    * @type {boolean} Debug mode
    * @memberof Cast
    */
-  isDebug: boolean;
+  debug: boolean;
 
 
   /**
