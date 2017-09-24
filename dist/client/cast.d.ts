@@ -62,45 +62,45 @@ export interface Cast {
     /**
      * Whether or not Cast is in debug mode
      *
-     * @returns {boolean} Debug mode
+     * @type {boolean} Debug mode
      * @memberof Cast
      */
-    isDebug(): boolean;
+    isDebug: boolean;
     /**
      * Gets the token for this bot
      *
      * @returns {string} The token
      * @memberof Cast
      */
-    getToken(): string;
+    token: string;
     /**
      * Gets an array of global admins
      *
-     * @returns {string[]} The global admins
+     * @type {string[]} The global admins
      * @memberof Cast
      */
-    getGlobalAdmins(): string[];
+    globalAdmins: string[];
     /**
      * Gets an array of default permissions each user/role will inherit
      *
-     * @returns {string[]} The default permissions
+     * @type {string[]} The default permissions
      * @memberof Cast
      */
-    getDefaultPermissions(): string[];
+    defaultPermissions: string[];
     /**
      * Gets the command prefix
      *
-     * @returns {string} The command prefix
+     * @type {string} The command prefix
      * @memberof Cast
      */
-    getCommandPrefix(): string;
+    commandPrefix(): string;
     /**
      * Gets an array of blacklisted users
      *
-     * @returns {string[]} The blacklisted users
+     * @type {string[]} The blacklisted users
      * @memberof Cast
      */
-    getUserBlacklist(): string[];
+    userBlacklist(): string[];
     /**
      * Set the blacklist state of a user
      *
