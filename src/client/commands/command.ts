@@ -20,27 +20,22 @@ export interface Command {
    */
   permission: string;
 
+  
   /**
    * Type definitions for command arguments
    * 
-   * @type {({
-   *     [key:string]: {
-   *       optional: boolean,
-   *       position: number,
-   *       type: string | number | 'mention' | 'channel',
-   *       name?: string
-   *     }
-   *   })}
+   * @type {(Array<{
+   *     optional: boolean,
+   *     type: string | number | 'mention' | 'channel',
+   *     name?: string
+   *   }>)}
    * @memberof Command
    */
-  arguments?: {
-    [key:string]: {
-      optional: boolean,
-      position: number,
-      type: string | number | 'mention' | 'channel',
-      name?: string
-    }
-  }
+  arguments?: Array<{
+    optional: boolean,
+    type: string | number | 'mention' | 'channel',
+    name?: string
+  }>
 
 
   /**
