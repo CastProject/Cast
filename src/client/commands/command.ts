@@ -33,7 +33,7 @@ export interface Command {
    */
   arguments?: Array<{
     optional: boolean,
-    type: string | number | 'mention' | 'channel',
+    type: String | Number | 'mention' | 'channel',
     name?: string
   }>
 
