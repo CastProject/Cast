@@ -20,6 +20,28 @@ export interface Command {
    */
   permission: string;
 
+  /**
+   * Type definitions for command arguments
+   * 
+   * @type {({
+   *     [key:string]: {
+   *       optional: boolean,
+   *       position: number,
+   *       type: string | number | 'mention' | 'channel',
+   *       name?: string
+   *     }
+   *   })}
+   * @memberof Command
+   */
+  arguments?: {
+    [key:string]: {
+      optional: boolean,
+      position: number,
+      type: string | number | 'mention' | 'channel',
+      name?: string
+    }
+  }
+
 
   /**
    * Handles a message event
