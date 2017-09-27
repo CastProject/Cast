@@ -20,6 +20,15 @@ export interface Command {
    */
   permission: string;
 
+
+  /**
+   * Whether this command is only accessible for global admins
+   * 
+   * @type {boolean}
+   * @memberof Command
+   */
+  globalAdminOnly: boolean;
+
   
   /**
    * Type definitions for command arguments
