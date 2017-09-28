@@ -8,6 +8,7 @@ import { Util } from './util/util';
 import { CommandContainer } from './containers/commandContainer';
 import { Plugin } from './plugins/plugin';
 import * as mongoose from 'mongoose';
+import { GuildManager } from '../index';
 export interface Cast {
     /**
      * The client that Cast will interact with
@@ -169,4 +170,12 @@ export interface Cast {
      * @memberof Cast
      */
     createCommandContainer(commandPath: string, owner: Plugin): CommandContainer;
+    /**
+     * Gets the guild manager for a given guild
+     *
+     * @param {Discord.Guild} guild
+     * @returns {Promise<GuildManager>}
+     * @memberof Cast
+     */
+    getGuildManager(guild: Discord.Guild): Promise<GuildManager>;
 }
