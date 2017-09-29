@@ -23,7 +23,6 @@ export interface Command {
      * @memberof Command
      */
     globalAdminOnly: boolean;
-    name: string;
     /**
      * Type definitions for command arguments
      *
