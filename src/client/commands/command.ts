@@ -33,14 +33,14 @@ export interface Command {
    * Type definitions for command arguments
    * 
    * @type {(Array<{
-   *     optional: boolean,
-   *     type: string | number | 'mention' | 'channel',
+   *     type: 'string' | 'number' | 'mention' | 'channel',
+   *     name?: string,
    *     allRemaining?: boolean
    *   }>)}
    * @memberof Command
    */
   arguments?: Array<{
-    type: String | Number | 'mention' | 'channel',
+    type: 'string' | 'number' | 'mention' | 'channel',
     name?: string,
     allRemaining?: boolean
   }>
