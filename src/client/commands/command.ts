@@ -29,6 +29,8 @@ export interface Command {
    */
   globalAdminOnly: boolean;
 
+  name: string;
+
   
   /**
    * Type definitions for command arguments

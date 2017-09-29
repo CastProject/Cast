@@ -66,7 +66,7 @@ export interface Plugin extends events.EventEmitter {
    * @returns {string} The name of this plugin
    * @memberof Plugin
    */
-  getName(): string;
+  name: string;
 
 
   /**
@@ -75,7 +75,7 @@ export interface Plugin extends events.EventEmitter {
    * @returns {(string | number)} The version
    * @memberof Plugin
    */
-  getVersion(): string | number;
+  version: string | number;
 
 
   /**
@@ -84,7 +84,7 @@ export interface Plugin extends events.EventEmitter {
    * @returns {boolean} Debug mode
    * @memberof Plugin
    */
-  isDebugMode(): boolean;
+  debugMode: boolean;
 
 
   /**
@@ -93,7 +93,7 @@ export interface Plugin extends events.EventEmitter {
    * @returns {boolean} 
    * @memberof Plugin
    */
-  isDisabledByDefault(): boolean;
+  disabledByDefault: boolean;
 
 
   /**
@@ -102,7 +102,7 @@ export interface Plugin extends events.EventEmitter {
    * @returns {object} Configuration
    * @memberof Plugin
    */
-  getPluginConfig(): object;
+  pluginConfig: object;
 
 
   /**
@@ -111,7 +111,7 @@ export interface Plugin extends events.EventEmitter {
    * @returns {string[]} Events
    * @memberof Plugin
    */
-  getListeningEvents(): string[];
+  listeningEvents: string[];
 
 
   /**
@@ -120,5 +120,5 @@ export interface Plugin extends events.EventEmitter {
    * @returns {boolean} Is enabled
    * @memberof Plugin
    */
-  isEnabled(): boolean;
+  enabled: boolean;
 }
