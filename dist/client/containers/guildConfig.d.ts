@@ -1,4 +1,4 @@
 export interface GuildConfiguration {
-    getItem(key: string, type?: any): Promise<any>;
+    getItem(key: string, type?: any): any;
     setItem(key: string, item: any): Promise<void>;
 }
