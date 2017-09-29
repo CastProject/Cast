@@ -121,4 +121,6 @@ export interface Plugin extends events.EventEmitter {
    * @memberof Plugin
    */
   enabled: boolean;
+
+  id: string;
 }
