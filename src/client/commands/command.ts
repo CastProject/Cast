@@ -27,7 +27,7 @@ export interface Command {
    * @type {boolean}
    * @memberof Command
    */
-  globalAdminOnly: boolean;
+  globalAdminOnly?: boolean;
   
   /**
    * Type definitions for command arguments
@@ -35,14 +35,14 @@ export interface Command {
    * @type {(Array<{
    *     optional: boolean,
    *     type: string | number | 'mention' | 'channel',
-   *     name?: string
+   *     allRemaining?: boolean
    *   }>)}
    * @memberof Command
    */
   arguments?: Array<{
-    optional: boolean,
     type: String | Number | 'mention' | 'channel',
-    name?: string
+    name?: string,
+    allRemaining?: boolean
   }>
 
 
@@ -63,5 +63,5 @@ export interface Command {
    * @returns {(['dm' | 'group' | 'text'])} 
    * @memberof Command
    */
-  supportedEnvironments(): ['dm' | 'text'];
+  supportedEnvironments?(): ['dm' | 'text'];
 }
