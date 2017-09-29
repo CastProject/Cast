@@ -86,16 +86,6 @@ export interface Plugin extends events.EventEmitter {
    */
   debugMode: boolean;
 
-
-  /**
-   * Gets whether or not this plugin is disabled by default in guilds
-   * 
-   * @returns {boolean} 
-   * @memberof Plugin
-   */
-  disabledByDefault: boolean;
-
-
   /**
    * Gets the plugin configuration
    * 
@@ -112,15 +102,6 @@ export interface Plugin extends events.EventEmitter {
    * @memberof Plugin
    */
   listeningEvents: string[];
-
-
-  /**
-   * Gets whether this plugin has been enabled or not
-   * 
-   * @returns {boolean} Is enabled
-   * @memberof Plugin
-   */
-  enabled: boolean;
 
   id: string;
 }
