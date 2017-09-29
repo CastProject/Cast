@@ -9,4 +9,5 @@ export * from './client/commands/command';
 export * from './client/containers/commandContainer';
 export * from './client/commands/permissions/permissionNode';
 export * from './client/commands/permissions/permissionTracker';
+export * from './client/containers/guildConfig';
 export * from './client/containers/guildManager';
