@@ -55,47 +55,47 @@ export interface Plugin extends events.EventEmitter {
      * @returns {string} The name of this plugin
      * @memberof Plugin
      */
-    getName(): string;
+    name: string;
     /**
      * Gets the plugin version
      *
      * @returns {(string | number)} The version
      * @memberof Plugin
      */
-    getVersion(): string | number;
+    version: string | number;
     /**
      * Gets whether or not this plugin is in debug mode
      *
      * @returns {boolean} Debug mode
      * @memberof Plugin
      */
-    isDebugMode(): boolean;
+    debugMode: boolean;
     /**
      * Gets whether or not this plugin is disabled by default in guilds
      *
      * @returns {boolean}
      * @memberof Plugin
      */
-    isDisabledByDefault(): boolean;
+    disabledByDefault: boolean;
     /**
      * Gets the plugin configuration
      *
      * @returns {object} Configuration
      * @memberof Plugin
      */
-    getPluginConfig(): object;
+    pluginConfig: object;
     /**
      * Gets the Discord events this plugin is currently listening for
      *
      * @returns {string[]} Events
      * @memberof Plugin
      */
-    getListeningEvents(): string[];
+    listeningEvents: string[];
     /**
      * Gets whether this plugin has been enabled or not
      *
      * @returns {boolean} Is enabled
      * @memberof Plugin
      */
-    isEnabled(): boolean;
+    enabled: boolean;
 }
