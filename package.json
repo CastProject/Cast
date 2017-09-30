@@ -1,14 +1,25 @@
 {
   "name": "cast",
-  "version": "0.0.5",
   "description": "The API for Cast-compatible Discord bots",
+  "version": "0.0.5",
+  "author": "Eric Rabil",
+  "repository": "CastProject/Cast",
+  "bugs": {
+    "url": "https://github.com/CastProject/Cast/issues"
+  },
+  "keywords": [
+    "discord",
+    "discord-bot",
+    "node",
+    "discord-api",
+    "javascript"
+  ],
   "main": "dist/index",
   "typings": "dist/index",
   "scripts": {
     "dev": "tsc -p . --watch"
   },
-  "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "discord.js": "^11.2.1",
     "mongoose": "^4.11.12"
