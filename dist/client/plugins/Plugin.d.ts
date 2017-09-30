@@ -52,37 +52,43 @@ export interface Plugin extends events.EventEmitter {
     /**
      * Gets the name of this plugin
      *
-     * @returns {string} The name of this plugin
+     * @type {string}
      * @memberof Plugin
      */
     name: string;
     /**
      * Gets the plugin version
      *
-     * @returns {(string | number)} The version
+     * @type {(string | number)}
      * @memberof Plugin
      */
     version: string | number;
     /**
      * Gets whether or not this plugin is in debug mode
      *
-     * @returns {boolean} Debug mode
+     * @type {boolean}
      * @memberof Plugin
      */
     debugMode: boolean;
     /**
      * Gets the plugin configuration
      *
-     * @returns {object} Configuration
+     * @type {object}
      * @memberof Plugin
      */
     pluginConfig: object;
     /**
      * Gets the Discord events this plugin is currently listening for
      *
-     * @returns {string[]} Events
+     * @type {string[]}
      * @memberof Plugin
      */
     listeningEvents: string[];
+    /**
+     * The ID of this plugin
+     *
+     * @type {string}
+     * @memberof Plugin
+     */
     id: string;
 }
