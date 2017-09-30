@@ -20,6 +20,14 @@ export interface Command {
    */
   permission: string;
 
+  /**
+   * The description of this command
+   * 
+   * @type {string}
+   * @memberof Command
+   */
+  description?: string;
+
 
   /**
    * Whether this command is only accessible for global admins
