@@ -11,6 +11,14 @@ export interface Command {
    */
   parent: Cast | Plugin;
 
+  /**
+   * A reference to the Cast instance
+   * 
+   * @type {Cast}
+   * @memberof Command
+   */
+  cast: Cast;
+
 
   /**
    * The permission node for this command

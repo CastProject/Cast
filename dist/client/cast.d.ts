@@ -112,6 +112,13 @@ export interface Cast {
      */
     userBlacklist: string[];
     /**
+     * A list of all loaded plugins
+     *
+     * @type {Map<string, Plugin>}
+     * @memberof Cast
+     */
+    plugins: Map<string, Plugin>;
+    /**
      * Set the blacklist state of a user
      *
      * @param {Discord.Snowflake} id The user to set blacklist
