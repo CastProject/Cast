@@ -1,9 +1,9 @@
-import {Message, MessageEmbed, GuildMember, User} from "discord.js";
+import {Message, RichEmbed, GuildMember, User} from "discord.js";
 
 export interface Response {
   message: Message;
 
-  reply(content: string | MessageEmbed, user?: User | GuildMember): Promise<Message>;
-  edit(content: string | MessageEmbed): Promise<Message>;
+  reply(content: string | RichEmbed, user?: User | GuildMember): Promise<Message>;
+  edit(content: string | RichEmbed): Promise<Message>;
   delete(): Promise<void>;
 }
