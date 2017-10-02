@@ -9,6 +9,7 @@ import { CommandContainer } from './containers/commandContainer';
 import { Plugin } from './plugins/plugin';
 import * as mongoose from 'mongoose';
 import { GuildManager } from '../index';
+import { Response } from "./util/response";
 export interface Cast {
     /**
      * The client that Cast will interact with
@@ -185,4 +186,12 @@ export interface Cast {
      * @memberof Cast
      */
     getGuildManager(guild: Discord.Guild): Promise<GuildManager>;
+    /**
+     * Creates a response wrapper for the given message
+     *
+     * @param {Discord.Message} message
+     * @returns {Response} The response object
+     * @memberof Cast
+     */
+    createResponse(message: Discord.Message): Response;
 }
