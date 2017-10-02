@@ -1,6 +1,7 @@
 import * as Discord from 'discord.js';
 import {Cast} from '../cast';
 import {Plugin} from '../plugins/plugin';
+import {Response} from '../util/response';
 
 export interface Command {
   /**
@@ -70,7 +71,7 @@ export interface Command {
    * @returns {Promise<boolean>} Whether or not to auto-remove the sender's message after a predefined amount of time
    * @memberof Command
    */
-  handle(message: Discord.Message, args: string[]): Promise<boolean>;
+  handle(response: Response, message: Discord.Message, args: string[]): Promise<boolean>;
 
 
   /**
