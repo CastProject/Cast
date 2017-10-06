@@ -2,6 +2,10 @@
 node_modules/
 
 ### Linux ###
+
+# Emacs autosave files
+\#*\#
+# Emacs backup files
 *~
 
 # temporary files which can be created if a process still has a handle open of a deleted file
