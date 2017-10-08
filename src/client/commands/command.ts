@@ -1,6 +1,6 @@
 import * as Discord from 'discord.js';
 import {Cast} from '../cast';
-import {Plugin} from '../plugins/plugin';
+import {Plugin} from '../plugins/Plugin';
 import {Response} from '../util/response';
 
 export interface Command {
