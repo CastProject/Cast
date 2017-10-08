@@ -1,5 +1,5 @@
 import * as Discord from 'discord.js';
-import {MessageListener} from './listeners/messageListener';
+import {MessageHandler} from './handlers/messageHandler';
 import {Logger} from './util/logger';
 import {PluginContainer} from './containers/pluginContainer';
 import {EmbedFactory} from './util/embedFactory';
@@ -51,10 +51,10 @@ export interface Cast {
   /**
    * A map of message listeners by their channel
    * 
-   * @type {Map<Discord.Snowflake, MessageListener>}
+   * @type {MessageHandler}
    * @memberof Cast
    */
-  messageListeners: Map<Discord.Snowflake, MessageListener>;
+  messageHandler: MessageHandler;
 
 
   /**
