@@ -28,10 +28,10 @@ export interface CommandContainer {
      * Unloads a provided command name
      *
      * @param {string} commandID The command to unload
-     * @returns {Promise<any>} The completion of the unload
+     * @returns {Promise<void>} The completion of the unload
      * @memberof CommandContainer
      */
-    unloadCommand(commandID: string): Promise<any>;
+    unloadCommand(commandID: string): Promise<void>;
     /**
      * Reload a provided command name
      *
@@ -50,10 +50,10 @@ export interface CommandContainer {
     /**
      * Unload all loaded commands
      *
-     * @returns {Promise<any>} The completion of the unload
+     * @returns {Promise<void>} The completion of the unload
      * @memberof CommandContainer
      */
-    unloadAll(): Promise<any>;
+    unloadAll(): Promise<void>;
     /**
      * Reloads all commands in the stored directory
      *

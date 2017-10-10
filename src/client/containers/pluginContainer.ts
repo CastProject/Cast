@@ -27,10 +27,10 @@ export interface PluginContainer {
    * Unload a specific plugin by its ID
    * 
    * @param {string} pluginID The ID of the plugin to unload
-   * @returns {Promise<any>} A promise representing the completed unload
+   * @returns {Promise<void>} A promise representing the completed unload
    * @memberof PluginContainer
    */
-  unloadPlugin(pluginID: string): Promise<any>;
+  unloadPlugin(pluginID: string): Promise<void>;
 
 
   /**
@@ -55,10 +55,10 @@ export interface PluginContainer {
   /**
    * Unload all currently loaded plugins
    * 
-   * @returns {Promise<any>} A promise representing the completed unload
+   * @returns {Promise<void>} A promise representing the completed unload
    * @memberof PluginContainer
    */
-  unloadAll(): Promise<any>;
+  unloadAll(): Promise<void>;
 
 
   /**

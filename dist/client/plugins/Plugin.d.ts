@@ -31,24 +31,24 @@ export interface Plugin extends events.EventEmitter {
      * @param {Cast} cast A reference to the Cast object that created this plugin
      * @param {Logger} logger The logger object this plugin should use
      * @param {object} [config] The configuration, if any, this plugin should use
-     * @returns {Promise<any>} A promise representing the completed loading
+     * @returns {Promise<void>} A promise representing the completed loading
      * @memberof Plugin
      */
-    onLoad(cast: Cast, logger: Logger): Promise<any>;
+    onLoad(cast: Cast, logger: Logger): Promise<void>;
     /**
      * Called when the plugin container is ready to fully enable this plugin.
      *
-     * @returns {Promise<any>} A promise representing the completed enabling
+     * @returns {Promise<void>} A promise representing the completed enabling
      * @memberof Plugin
      */
-    onEnable(): Promise<any>;
+    onEnable(): Promise<void>;
     /**
      * Called when the plugin container has requested that this plugin is disabled.
      *
-     * @returns {Promise<any>} A promise representing the completed disabling
+     * @returns {Promise<void>} A promise representing the completed disabling
      * @memberof Plugin
      */
-    onDisable(): Promise<any>;
+    onDisable(): Promise<void>;
     /**
      * Gets the name of this plugin
      *

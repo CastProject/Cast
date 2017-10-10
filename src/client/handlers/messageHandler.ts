@@ -5,8 +5,8 @@ export interface MessageHandler {
    * Handles a message
    * 
    * @param {Discord.Message} message The message to handle
-   * @returns {Promise<any>} 
+   * @returns {Promise<void>} 
    * @memberof MessageListener
    */
-  handle(message: Discord.Message): Promise<any>;
+  handle(message: Discord.Message): Promise<void>;
 }
