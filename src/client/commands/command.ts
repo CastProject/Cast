@@ -71,7 +71,7 @@ export interface Command {
    * @returns {Promise<boolean>} Whether or not to auto-remove the sender's message after a predefined amount of time
    * @memberof Command
    */
-  handle(response: Response, message: Discord.Message, args: string[]): Promise<boolean>;
+  handle(response: Response, message: Discord.Message, args: string[]): Promise<void>;
 
 
   /**
