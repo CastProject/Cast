@@ -27,7 +27,7 @@ export interface Command {
    * @type {string}
    * @memberof Command
    */
-  permission: string;
+  permission?: string;
 
   /**
    * The description of this command
@@ -68,7 +68,7 @@ export interface Command {
    * 
    * @param {Discord.Message} message The message event
    * @param {string[]} args The arguments
-   * @returns {Promise<boolean>} Whether or not to auto-remove the sender's message after a predefined amount of time
+   * @returns {Promise<void>} The completed command, or an error that occurred.
    * @memberof Command
    */
   handle(response: Response, message: Discord.Message, args: string[]): Promise<void>;
