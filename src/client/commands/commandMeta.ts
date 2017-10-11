@@ -57,8 +57,6 @@ export interface CommandMeta {
     allRemaining?: boolean
   }>;
 
-
-
   /**
    * The environments this command can be used in
    * 

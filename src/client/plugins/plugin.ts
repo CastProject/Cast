@@ -1,6 +1,4 @@
-import {Cast} from '../cast';
-import {Logger} from '../util/logger';
-import {CommandContainer} from '../containers/commandContainer';
+import {Cast, CommandContainer, Logger, PluginMeta} from "../../index";
 import * as Discord from 'discord.js';
 import * as events from 'events';
 
@@ -31,6 +29,14 @@ export interface Plugin extends events.EventEmitter {
   logger: Logger;
 
   /**
+   * The metadata for this plugin
+   * 
+   * @type {PluginMeta}
+   * @memberof Plugin
+   */
+  metadata: PluginMeta;
+
+  /**
    * Called on initial load, is used to give a plugin a chance to initialize before fully enabling.
    * 
    * @param {Cast} cast A reference to the Cast object that created this plugin
@@ -59,33 +65,6 @@ export interface Plugin extends events.EventEmitter {
    */
   onDisable(): Promise<void>;
 
-
-  /**
-   * Gets the name of this plugin
-   * 
-   * @type {string}
-   * @memberof Plugin
-   */
-  name: string;
-
-
-  /**
-   * Gets the plugin version
-   * 
-   * @type {(string | number)}
-   * @memberof Plugin
-   */
-  version: string | number;
-
-
-  /**
-   * Gets whether or not this plugin is in debug mode
-   * 
-   * @type {boolean}
-   * @memberof Plugin
-   */
-  debugMode: boolean;
-
   /**
    * Gets the plugin configuration
    * 
@@ -103,11 +82,4 @@ export interface Plugin extends events.EventEmitter {
    */
   listeningEvents: string[];
 
-  /**
-   * The ID of this plugin
-   * 
-   * @type {string}
-   * @memberof Plugin
-   */
-  id: string;
 }
