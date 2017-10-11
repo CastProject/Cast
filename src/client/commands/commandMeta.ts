@@ -13,47 +13,57 @@ export interface CommandMeta {
    * @memberof Command
    */
   permission?: string;
-  
-    /**
-     * The description of this command
-     * 
-     * @type {string}
-     * @memberof Command
-     */
-    description?: string;
-  
-  
-    /**
-     * Whether this command is only accessible for global admins
-     * 
-     * @type {boolean}
-     * @memberof Command
-     */
-    globalAdminOnly?: boolean;
 
-    /**
-     * Type definitions for command arguments
-     * 
-     * @type {(Array<{
-     *     type: 'string' | 'number' | 'mention' | 'channel',
-     *     name?: string,
-     *     allRemaining?: boolean
-     *   }>)}
-     * @memberof Command
-     */
-    arguments?: Array<{
-      type: 'string' | 'number' | 'mention' | 'channel',
-      name?: string,
-      allRemaining?: boolean
-    }>;
+  /**
+   * When present, the command will be accessible by default.
+   * 
+   * The command can still be denied if someone is granted the permission prefixed with a '-'
+   * 
+   * @type {*}
+   * @memberof CommandMeta
+   */
+  accessibleByDefault?: any;
+
+  /**
+   * The description of this command
+   * 
+   * @type {string}
+   * @memberof Command
+   */
+  description?: string;
 
 
+  /**
+   * Whether this command is only accessible for global admins
+   * 
+   * @type {boolean}
+   * @memberof Command
+   */
+  globalAdminOnly?: boolean;
 
-    /**
-     * The environments this command can be used in
-     * 
-     * @returns {(['dm' | 'group' | 'text'])} 
-     * @memberof Command
-     */
-    supportedEnvironments?: ['dm' | 'text'];
+  /**
+   * Type definitions for command arguments
+   * 
+   * @type {(Array<{
+   *     type: 'string' | 'number' | 'mention' | 'channel',
+   *     name?: string,
+   *     allRemaining?: boolean
+   *   }>)}
+   * @memberof Command
+   */
+  arguments?: Array<{
+    type: 'string' | 'number' | 'mention' | 'channel',
+    name?: string,
+    allRemaining?: boolean
+  }>;
+
+
+
+  /**
+   * The environments this command can be used in
+   * 
+   * @returns {(['dm' | 'group' | 'text'])} 
+   * @memberof Command
+   */
+  supportedEnvironments?: ['dm' | 'text'];
 }

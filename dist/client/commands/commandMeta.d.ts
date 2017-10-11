@@ -13,6 +13,15 @@ export interface CommandMeta {
      */
     permission?: string;
     /**
+     * When present, the command will be accessible by default.
+     *
+     * The command can still be denied if someone is granted the permission prefixed with a '-'
+     *
+     * @type {*}
+     * @memberof CommandMeta
+     */
+    accessibleByDefault?: any;
+    /**
      * The description of this command
      *
      * @type {string}
