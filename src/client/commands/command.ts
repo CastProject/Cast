@@ -5,12 +5,12 @@ import {Response} from '../util/response';
 
 export interface Command {
   /**
-   * The owner of this command, it is either a native command or a plugin command.
+   * The owner of this command
    * 
-   * @type {(Cast | Plugin)}
+   * @type {Plugin}
    * @memberof Command
    */
-  parent: Cast | Plugin;
+  parent: Plugin;
 
   /**
    * A reference to the Cast instance
