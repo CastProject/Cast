@@ -18,7 +18,7 @@ export interface PluginMeta {
    * Gets the name of this plugin
    * 
    * @type {string}
-   * @memberof Plugin
+   * @memberof PluginMeta
    */
   name: string;
   
@@ -26,7 +26,7 @@ export interface PluginMeta {
    * Gets the plugin version
    * 
    * @type {(string | number)}
-   * @memberof Plugin
+   * @memberof PluginMeta
    */
   version: string | number;
 
@@ -35,7 +35,15 @@ export interface PluginMeta {
    * The ID of this plugin
    * 
    * @type {string}
-   * @memberof Plugin
+   * @memberof PluginMeta
    */
   id: string;
+  
+  /**
+   * The main file of this plugin
+   * 
+   * @type {string}
+   * @memberof PluginMeta
+   */
+  mainFile: string;
 }
