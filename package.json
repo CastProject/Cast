@@ -18,6 +18,7 @@
   "typings": "dist/index",
   "scripts": {
     "dev": "tsc -p . --watch",
+    "compile": "tsc -p .",
     "build": "tsc -p . && typedoc --out ./docs ./src --includeDeclarations --name Cast --readme ./README.md --hideGenerator"
   },
   "license": "MIT",

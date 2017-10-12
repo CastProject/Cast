@@ -2,6 +2,7 @@ import * as Discord from 'discord.js';
 import {Cast} from '../cast';
 import {Plugin} from '../plugins/Plugin';
 import {Response} from '../util/response';
+import {CommandMeta} from './commandMeta';
 
 export interface Command {
   /**
@@ -20,6 +21,13 @@ export interface Command {
    */
   cast: Cast;
 
+  /**
+   * The metadata for this command
+   * 
+   * @type {CommandMeta}
+   * @memberof Command
+   */
+  metadata: CommandMeta;
 
   /**
    * Handles a message event
