@@ -18,6 +18,42 @@ export interface Command {
      */
     cast: Cast;
     /**
+     * The permission node for this command
+     *
+     * @type {string}
+     * @memberof Command
+     */
+    permission?: string;
+    /**
+     * The description of this command
+     *
+     * @type {string}
+     * @memberof Command
+     */
+    description?: string;
+    /**
+     * Whether this command is only accessible for global admins
+     *
+     * @type {boolean}
+     * @memberof Command
+     */
+    globalAdminOnly?: boolean;
+    /**
+     * Type definitions for command arguments
+     *
+     * @type {(Array<{
+     *     type: 'string' | 'number' | 'mention' | 'channel',
+     *     name?: string,
+     *     allRemaining?: boolean
+     *   }>)}
+     * @memberof Command
+     */
+    arguments?: Array<{
+        type: 'string' | 'number' | 'mention' | 'channel';
+        name?: string;
+        allRemaining?: boolean;
+    }>;
+    /**
      * Handles a message event
      *
      * @param {Discord.Message} message The message event
@@ -26,4 +62,11 @@ export interface Command {
      * @memberof Command
      */
     handle(response: Response, message: Discord.Message, args: string[]): Promise<void>;
+    /**
+     * The environments this command can be used in
+     *
+     * @returns {(['dm' | 'group' | 'text'])}
+     * @memberof Command
+     */
+    supportedEnvironments?: ['dm' | 'text'];
 }

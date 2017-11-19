@@ -17,8 +17,7 @@
   "main": "dist/index",
   "typings": "dist/index",
   "scripts": {
-    "dev": "tsc -p . --watch",
-    "build": "tsc -p . && typedoc --out ./docs ./src --includeDeclarations --name Cast --readme ./README.md --hideGenerator"
+    "dev": "tsc -p . --watch"
   },
   "license": "MIT",
   "dependencies": {
@@ -27,7 +26,6 @@
   },
   "devDependencies": {
     "@types/mongoose": "^4.7.23",
-    "@types/node": "^8.0.28",
-    "typedoc": "^0.9.0"
+    "@types/node": "^8.0.28"
   }
 }
