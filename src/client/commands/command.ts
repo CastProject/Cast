@@ -2,16 +2,15 @@ import * as Discord from 'discord.js';
 import {Cast} from '../cast';
 import {Plugin} from '../plugins/Plugin';
 import {Response} from '../util/response';
-import {CommandMeta} from './commandMeta';
 
 export interface Command {
   /**
-   * The owner of this command
+   * The owner of this command, it is either a native command or a plugin command.
    * 
-   * @type {Plugin}
+   * @type {(Cast | Plugin)}
    * @memberof Command
    */
-  parent: Plugin;
+  parent: Cast | Plugin;
 
   /**
    * A reference to the Cast instance
@@ -21,13 +20,6 @@ export interface Command {
    */
   cast: Cast;
 
-  /**
-   * The metadata for this command
-   * 
-   * @type {CommandMeta}
-   * @memberof Command
-   */
-  metadata: CommandMeta;
 
   /**
    * Handles a message event
