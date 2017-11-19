@@ -27,7 +27,7 @@ export interface Command {
    * @type {string}
    * @memberof Command
    */
-  permission?: string;
+  permission: string;
 
   /**
    * The description of this command
