@@ -91,10 +91,13 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_src_client_plugins_plugin_.plugin.html#cast" class="tsd-kind-icon">cast</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_src_client_plugins_plugin_.plugin.html#commands" class="tsd-kind-icon">commands</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_src_client_plugins_plugin_.plugin.html#debugmode" class="tsd-kind-icon">debug<wbr>Mode</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_src_client_plugins_plugin_.plugin.html#id" class="tsd-kind-icon">id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_src_client_plugins_plugin_.plugin.html#listeningevents" class="tsd-kind-icon">listening<wbr>Events</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_src_client_plugins_plugin_.plugin.html#logger" class="tsd-kind-icon">logger</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_src_client_plugins_plugin_.plugin.html#metadata" class="tsd-kind-icon">metadata</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_src_client_plugins_plugin_.plugin.html#name" class="tsd-kind-icon">name</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_src_client_plugins_plugin_.plugin.html#pluginconfig" class="tsd-kind-icon">plugin<wbr>Config</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_src_client_plugins_plugin_.plugin.html#version" class="tsd-kind-icon">version</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-static tsd-is-external"><a href="_src_client_plugins_plugin_.plugin.html#defaultmaxlisteners" class="tsd-kind-icon">default<wbr>Max<wbr>Listeners</a></li>
 							</ul>
 						</section>
@@ -131,7 +134,7 @@
 					<div class="tsd-signature tsd-kind-icon">cast<span class="tsd-signature-symbol">:</span> <a href="_src_client_cast_.cast.html" class="tsd-signature-type">Cast</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/client/plugins/Plugin.ts:13</li>
+							<li>Defined in src/client/plugins/Plugin.ts:15</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -154,7 +157,7 @@
 					<div class="tsd-signature tsd-kind-icon">commands<span class="tsd-signature-symbol">:</span> <a href="_src_client_containers_commandcontainer_.commandcontainer.html" class="tsd-signature-type">CommandContainer</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/client/plugins/Plugin.ts:21</li>
+							<li>Defined in src/client/plugins/Plugin.ts:23</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -172,12 +175,58 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="debugmode" class="tsd-anchor"></a>
+					<h3>debug<wbr>Mode</h3>
+					<div class="tsd-signature tsd-kind-icon">debug<wbr>Mode<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/client/plugins/Plugin.ts:87</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Gets whether or not this plugin is in debug mode</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{boolean}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>Plugin</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="id" class="tsd-anchor"></a>
+					<h3>id</h3>
+					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/client/plugins/Plugin.ts:112</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The ID of this plugin</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{string}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>Plugin</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
 					<a name="listeningevents" class="tsd-anchor"></a>
 					<h3>listening<wbr>Events</h3>
 					<div class="tsd-signature tsd-kind-icon">listening<wbr>Events<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/client/plugins/Plugin.ts:83</li>
+							<li>Defined in src/client/plugins/Plugin.ts:104</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -200,7 +249,7 @@
 					<div class="tsd-signature tsd-kind-icon">logger<span class="tsd-signature-symbol">:</span> <a href="_src_client_util_logger_.logger.html" class="tsd-signature-type">Logger</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/client/plugins/Plugin.ts:29</li>
+							<li>Defined in src/client/plugins/Plugin.ts:31</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -218,21 +267,21 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="metadata" class="tsd-anchor"></a>
-					<h3>metadata</h3>
-					<div class="tsd-signature tsd-kind-icon">metadata<span class="tsd-signature-symbol">:</span> <a href="_src_client_plugins_pluginmeta_.pluginmeta.html" class="tsd-signature-type">PluginMeta</a></div>
+					<a name="name" class="tsd-anchor"></a>
+					<h3>name</h3>
+					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/client/plugins/Plugin.ts:37</li>
+							<li>Defined in src/client/plugins/Plugin.ts:69</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The metadata for this plugin</p>
+							<p>Gets the name of this plugin</p>
 						</div>
 						<dl class="tsd-comment-tags">
 							<dt>type</dt>
-							<dd><p>{PluginMeta}</p>
+							<dd><p>{string}</p>
 							</dd>
 							<dt>memberof</dt>
 							<dd><p>Plugin</p>
@@ -246,7 +295,7 @@
 					<div class="tsd-signature tsd-kind-icon">plugin<wbr>Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/client/plugins/Plugin.ts:74</li>
+							<li>Defined in src/client/plugins/Plugin.ts:95</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -256,6 +305,29 @@
 						<dl class="tsd-comment-tags">
 							<dt>type</dt>
 							<dd><p>{object}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>Plugin</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="version" class="tsd-anchor"></a>
+					<h3>version</h3>
+					<div class="tsd-signature tsd-kind-icon">version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/client/plugins/Plugin.ts:78</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Gets the plugin version</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{(string | number)}</p>
 							</dd>
 							<dt>memberof</dt>
 							<dd><p>Plugin</p>
@@ -495,7 +567,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/client/plugins/Plugin.ts:66</li>
+									<li>Defined in src/client/plugins/Plugin.ts:60</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -523,7 +595,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/client/plugins/Plugin.ts:57</li>
+									<li>Defined in src/client/plugins/Plugin.ts:51</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -551,7 +623,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/client/plugins/Plugin.ts:48</li>
+									<li>Defined in src/client/plugins/Plugin.ts:42</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -872,16 +944,25 @@
 								<a href="_src_client_plugins_plugin_.plugin.html#commands" class="tsd-kind-icon">commands</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="_src_client_plugins_plugin_.plugin.html#debugmode" class="tsd-kind-icon">debug<wbr>Mode</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="_src_client_plugins_plugin_.plugin.html#id" class="tsd-kind-icon">id</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
 								<a href="_src_client_plugins_plugin_.plugin.html#listeningevents" class="tsd-kind-icon">listening<wbr>Events</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
 								<a href="_src_client_plugins_plugin_.plugin.html#logger" class="tsd-kind-icon">logger</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="_src_client_plugins_plugin_.plugin.html#metadata" class="tsd-kind-icon">metadata</a>
+								<a href="_src_client_plugins_plugin_.plugin.html#name" class="tsd-kind-icon">name</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
 								<a href="_src_client_plugins_plugin_.plugin.html#pluginconfig" class="tsd-kind-icon">plugin<wbr>Config</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="_src_client_plugins_plugin_.plugin.html#version" class="tsd-kind-icon">version</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-static tsd-is-external">
 								<a href="_src_client_plugins_plugin_.plugin.html#defaultmaxlisteners" class="tsd-kind-icon">default<wbr>Max<wbr>Listeners</a>
