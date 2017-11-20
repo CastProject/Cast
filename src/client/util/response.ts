@@ -6,4 +6,5 @@ export interface Response {
   reply(content: string | RichEmbed, user?: User | GuildMember): Promise<Message>;
   edit(content: string | RichEmbed): Promise<Message>;
   delete(): Promise<void>;
+  fail(): Promise<void>;
 }
