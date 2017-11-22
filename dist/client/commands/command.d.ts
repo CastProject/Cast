@@ -49,7 +49,7 @@ export interface Command {
      * @memberof Command
      */
     arguments?: Array<{
-        type: 'string' | 'number' | 'mention' | 'channel';
+        type: 'string' | 'number' | 'mention' | 'channel' | 'boolean';
         name?: string;
         allRemaining?: boolean;
     }>;
