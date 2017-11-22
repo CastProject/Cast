@@ -5,4 +5,5 @@ export interface Response {
     edit(content: string | RichEmbed): Promise<Message>;
     delete(): Promise<void>;
     fail(): Promise<void>;
+    success(): Promise<void>;
 }
