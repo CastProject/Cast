@@ -6,7 +6,7 @@ import { EmbedFactory } from './util/embedFactory';
 import { Util } from './util/util';
 import { CommandContainer } from './containers/commandContainer';
 import { Plugin } from './plugins/Plugin';
-import { GuildManager } from '../index';
+import { GuildManager, DataFetcher } from '../index';
 import { Response } from "./util/response";
 export interface Cast {
     /**
@@ -110,6 +110,13 @@ export interface Cast {
      * @memberof Cast
      */
     plugins: Map<string, Plugin>;
+    /**
+     * A reference to the container factory
+     *
+     * @type {DataFetcher}
+     * @memberof Cast
+     */
+    dataFetcher: DataFetcher;
     /**
      * Set the blacklist state of a user
      *
