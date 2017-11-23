@@ -12,7 +12,7 @@ export interface GuildManager {
     /**
      * The container for this guild
      *
-     * @type {GuildConfiguration}
+     * @type {Container}
      * @memberof GuildManager
      */
     container: Container;
