@@ -2,6 +2,7 @@
 import { Cast } from '../cast';
 import { Logger } from '../util/logger';
 import { CommandContainer } from '../containers/commandContainer';
+import { Container } from '../containers/data/container';
 import * as events from 'events';
 export interface Plugin extends events.EventEmitter {
     /**
@@ -34,7 +35,7 @@ export interface Plugin extends events.EventEmitter {
      * @returns {Promise<void>} A promise representing the completed loading
      * @memberof Plugin
      */
-    onLoad(cast: Cast, logger: Logger): Promise<void>;
+    onLoad(cast: Cast, logger: Logger, container: Container): Promise<void>;
     /**
      * Called when the plugin container is ready to fully enable this plugin.
      *
