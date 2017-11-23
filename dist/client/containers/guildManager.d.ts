@@ -10,12 +10,12 @@ export interface GuildManager {
      */
     guild: Guild;
     /**
-     * The configuration for this guild
+     * The container for this guild
      *
      * @type {GuildConfiguration}
      * @memberof GuildManager
      */
-    config: Container;
+    container: Container;
     /**
      * Whether the given command or plugin is enabled
      *
