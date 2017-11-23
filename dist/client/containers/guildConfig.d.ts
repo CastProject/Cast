@@ -1,4 +1,5 @@
-export interface GuildConfiguration {
+import { Container } from "./data/container";
+export interface GuildConfiguration extends Container {
     /**
      * Fetches a stored value from the guild configuration
      *

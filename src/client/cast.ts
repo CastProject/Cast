@@ -6,7 +6,6 @@ import {EmbedFactory} from './util/embedFactory';
 import {Util} from './util/util';
 import {CommandContainer} from './containers/commandContainer';
 import {Plugin} from './plugins/Plugin';
-import * as mongoose from 'mongoose';
 import {GuildManager} from '../index';
 import {Response} from "./util/response";
 
@@ -19,15 +18,6 @@ export interface Cast {
    * @memberof Cast
    */
   client: Discord.Client;
-
-
-  /**
-   * The database connection (if any)
-   * 
-   * @type {mongoose.Mongoose}
-   * @memberof Cast
-   */
-  mongoose: mongoose.Mongoose;
 
 
   /**

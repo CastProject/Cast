@@ -1,5 +1,6 @@
 import { Guild } from 'discord.js';
-import { Command, Plugin, GuildConfiguration } from '../../index';
+import { Command, Plugin } from '../../index';
+import { Container } from "./data/container";
 export interface GuildManager {
     /**
      * The guild that this manager manages
@@ -14,7 +15,7 @@ export interface GuildManager {
      * @type {GuildConfiguration}
      * @memberof GuildManager
      */
-    config: GuildConfiguration;
+    config: Container;
     /**
      * Whether the given command or plugin is enabled
      *
