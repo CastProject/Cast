@@ -4,6 +4,7 @@ export * from './client/util/logger';
 export * from './client/handlers/messageHandler';
 export * from './client/util/embedFactory';
 export * from './client/plugins/Plugin';
+export * from './client/plugins/MiniPlugin';
 export * from './client/containers/pluginContainer';
 export * from './client/commands/command';
 export * from './client/containers/commandContainer';

@@ -3,8 +3,6 @@ import { Cast } from '../cast';
 import { Logger } from '../util/logger';
 import { CommandContainer } from '../containers/commandContainer';
 import { Container } from '../containers/data/container';
-import { Response } from '../util/response';
-import * as Discord from 'discord.js';
 import * as events from 'events';
 export interface Plugin extends events.EventEmitter {
     /**
@@ -88,38 +86,3 @@ export interface Plugin extends events.EventEmitter {
      */
     id: string;
 }
-export declare type MiniCommandOperator = (this: Plugin, response: Response, message: Discord.Message, args: string[]) => Promise<void> | void;
-export declare type MiniEventOperator = (this: Plugin) => Promise<void> | void;
-export declare type StateChangeOperator = (this: Plugin) => Promise<void>;
-export declare type MiniCommand = {
-    name: string;
-    operator: MiniCommandOperator;
-    permission?: string;
-    environments: ["text" | "dm"];
-};
-export declare type MiniEvent = {
-    event: string;
-    operator: MiniEventOperator;
-};
-export declare type DumpedPlugin = {
-    commands: MiniCommand[];
-    events: MiniEvent[];
-    name?: string;
-    version?: string;
-    id?: string;
-    enabled?: StateChangeOperator;
-    disabled?: StateChangeOperator;
-};
-export declare type MetadataOpt = "name" | "version" | "id";
-export interface PluginBuilder {
-    cast: Cast;
-    readonly interactedWith: boolean;
-    command(name: string, operator: MiniCommandOperator, environments?: ["text", "dm"]): void;
-    on(event: string, operator: MiniEventOperator): void;
-    enabled(operator: StateChangeOperator): void;
-    disabled(operator: StateChangeOperator): void;
-    set(key: MetadataOpt, value: string): void;
-    dumpedPlugin: DumpedPlugin;
-    plugin: Plugin;
-}
-export declare type MiniPlugin = (plugin: PluginBuilder) => Promise<void>;
