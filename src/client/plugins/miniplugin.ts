@@ -1,4 +1,5 @@
 import {Cast} from "../cast";
+import {Plugin} from "./plugin";
 import {Message} from "discord.js";
 
 export module MiniPlugin {
