@@ -35,7 +35,7 @@ export module MiniPlugin {
   export interface PluginBuilder {
     cast: Cast;
     readonly interactedWith: boolean;
-    command(name: string, operator: MiniCommandOperator, environments?: ["text", "dm"]): void;
+    command(name: string, operator: MiniCommandOperator, permission?: string, environments?: ["text", "dm"], globalAdmin?: boolean): void;
     on(event: string, operator: MiniEventOperator): void;
     enabled(operator: StateChangeOperator): void;
     disabled(operator: StateChangeOperator): void;
