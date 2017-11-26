@@ -2,6 +2,7 @@ import {Cast} from '../cast';
 import {Logger} from '../util/logger';
 import {CommandContainer} from '../containers/commandContainer';
 import {Container} from '../containers/data/container';
+import {Response} from '../util/response';
 import * as Discord from 'discord.js';
 import * as events from 'events';
 
@@ -30,6 +31,14 @@ export interface Plugin extends events.EventEmitter {
    * @memberof Plugin
    */
   logger: Logger;
+
+  /**
+   * The storage container for this plugin
+   * 
+   * @type {Container}
+   * @memberof Plugin
+   */
+  container: Container;
 
   /**
    * Called on initial load, is used to give a plugin a chance to initialize before fully enabling.
@@ -78,24 +87,6 @@ export interface Plugin extends events.EventEmitter {
    */
   version: string | number;
 
-
-  /**
-   * Gets whether or not this plugin is in debug mode
-   * 
-   * @type {boolean}
-   * @memberof Plugin
-   */
-  debugMode: boolean;
-
-  /**
-   * Gets the plugin configuration
-   * 
-   * @type {object}
-   * @memberof Plugin
-   */
-  pluginConfig: object;
-
-
   /**
    * Gets the Discord events this plugin is currently listening for
    * 
@@ -112,3 +103,46 @@ export interface Plugin extends events.EventEmitter {
    */
   id: string;
 }
+
+export type MiniCommandOperator = (this: Plugin, response: Response, message: Discord.Message, args: string[]) => Promise<void> | void;
+export type MiniEventOperator = (this: Plugin) => Promise<void> | void;
+export type StateChangeOperator = (this: Plugin) => Promise<void>;
+
+
+export type MiniCommand = {
+  name: string,
+  operator: MiniCommandOperator,
+  permission?: string,
+  environments: ["text" | "dm"],
+};
+
+export type MiniEvent = {
+  event: string,
+  operator: MiniEventOperator;
+};
+
+export type DumpedPlugin = {
+  commands: MiniCommand[],
+  events: MiniEvent[],
+  name?: string,
+  version?: string,
+  id?: string,
+  enabled?: StateChangeOperator,
+  disabled?: StateChangeOperator,
+};
+
+export type MetadataOpt = "name" | "version" | "id";
+
+export interface PluginBuilder {
+  cast: Cast;
+  readonly interactedWith: boolean;
+  command(name: string, operator: MiniCommandOperator, environments?: ["text", "dm"]): void;
+  on(event: string, operator: MiniEventOperator): void;
+  enabled(operator: StateChangeOperator): void;
+  disabled(operator: StateChangeOperator): void;
+  set(key: MetadataOpt, value: string): void;
+  dumpedPlugin: DumpedPlugin;
+  plugin: Plugin;
+}
+
+export type MiniPlugin = (plugin: PluginBuilder) => Promise<void>;
