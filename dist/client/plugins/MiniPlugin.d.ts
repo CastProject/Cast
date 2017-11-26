@@ -5,10 +5,11 @@ export declare module MiniPlugin {
     type MiniEventOperator = (this: Plugin) => Promise<void> | void;
     type StateChangeOperator = (this: Plugin) => Promise<void>;
     type MiniCommand = {
+        environments: ["text" | "dm"];
+        globalAdmin: boolean;
         name: string;
         operator: MiniCommandOperator;
         permission?: string;
-        environments: ["text" | "dm"];
     };
     type MiniEvent = {
         event: string;

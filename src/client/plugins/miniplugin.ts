@@ -8,10 +8,11 @@ export module MiniPlugin {
   
   
   export type MiniCommand = {
+    environments: ["text" | "dm"],
+    globalAdmin: boolean,
     name: string,
     operator: MiniCommandOperator,
     permission?: string,
-    environments: ["text" | "dm"],
   };
   
   export type MiniEvent = {
