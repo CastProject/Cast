@@ -1,5 +1,6 @@
 import {Cast} from "../cast";
 import {Plugin} from "./plugin";
+import {Response} from "../util/response";
 import {Message} from "discord.js";
 
 export module MiniPlugin {
