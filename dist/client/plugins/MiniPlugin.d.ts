@@ -3,7 +3,7 @@ import { Plugin } from "./plugin";
 import { Response } from "../util/response";
 import { Message } from "discord.js";
 export declare module MiniPlugin {
-    type MiniCommandOperator = (this: Plugin, response: Response, message: Message, args: string[]) => Promise<void> | void;
+    type MiniCommandOperator = (this: Plugin, response: Response, message: Message, args: string[]) => Promise<any>;
     type MiniEventOperator = (this: Plugin) => Promise<void> | void;
     type StateChangeOperator = (this: Plugin) => Promise<void>;
     type MiniCommand = {
