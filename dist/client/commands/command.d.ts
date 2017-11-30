@@ -2,6 +2,14 @@ import * as Discord from 'discord.js';
 import { Cast } from '../cast';
 import { Plugin } from '../plugins/Plugin';
 import { Response } from '../util/response';
+export declare module CommandTypes {
+    type ArgumentDefinition = Array<{
+        type: 'string' | 'number' | 'mention' | 'channel' | 'boolean';
+        name?: string;
+        allRemaining?: boolean;
+    }>;
+    type CommandEnvironments = ["text" | "dm"];
+}
 export interface Command {
     /**
      * The owner of this command, it is either a native command or a plugin command.
@@ -24,6 +32,13 @@ export interface Command {
      * @memberof Command
      */
     permission: string;
+    /**
+     * The discord permissions required to execute this command
+     *
+     * @type {string}
+     * @memberof Command
+     */
+    discordPermissions?: Discord.PermissionResolvable[];
     /**
      * The description of this command
      *
@@ -48,11 +63,7 @@ export interface Command {
      *   }>)}
      * @memberof Command
      */
-    arguments?: Array<{
-        type: 'string' | 'number' | 'mention' | 'channel' | 'boolean';
-        name?: string;
-        allRemaining?: boolean;
-    }>;
+    arguments?: CommandTypes.ArgumentDefinition;
     /**
      * Handles a message event
      *
@@ -68,5 +79,5 @@ export interface Command {
      * @returns {(['dm' | 'group' | 'text'])}
      * @memberof Command
      */
-    supportedEnvironments?: ['dm' | 'text'];
+    supportedEnvironments?: CommandTypes.CommandEnvironments;
 }

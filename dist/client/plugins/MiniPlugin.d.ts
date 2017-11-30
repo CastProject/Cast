@@ -1,17 +1,24 @@
 import { Cast } from "../cast";
 import { Plugin } from "./plugin";
+import { CommandTypes } from "../commands/command";
 import { Response } from "../util/response";
-import { Message } from "discord.js";
+import { Message, PermissionResolvable } from "discord.js";
 export declare module MiniPlugin {
     type MiniCommandOperator = (this: Plugin, response: Response, message: Message, args: string[]) => Promise<any>;
-    type MiniEventOperator = (this: Plugin) => Promise<void> | void;
+    type MiniEventOperator = (this: Plugin, ...args: any[]) => Promise<void> | void;
     type StateChangeOperator = (this: Plugin) => Promise<void>;
+    type MiniCommandOpts = {
+        description?: string;
+        arguments?: CommandTypes.ArgumentDefinition;
+        environments?: CommandTypes.CommandEnvironments;
+        globalAdmin?: boolean;
+        permission?: string;
+        discordPermissions?: PermissionResolvable[];
+    };
     type MiniCommand = {
-        environments: ["text" | "dm"];
-        globalAdmin: boolean;
         name: string;
         operator: MiniCommandOperator;
-        permission?: string;
+        opts?: MiniCommandOpts;
     };
     type MiniEvent = {
         event: string;
@@ -30,7 +37,7 @@ export declare module MiniPlugin {
     interface PluginBuilder {
         cast: Cast;
         readonly interactedWith: boolean;
-        command(name: string, operator: MiniCommandOperator, permission?: string, environments?: ["text", "dm"], globalAdmin?: boolean): void;
+        command(name: string, operator: MiniCommandOperator, opts?: MiniCommandOpts): void;
         on(event: string, operator: MiniEventOperator): void;
         enabled(operator: StateChangeOperator): void;
         disabled(operator: StateChangeOperator): void;
