@@ -44,7 +44,7 @@ export module MiniPlugin {
   export interface PluginBuilder {
     cast: Cast;
     readonly interactedWith: boolean;
-    command(name: string, operator: MiniCommandOperatorm, opts?: MiniCommandOpts): void;
+    command(name: string, operator: MiniCommandOperator, opts?: MiniCommandOpts): void;
     on(event: string, operator: MiniEventOperator): void;
     enabled(operator: StateChangeOperator): void;
     disabled(operator: StateChangeOperator): void;
