@@ -14,6 +14,7 @@ export module MiniPlugin {
     arguments?: CommandTypes.ArgumentDefinition,
     environments?: CommandTypes.CommandEnvironments,
     globalAdmin?: boolean,
+    guildOwnerCommand?: boolean,
     permission?: string,
     discordPermissions?: PermissionResolvable[]
   };

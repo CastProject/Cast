@@ -62,6 +62,14 @@ export interface Command {
    * @memberof Command
    */
   globalAdminOnly?: boolean;
+
+  /**
+   * Whether this command is accessible to guild owners
+   * 
+   * @type {boolean}
+   * @memberof Command
+   */
+  guildOwnerCommand?: boolean;
   
   /**
    * Type definitions for command arguments
