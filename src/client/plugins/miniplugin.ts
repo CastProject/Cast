@@ -1,5 +1,6 @@
 import {Cast} from "../cast";
 import {Plugin} from "./plugin";
+import {CommandTypes} from "../commands/command";
 import {Response} from "../util/response";
 import {Message} from "discord.js";
 
@@ -7,14 +8,19 @@ export module MiniPlugin {
   export type MiniCommandOperator = (this: Plugin, response: Response, message: Message, args: string[]) => Promise<any>;
   export type MiniEventOperator = (this: Plugin) => Promise<void> | void;
   export type StateChangeOperator = (this: Plugin) => Promise<void>;
-  
-  
+
+  export type MiniCommandOpts = {
+    description?: string,
+    arguments?: CommandTypes.ArgumentDefinition,
+    environments?: CommandTypes.CommandEnvironments,
+    globalAdmin?: boolean,
+    permission?: string,
+  };
+
   export type MiniCommand = {
-    environments: ["text" | "dm"],
-    globalAdmin: boolean,
     name: string,
     operator: MiniCommandOperator,
-    permission?: string,
+    opts?: MiniCommandOpts
   };
   
   export type MiniEvent = {
@@ -37,7 +43,7 @@ export module MiniPlugin {
   export interface PluginBuilder {
     cast: Cast;
     readonly interactedWith: boolean;
-    command(name: string, operator: MiniCommandOperator, permission?: string, environments?: ["text", "dm"], globalAdmin?: boolean): void;
+    command(name: string, operator: MiniCommandOperatorm, opts?: MiniCommandOpts): void;
     on(event: string, operator: MiniEventOperator): void;
     enabled(operator: StateChangeOperator): void;
     disabled(operator: StateChangeOperator): void;

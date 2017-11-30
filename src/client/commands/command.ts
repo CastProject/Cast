@@ -3,6 +3,15 @@ import {Cast} from '../cast';
 import {Plugin} from '../plugins/Plugin';
 import {Response} from '../util/response';
 
+export module CommandTypes {
+  export type ArgumentDefinition = Array<{
+    type: 'string' | 'number' | 'mention' | 'channel' | 'boolean',
+    name?: string,
+    allRemaining?: boolean
+  }>;
+  export type CommandEnvironments = ["text" | "dm"];
+}
+
 export interface Command {
   /**
    * The owner of this command, it is either a native command or a plugin command.
@@ -56,11 +65,7 @@ export interface Command {
    *   }>)}
    * @memberof Command
    */
-  arguments?: Array<{
-    type: 'string' | 'number' | 'mention' | 'channel' | 'boolean',
-    name?: string,
-    allRemaining?: boolean
-  }>
+  arguments?: CommandTypes.ArgumentDefinition;
 
 
   /**
@@ -80,5 +85,5 @@ export interface Command {
    * @returns {(['dm' | 'group' | 'text'])} 
    * @memberof Command
    */
-  supportedEnvironments?: ['dm' | 'text'];
+  supportedEnvironments?: CommandTypes.CommandEnvironments;
 }
