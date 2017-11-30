@@ -2,7 +2,7 @@ import {Cast} from "../cast";
 import {Plugin} from "./plugin";
 import {CommandTypes} from "../commands/command";
 import {Response} from "../util/response";
-import {Message} from "discord.js";
+import {Message, PermissionResolvable} from "discord.js";
 
 export module MiniPlugin {
   export type MiniCommandOperator = (this: Plugin, response: Response, message: Message, args: string[]) => Promise<any>;
@@ -15,6 +15,7 @@ export module MiniPlugin {
     environments?: CommandTypes.CommandEnvironments,
     globalAdmin?: boolean,
     permission?: string,
+    discordPermissions?: PermissionResolvable[]
   };
 
   export type MiniCommand = {

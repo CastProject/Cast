@@ -39,6 +39,14 @@ export interface Command {
   permission: string;
 
   /**
+   * The discord permissions required to execute this command
+   * 
+   * @type {string}
+   * @memberof Command
+   */
+  discordPermissions?: Discord.PermissionResolvable[];
+
+  /**
    * The description of this command
    * 
    * @type {string}
