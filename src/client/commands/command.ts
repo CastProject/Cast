@@ -1,14 +1,16 @@
-import * as Discord from 'discord.js';
+import {Message, PermissionResolvable} from 'discord.js';
 import {Cast} from '../cast';
 import {Plugin} from '../plugins/Plugin';
 import {Response} from '../util/response';
 
 export module CommandTypes {
-  export type ArgumentDefinition = Array<{
+  export type ArgumentDefinition = {
     type: 'string' | 'number' | 'mention' | 'channel' | 'boolean',
     name?: string,
     allRemaining?: boolean
-  }>;
+  };
+
+  export type ArgumentDefinitions = ArgumentDefinition[];
   export type CommandEnvironments = ["text" | "dm"];
 }
 
@@ -44,7 +46,7 @@ export interface Command {
    * @type {string}
    * @memberof Command
    */
-  discordPermissions?: Discord.PermissionResolvable[];
+  discordPermissions?: PermissionResolvable[];
 
   /**
    * The description of this command
@@ -92,7 +94,7 @@ export interface Command {
    * @returns {Promise<void>} The completed command, or an error that occurred.
    * @memberof Command
    */
-  handle(response: Response, message: Discord.Message, args: string[]): Promise<void>;
+  handle(response: Response, message: Message, args: string[]): Promise<void>;
 
 
   /**
