@@ -1,5 +1,7 @@
 import { Message, PermissionResolvable } from 'discord.js';
 import { Command, CommandTypes } from "../commands/command";
+import { Plugin } from "../plugins/plugin";
+import { Response } from "../util/response";
 export interface MessageSender {
     id: string;
     guildOwner: boolean;
@@ -11,6 +13,7 @@ export interface MessageContext {
     requiredEnvironments: CommandTypes.CommandEnvironments;
     missingPermissions: PermissionResolvable[];
     response: Response;
+    plugin?: Plugin;
     hasPermission(): Promise<boolean>;
 }
 export interface MessageEvent {
