@@ -83,7 +83,7 @@ export interface Command {
    *   }>)}
    * @memberof Command
    */
-  arguments?: CommandTypes.ArgumentDefinition;
+  arguments?: CommandTypes.ArgumentDefinitions;
 
 
   /**
