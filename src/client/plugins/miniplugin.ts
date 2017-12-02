@@ -11,7 +11,7 @@ export module MiniPlugin {
 
   export type MiniCommandOpts = {
     description?: string,
-    arguments?: CommandTypes.ArgumentDefinition,
+    args?: CommandTypes.ArgumentDefinition,
     environments?: CommandTypes.CommandEnvironments,
     globalAdmin?: boolean,
     guildOwnerCommand?: boolean,
