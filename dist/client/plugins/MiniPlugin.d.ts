@@ -9,7 +9,7 @@ export declare module MiniPlugin {
     type StateChangeOperator = (this: Plugin) => Promise<void>;
     type MiniCommandOpts = {
         description?: string;
-        args?: CommandTypes.ArgumentDefinition;
+        args?: CommandTypes.ArgumentDefinitions;
         environments?: CommandTypes.CommandEnvironments;
         globalAdmin?: boolean;
         guildOwnerCommand?: boolean;
