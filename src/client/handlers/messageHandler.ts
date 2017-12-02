@@ -23,6 +23,8 @@ export interface MessageEvent {
   context: MessageContext;
 }
 
+export type MessageMiddleware = (event: MessageEvent, next: () => void) => void;
+
 export interface MessageHandler {
   /**
    * Handles a message
@@ -32,4 +34,12 @@ export interface MessageHandler {
    * @memberof MessageListener
    */
   handle(message: Message): Promise<void>;
+
+  /**
+   * Adds a function to the middleware flow
+   * 
+   * @param {MessageMiddleware} middleware The middlware to use
+   * @memberof MessageListener
+   */
+  use(middleware: MessageMiddleware): void;
 }
