@@ -27,7 +27,7 @@ export interface GuildManager {
    * @returns {boolean} Whether it is enabled or disabled
    * @memberof GuildManager
    */
-  isEnabled(object: Command | Plugin): boolean;
+  isEnabled(object: Command | Plugin): Promise<boolean>;
 
   /**
    * Enable or disable the given command or plugin
