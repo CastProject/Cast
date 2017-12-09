@@ -156,7 +156,7 @@ export interface Cast {
      * @returns {Promise<PermissionTracker>} The Permission Tracker
      * @memberof Cast
      */
-    getPermissionTracker(entity: Discord.Role | Discord.GuildMember | Discord.User, permission: string): Promise<PermissionTracker>;
+    getPermissionTracker(entity: Discord.Role | Discord.GuildMember | Discord.User): Promise<PermissionTracker>;
     /**
      * Gets the guild manager for a given guild
      *
