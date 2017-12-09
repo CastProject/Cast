@@ -33,5 +33,5 @@ export interface PermissionNode {
      * @returns {string} 
      * @memberof PermissionNode
      */
-    serialize (): string;
+    serialize(): string;
 }
