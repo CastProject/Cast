@@ -6,7 +6,7 @@ import { EmbedFactory } from './util/embedFactory';
 import { Util } from './util/util';
 import { CommandContainer } from './containers/commandContainer';
 import { Plugin } from './plugins/Plugin';
-import { GuildManager, DataFetcher } from '../index';
+import { GuildManager, DataFetcher, PermissionTracker } from '../index';
 import { Response } from "./util/response";
 export interface Cast {
     /**
@@ -142,33 +142,6 @@ export interface Cast {
      */
     hasPermission(entity: Discord.Role | Discord.GuildMember | Discord.User, permission: string): Promise<boolean>;
     /**
-     * Toggles a permission for a given entity
-     *
-     * @param {(Discord.Role | Discord.GuildMember | Discord.User)} entity
-     * @param {string} permission
-     * @returns {Promise<void>}
-     * @memberof Cast
-     */
-    togglePermission(entity: Discord.Role | Discord.GuildMember | Discord.User, permission: string): Promise<void>;
-    /**
-     * Revokes a permission from a given user
-     *
-     * @param {(Discord.Role | Discord.GuildMember | Discord.User)} entity
-     * @param {string} permission
-     * @returns {Promise<void>}
-     * @memberof Cast
-     */
-    revokePermission(entity: Discord.Role | Discord.GuildMember | Discord.User, permission: string): Promise<void>;
-    /**
-     * Grants permission to a given user
-     *
-     * @param {(Discord.Role | Discord.GuildMember | Discord.User)} entity
-     * @param {string} permission
-     * @returns {Promise<void>}
-     * @memberof Cast
-     */
-    grantPermission(entity: Discord.Role | Discord.GuildMember | Discord.User, permission: string): Promise<void>;
-    /**
      * Creates a command container for the provided directory
      *
      * @param {string} commandPath The command directory
@@ -176,6 +149,14 @@ export interface Cast {
      * @memberof Cast
      */
     createCommandContainer(commandPath: string, owner: Plugin): CommandContainer;
+    /**
+     * Fetches a permission tracker for the given entity
+     *
+     * @param {(Discord.Role | Discord.GuildMember | Discord.User)} entity The entity to fetch
+     * @returns {Promise<PermissionTracker>} The Permission Tracker
+     * @memberof Cast
+     */
+    getPermissionTracker(entity: Discord.Role | Discord.GuildMember | Discord.User, permission: string): Promise<PermissionTracker>;
     /**
      * Gets the guild manager for a given guild
      *
