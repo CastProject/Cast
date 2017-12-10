@@ -4,7 +4,7 @@ import { Plugin } from '../plugins/Plugin';
 import { Response } from '../util/response';
 export declare module CommandTypes {
     type ArgumentDefinition = {
-        type: 'string' | 'number' | 'mention' | 'channel' | 'boolean';
+        type: 'string' | 'number' | 'mention' | 'channel' | 'boolean' | 'user' | 'role';
         name?: string;
         allRemaining?: boolean;
     };

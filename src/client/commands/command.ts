@@ -5,7 +5,7 @@ import {Response} from '../util/response';
 
 export module CommandTypes {
   export type ArgumentDefinition = {
-    type: 'string' | 'number' | 'mention' | 'channel' | 'boolean',
+    type: 'string' | 'number' | 'mention' | 'channel' | 'boolean' | 'user' | 'role',
     name?: string,
     allRemaining?: boolean
   };
