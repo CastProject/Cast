@@ -8,6 +8,7 @@ import { CommandContainer } from './containers/commandContainer';
 import { Plugin } from './plugins/Plugin';
 import { GuildManager, DataFetcher, PermissionTracker } from '../index';
 import { Response } from "./util/response";
+import { Command } from "./commands/command";
 export interface Cast {
     /**
      * The client that Cast will interact with
@@ -140,7 +141,7 @@ export interface Cast {
      * @returns {Promise<boolean>} Whether they have permission
      * @memberof Cast
      */
-    hasPermission(entity: Discord.Role | Discord.GuildMember | Discord.User, permission: string): Promise<boolean>;
+    hasPermission(entity: Discord.Role | Discord.GuildMember | Discord.User, command: Command | string): Promise<boolean>;
     /**
      * Creates a command container for the provided directory
      *
