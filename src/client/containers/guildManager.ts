@@ -5,7 +5,7 @@ import {Container} from "./data/container";
 export interface GuildSettings {
   getAll(): Promise<any>;
   get(key: string): Promise<any>;
-  set(key: string, value: string): Promise<void>;
+  set(key: string, value: any): Promise<void>;
 }
 
 export interface GuildManager {
