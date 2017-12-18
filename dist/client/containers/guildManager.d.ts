@@ -1,6 +1,11 @@
 import { Guild } from 'discord.js';
 import { Command, Plugin } from '../../index';
 import { Container } from "./data/container";
+export interface GuildSettings {
+    getAll(): Promise<any>;
+    get(key: string): Promise<any>;
+    set(key: string, value: string): Promise<void>;
+}
 export interface GuildManager {
     /**
      * The guild that this manager manages
@@ -16,6 +21,13 @@ export interface GuildManager {
      * @memberof GuildManager
      */
     container: Container;
+    /**
+     * The settings for this guild - to be used by plugins
+     *
+     * @type {GuildSettings}
+     * @memberof GuildManager
+     */
+    settings: GuildSettings;
     /**
      * Whether the given command or plugin is enabled
      *
