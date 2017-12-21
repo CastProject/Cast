@@ -22,12 +22,19 @@ export interface GuildManager {
      */
     container: Container;
     /**
-     * The settings for this guild - to be used by plugins
+     * The settings for this guild
      *
      * @type {GuildSettings}
      * @memberof GuildManager
      */
     settings: GuildSettings;
+    /**
+     * Gets specialized settings for a specific plugin
+     *
+     * @type {Promise<GuildSettings>}
+     * @memberof GuildManager
+     */
+    getPluginSettings(plugin: Plugin): Promise<GuildSettings>;
     /**
      * Whether the given command or plugin is enabled
      *
