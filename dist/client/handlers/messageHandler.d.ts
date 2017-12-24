@@ -11,6 +11,9 @@ export interface MessageContext {
     args: string[];
     supportedEnvironment: boolean;
     requiredEnvironments: CommandTypes.CommandEnvironments;
+    /**
+     * The missing permissions for this command (whether the bot or the sender is missing them)
+     */
     missingPermissions: PermissionResolvable[];
     response: Response;
     plugin?: Plugin;

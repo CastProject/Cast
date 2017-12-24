@@ -34,7 +34,7 @@ export interface Command {
      */
     permission: string;
     /**
-     * The discord permissions required to execute this command
+     * The discord permissions the bot requires to execute this command
      *
      * @type {string}
      * @memberof Command
