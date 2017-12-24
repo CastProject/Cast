@@ -16,7 +16,8 @@ export module MiniPlugin {
     globalAdmin?: boolean,
     guildOwnerCommand?: boolean,
     permission?: string,
-    discordPermissions?: PermissionResolvable[]
+    discordPermissions?: PermissionResolvable[],
+    requiredUserPerms?: PermissionResolvable[],
   };
 
   export type MiniCommand = {

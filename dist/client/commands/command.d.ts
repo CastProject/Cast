@@ -41,6 +41,13 @@ export interface Command {
      */
     discordPermissions?: PermissionResolvable[];
     /**
+     * Discord permissions that can substitute a missing permission node
+     *
+     * @type {string}
+     * @memberof Command
+     */
+    requiredUserPerms?: PermissionResolvable[];
+    /**
      * The description of this command
      *
      * @type {string}
