@@ -24,6 +24,7 @@ export interface MessageEvent {
 }
 export declare type MessageMiddleware = (event: MessageEvent, next: () => void) => void;
 export interface MessageHandler {
+    middleware: MessageMiddleware[];
     /**
      * Handles a message
      *
@@ -36,7 +37,8 @@ export interface MessageHandler {
      * Adds a function to the middleware flow
      *
      * @param {MessageMiddleware} middleware The middlware to use
+     * @returns {number} the index of this middleware
      * @memberof MessageListener
      */
-    use(middleware: MessageMiddleware): void;
+    use(middleware: MessageMiddleware): number;
 }
