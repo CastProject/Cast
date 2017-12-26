@@ -1,3 +1,5 @@
+import {Client} from "discord.js";
+
 export interface Util {
 
   /**
@@ -7,5 +9,14 @@ export interface Util {
    * @param {string} path The path to save the object
    * @memberof Util
    */
-  writeJSON (object: object, path: string): any;
+  writeJSON (object: object, path: string): Promise<void>;
+
+  /**
+   * Sanitizes the message of its mentions
+   * 
+   * @param {Client} client The client object to pull data from
+   * @param {string} content The content to sanitize
+   * @returns {string} The sanitized string
+   */
+  filter (client: Client, content: string): string;
 }

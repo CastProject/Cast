@@ -2,7 +2,6 @@ import * as Discord from 'discord.js';
 import {MessageHandler} from './handlers/messageHandler';
 import {Logger} from './util/logger';
 import {PluginContainer} from './containers/pluginContainer';
-import {EmbedFactory} from './util/embedFactory';
 import {Util} from './util/util';
 import {CommandContainer} from './containers/commandContainer';
 import {Plugin} from './plugins/Plugin';
@@ -58,12 +57,12 @@ export interface Cast {
   
 
   /**
-   * The implemented libraries available for plugins and commands to use
+   * The utilities library
    * 
-   * @type {{embedFactory: EmbedFactory, util: Util}}
+   * @type {Util}
    * @memberof Cast
    */
-  libraries: {embedFactory: EmbedFactory, util: Util};
+  util: Util;
 
 
   /**
