@@ -1,5 +1,5 @@
 import { Guild, GuildMember, Role, User } from "discord.js";
-import { Plugin } from "../../plugins/Plugin";
+import { Plugin } from "../../plugins/plugin";
 import { Container } from "./container";
 export interface DataFetcher {
     getGuildContainer(guild: Guild): Promise<Container>;

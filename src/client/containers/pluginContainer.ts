@@ -1,4 +1,4 @@
-import {Plugin} from '../plugins/Plugin';
+import {Plugin} from '../plugins/plugin';
 import * as Discord from 'discord.js';
 
 export interface PluginContainer {

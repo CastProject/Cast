@@ -4,7 +4,7 @@ import {Logger} from './util/logger';
 import {PluginContainer} from './containers/pluginContainer';
 import {Util} from './util/util';
 import {CommandContainer} from './containers/commandContainer';
-import {Plugin} from './plugins/Plugin';
+import {Plugin} from './plugins/plugin';
 import {GuildManager, DataFetcher, PermissionTracker} from '../index';
 import {Response} from "./util/response";
 import {Command} from "./commands/command";

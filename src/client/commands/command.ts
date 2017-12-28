@@ -1,6 +1,6 @@
 import {Message, PermissionResolvable} from 'discord.js';
 import {Cast} from '../cast';
-import {Plugin} from '../plugins/Plugin';
+import {Plugin} from '../plugins/plugin';
 import {Response} from '../util/response';
 
 export module CommandTypes {

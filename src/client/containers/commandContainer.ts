@@ -1,6 +1,6 @@
 import {Command} from '../commands/command';
 import {Cast} from '../cast';
-import {Plugin} from '../plugins/Plugin';
+import {Plugin} from '../plugins/plugin';
 
 export interface CommandContainer {
 

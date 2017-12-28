@@ -1,3 +1,3 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-//# sourceMappingURL=MiniPlugin.js.map
+//# sourceMappingURL=miniPlugin.js.map

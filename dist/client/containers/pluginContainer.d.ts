@@ -1,4 +1,4 @@
-import { Plugin } from '../plugins/Plugin';
+import { Plugin } from '../plugins/plugin';
 export interface PluginContainer {
     /**
      * A map of all loaded plugins keyed by their ID
