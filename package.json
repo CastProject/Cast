@@ -1,7 +1,7 @@
 {
   "name": "cast",
   "description": "The API for Cast-compatible Discord bots",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "author": "Eric Rabil",
   "repository": "CastProject/Cast",
   "bugs": {
